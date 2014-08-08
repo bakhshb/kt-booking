@@ -1,4 +1,4 @@
-package com.kt.booking.restful;
+package com.kt.booking.restful.api;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
