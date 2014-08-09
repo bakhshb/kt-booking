@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Post Data</title>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-resource.js"></script>
+<script src="js/post-angular.js"></script>
+</head>
+<body ng-app="app">
+	<h1>API Post Angular</h1>
+
+	<div ng-controller="postController">
+		<form name="form" ng-submit="submit()">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td><input type="text" ng-model="commitData"></td>
+				</tr>
+
+				<tr>
+					<td></td>
+					<td><button>Submit</button>
+				</tr>
+			</table>
+		</form>
+
+	</div>
+</body>
+</html>
