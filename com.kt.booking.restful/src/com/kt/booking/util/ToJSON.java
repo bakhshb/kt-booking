@@ -14,11 +14,11 @@ import org.owasp.esapi.ESAPI;
 import org.owasp.esapi.errors.EncodingException;
 public class ToJSON {
 
+	
 	/**
 	 * This method call all the names from database and then 
 	 * convert them in JSON format and 
 	 * finally store them in JSONArray
-	 * 
 	 * @throws JSONException
 	 * @throws EncodingException 
 	 * 
@@ -26,8 +26,9 @@ public class ToJSON {
 	public JSONArray queryReturnCustomerNames ()throws JSONException, EncodingException{
 
 		JSONArray json = new JSONArray();
-		CustomerManager manager = new CustomerManager();
+		//CustomerManager manager = new CustomerManager();
 		String temp = null;
+		 CustomerManager manager = new CustomerManager();
 		try{
 			for (Customer returnAll : manager.getCustomersList()) {
 
@@ -53,16 +54,17 @@ public class ToJSON {
 	 * convert them in JSON format and 
 	 * finally store them in JSONArray
 	 * 
-	 * @throws JSONException
+	 * $ throws
 	 * @throws EncodingException 
 	 * 
 	 */
 	public JSONArray queryReturnCustomerById (Long customerId)throws JSONException, EncodingException{
 
 		JSONArray json = new JSONArray();
-		CustomerManager manager = new CustomerManager();
+		//CustomerManager manager = new CustomerManager();
 		String temp = null;
 		try{
+			CustomerManager manager = new CustomerManager();
 			List <Customer> search_cus = manager.searchCustomerById(customerId);
 			for (Customer returnAll : search_cus) {
 

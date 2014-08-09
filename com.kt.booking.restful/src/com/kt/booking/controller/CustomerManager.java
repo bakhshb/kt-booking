@@ -12,7 +12,6 @@ import com.kt.booking.model.Customer;
 import com.kt.booking.util.HibernateUtil;
 
 public class CustomerManager  {
-
 	public Customer updateCustomer (Customer customer)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
