@@ -21,8 +21,8 @@ public class ToJSON {
 			JSONObject objects = new JSONObject();
 			
 			System.out.println(returnAll.getFirstName());
-			objects.put("Id", returnAll.getId());
-			objects.put("Name", returnAll.getFirstName());
+			objects.put("id", returnAll.getId());
+			objects.put("name", returnAll.getFirstName());
 			
 			json.put(objects);
 		}

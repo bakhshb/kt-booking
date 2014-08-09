@@ -42,7 +42,7 @@ public class V1_customerRest {
 			}
 		}catch (Exception ex){
 			ex.printStackTrace();
-			//return Response.status(500).entity("Server was not able to process your request").build();
+			return Response.status(500).entity("Server was not able to process your request").build();
 		}
 		return Response.ok(returnString).build();
 	}
