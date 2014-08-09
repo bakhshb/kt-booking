@@ -6,7 +6,9 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtil {
 
 	private static final SessionFactory sessionFactory = buildSessionFactory();
-
+	/**
+	 * This method connect hibernate with database.
+	 */
 	private static SessionFactory buildSessionFactory() {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml

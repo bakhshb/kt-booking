@@ -50,6 +50,31 @@ public class CustomerManager  {
 		session.getTransaction().commit();	
 		return customers;
 	}
+	
+	public List <Customer> searchCustomerById(Long customerId){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		List <Customer> customers = null;
+
+		try {
+
+			Criteria criteria = session.createCriteria(Customer.class);
+			if (customerId != null)
+			{
+				criteria.add(Restrictions.eq("id",customerId));
+			}
+
+			customers=(List<Customer>)criteria.list();
+
+		} catch (HibernateException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		session.getTransaction().commit();	
+		return customers;
+		
+	}
 
 	public List <Customer> searchCustomer(Long customerId, String firstName , String lastName, String email)
 	{

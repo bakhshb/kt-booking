@@ -4,6 +4,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,6 +18,13 @@ import com.kt.booking.util.ToJSON;
 
 @Path("/v1/customer")
 public class V1_customerRest {
+	/**
+	 * This method will allow you to insert data the Customer table.
+	 * This is a example of using JSONArray and JSONObject
+	 * @param incomingData
+	 * @return
+	 * @throws Exception
+	 */
 
 	@POST
 	@Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
@@ -26,7 +34,7 @@ public class V1_customerRest {
 		Response rb = null;	
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject = new JSONObject(incomingData);
-		
+
 		try{
 			JSONObject partsData = new JSONObject(incomingData);
 			CustomerManager manager = new CustomerManager();
@@ -46,7 +54,13 @@ public class V1_customerRest {
 		}
 		return Response.ok(returnString).build();
 	}
-	
+	/**
+	 * This method will return all Customer name that are listed
+	 * in Customer table.
+	 * 
+	 * @return - JSON array string
+	 * @throws Exception
+	 */
 	@Path ("/returnlist")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -56,15 +70,47 @@ public class V1_customerRest {
 		JSONArray json = new JSONArray();
 		ToJSON converter = new ToJSON();
 		try {
-			
+
 			json = converter.queryReturnCustomerNames();
-			
+
 			returnString = json.toString();
 			rb = Response.ok(returnString).build();
-			
+
 		}catch (Exception ex){
 			ex.printStackTrace();
 		}
 		return rb;
+	}
+
+	/**
+	 * This method does a search oncustomerID.
+	 * It uses PathParam to bring in a parameter.
+	 * 
+	 * Example:
+	 * http://localhost:7001/com.kt.booking.restful/api/v1/customer/1
+	 * 
+	 * @param id - customer id
+	 * @return - json array results list from the database
+	 * @throws Exception
+	 */
+	@Path ("/{id}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response returnSpecificBrandItem(@PathParam("id") Long id) throws Exception {
+		String returnString = null;
+		Response rb = null;	
+		JSONArray json = new JSONArray();
+		ToJSON converter = new ToJSON();
+		try{
+			json = converter.queryReturnCustomerById(id);
+
+			returnString = json.toString();
+
+		}catch (Exception ex){
+			ex.printStackTrace();
+			return Response.status(500).entity("Server was not able to process your request").build();
+		}
+
+		return Response.ok(returnString).build();
 	}
 }

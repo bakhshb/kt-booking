@@ -6,15 +6,20 @@ import javax.ws.rs.Produces;
 
 @Path ("v1")
 public class V1_status {
-
+	
 	private static final String api_version = "00.0.1.00";
+	/**
+	 * This method shows the status of the API
+	 */
 	@Path ("/status")
 	@GET 
 	@Produces(javax.ws.rs.core.MediaType.TEXT_HTML)
 	public String returnTitle (){
 		return "<p>Java Web Service</p>";
 	}
-	
+	/**
+	 * This method shows the version of the API
+	 */
 	@Path("/version")
 	@GET 
 	@Produces(javax.ws.rs.core.MediaType.TEXT_HTML)
