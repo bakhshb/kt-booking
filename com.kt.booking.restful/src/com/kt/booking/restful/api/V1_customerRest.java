@@ -31,7 +31,6 @@ public class V1_customerRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response returnAllTest(String incomingData) throws Exception {
 		String returnString = null;
-		Response rb = null;	
 		JSONArray jsonArray = new JSONArray();
 		JSONObject jsonObject = new JSONObject(incomingData);
 
@@ -71,7 +70,7 @@ public class V1_customerRest {
 		ToJSON converter = new ToJSON();
 		try {
 
-			json = converter.queryReturnCustomerNames();
+			json = converter.queryReturnCustomerList();
 
 			returnString = json.toString();
 			rb = Response.ok(returnString).build();
@@ -98,7 +97,6 @@ public class V1_customerRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response returnSpecificBrandItem(@PathParam("id") Long id) throws Exception {
 		String returnString = null;
-		Response rb = null;	
 		JSONArray json = new JSONArray();
 		ToJSON converter = new ToJSON();
 		try{

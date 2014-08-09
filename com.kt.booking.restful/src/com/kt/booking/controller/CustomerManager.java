@@ -12,13 +12,14 @@ import com.kt.booking.model.Customer;
 import com.kt.booking.util.HibernateUtil;
 
 public class CustomerManager  {
-	public Customer updateCustomer (Customer customer)
+	
+	public int updateCustomer (Customer customer)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.saveOrUpdate(customer);
 		session.getTransaction().commit();
-		return customer;
+		return 200;
 	}
 
 	public int addCustomer (Customer customer)
@@ -109,7 +110,7 @@ public class CustomerManager  {
 		return customers;
 	}
 
-	public Customer deleteCustomer (Long id)
+	public int deleteCustomer (Long id)
 	{
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
@@ -120,7 +121,7 @@ public class CustomerManager  {
 			session.delete(customer);
 		}
 		session.getTransaction().commit();
-		return customer;
+		return 200;
 	}
 
 }
