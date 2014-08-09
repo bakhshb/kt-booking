@@ -1,6 +1,9 @@
 /**
- * 
+ * posting data using angular 
+ * it requires two javascript files that has to be downloaded from angular 
+ * app is the name of the application defined in html file 
  */
+
 
 var myApp = angular.module('app',['ngResource']);
 
@@ -9,11 +12,15 @@ myApp.factory('Post', function ($http,$resource,$log){
 			{},{
 				create:{
 					method:'POST',
-					isArray:true
+					isArray:true,
+					
+				},headers:{
+					'Content-Type':'application/json'
 				}
 			});
 });
 
+//call the controller defined in html file between <div>
 myApp.controller('postController', function ($scope, Post){
 	
 	$scope.submit = function(){
