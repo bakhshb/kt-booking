@@ -16,6 +16,7 @@ public class ToJSON {
 
 	/**
 	 * This method convert customer list to JSON  
+	 * prevent SQL injection
 	 * finally store them in JSONArray
 	 * @param customer
 	 * @throws JSONException
