@@ -11,7 +11,18 @@ import org.hibernate.criterion.Restrictions;
 import com.kt.booking.model.Customer;
 import com.kt.booking.util.HibernateUtil;
 
-public class CustomerManager  {
+public class CustomerCtrl  {
+	
+	private static CustomerCtrl instance ;
+	
+	private CustomerCtrl(){}
+	
+	public static CustomerCtrl getInstance(){
+		if(instance == null) {
+	         instance = new CustomerCtrl();
+	      }
+		return instance;
+	}
 	
 	public int updateCustomer (Customer customer)
 	{

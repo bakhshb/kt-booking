@@ -12,12 +12,17 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
-import com.kt.booking.controller.CustomerManager;
+
+import com.kt.booking.controller.CustomerCtrl;
 import com.kt.booking.model.Customer;
 import com.kt.booking.util.ToJSON;
 
 @Path("/v1/customer")
 public class V1_customerRest {
+
+	// variabel using singalton 
+	private CustomerCtrl manager = CustomerCtrl.getInstance();
+	
 	/**
 	 * This method will allow you to insert data the Customer table.
 	 * This is a example of using JSONArray and JSONObject
@@ -36,7 +41,6 @@ public class V1_customerRest {
 
 		try{
 			JSONObject partsData = new JSONObject(incomingData);
-			CustomerManager manager = new CustomerManager();
 			Customer customer = new Customer ();
 			customer.setFirstName(partsData.optString("first_name"));
 			int http_code  =manager.addCustomer(customer);
@@ -53,6 +57,7 @@ public class V1_customerRest {
 		}
 		return Response.ok(returnString).build();
 	}
+	
 	/**
 	 * This method will return all Customer name that are listed
 	 * in Customer table.
@@ -70,7 +75,7 @@ public class V1_customerRest {
 		ToJSON converter = new ToJSON();
 		try {
 
-			json = converter.queryReturnCustomerList();
+			json = converter.returnJSONCustomerList(manager.getCustomersList());
 
 			returnString = json.toString();
 			rb = Response.ok(returnString).build();
@@ -100,8 +105,7 @@ public class V1_customerRest {
 		JSONArray json = new JSONArray();
 		ToJSON converter = new ToJSON();
 		try{
-			json = converter.queryReturnCustomerById(id);
-
+			json = converter.returnJSONCustomerList(manager.searchCustomerById(id));
 			returnString = json.toString();
 
 		}catch (Exception ex){
