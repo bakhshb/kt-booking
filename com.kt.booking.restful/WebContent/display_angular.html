@@ -1,22 +1,22 @@
 <!doctype html>
-<html >
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Rest Example: Display Data</title>
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-resource.js"></script>
-	<script src="js/app.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Rest Example: Display Data</title>
+<script src="lib/angular.js"></script>
+<script src="lib/angular-resource.js"></script>
+<script src="js/display-angular.js"></script>
 
 
 </head>
 <body ng-app="spicyApp1">
-    <div ng-controller="SpicyController">
-    <ul ng-repeat="post in posts">
-    <li>{{post}}</li>		
-    </ul>
-    
-<br/>
-  </div>
+	<div ng-controller="SpicyController">
+		<ul ng-repeat="post in posts">
+			<li>{{post}}</li>
+		</ul>
+
+		<br />
+	</div>
 
 
 </body>
