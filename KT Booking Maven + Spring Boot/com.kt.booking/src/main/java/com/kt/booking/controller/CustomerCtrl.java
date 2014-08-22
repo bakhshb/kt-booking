@@ -22,12 +22,23 @@ public class CustomerCtrl {
 	@Autowired
 	private CustomerService customerService;
 
+	/**
+	 * this method list all the customer
+	 * 
+	 * @return List<Customer>
+	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@Secured("ROLE_ADMIN")
 	public List<Customer> findAll() {
 		return (List<Customer>) customerService.findAll();
 	}
 
+	/**
+	 * this method look for customer by id
+	 * 
+	 * @param id
+	 * @return Customer and HttpStatus
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@Secured("ROLE_ADMIN")
 	public ResponseEntity<Customer> findById(@PathVariable Long id) {
@@ -36,10 +47,17 @@ public class CustomerCtrl {
 				HttpStatus.OK);
 	}
 
+	/**
+	 * this method insert customer
+	 * 
+	 * @param customer
+	 * @return Customer and HttpStatus
+	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	@Secured("ROLE_ADMIN")
 	public ResponseEntity<Customer> save(@RequestBody final Customer customer) {
-		return new ResponseEntity<Customer>(customerService.save(customer), HttpStatus.OK);
+		return new ResponseEntity<Customer>(customerService.save(customer),
+				HttpStatus.OK);
 	}
 
 }
