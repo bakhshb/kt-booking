@@ -1,0 +1,48 @@
+<form data-ng-submit="submit()" name="form">
+			<table>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" data-ng-model="commitData.firstName" required></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" data-ng-model="commitData.lastName" required></td>
+				</tr>
+				<tr>
+					<td>NickName</td>
+					<td><input type="text" data-ng-model="commitData.nickName" required></td>
+				</tr>
+				<tr>
+					<td>Nationality</td>
+					<td><input type="text" data-ng-model="commitData.nationality" required></td>
+				</tr>
+				<tr>
+					<td>Date Of Birth</td>
+					<td><input type="text" data-ng-model="commitData.dateOfBirth" required></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td><input type="text" data-ng-model="commitData.gender" required></td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><input type="text" data-ng-model="commitData.address" required></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" data-ng-model="commitData.email" required></td>
+				</tr>
+				<tr>
+					<td>ContactNo</td>
+					<td><input type="text" data-ng-model="commitData.contactNo" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><button data-ng-disable="form.$invalid">Submit</button>
+				</tr>
+				<tr>
+					<td></td>
+					<td>{{serverResponse}}
+				</tr>
+			</table>
+		</form>
