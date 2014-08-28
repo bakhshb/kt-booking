@@ -1,4 +1,4 @@
-package com.kt.booking.service;
+package com.kt.booking.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kt.booking.model.Customer;
 import com.kt.booking.repository.CustomerRepository;
+import com.kt.booking.service.CustomerService;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{

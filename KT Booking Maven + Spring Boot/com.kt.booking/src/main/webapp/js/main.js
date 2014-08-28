@@ -8,6 +8,7 @@ myApp.config (function($routeProvider){
 	$routeProvider
 	.when('/',{templateUrl:'partials/index.html'})
 	.when('/post',{templateUrl:'partials/post_angular.html', controller:'postController'})
+	.when('/test',{templateUrl:'partials/NewFile.html'})
 	.otherwise({redirectTo:''});
 });
 

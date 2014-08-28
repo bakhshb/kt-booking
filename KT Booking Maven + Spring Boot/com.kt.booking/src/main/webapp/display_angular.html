@@ -12,12 +12,9 @@
 <body data-ng-app="spicyApp1">
 	<div data-ng-controller="SpicyController">
 		<ul data-ng-repeat="post in posts">
-			<li>{{post}}</li>
+			<li><a href="post/{{post.id}}">{{post.firstName}}</a></li>
 		</ul>
-
 		<br />
 	</div>
-
-
 </body>
 </html>
