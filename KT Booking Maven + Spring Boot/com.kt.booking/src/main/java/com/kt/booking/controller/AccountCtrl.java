@@ -1,5 +1,6 @@
 package com.kt.booking.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,20 @@ public class AccountCtrl {
 	public String getCurrent(HttpServletRequest request) {
 		String loginName = null;
 		if (request.getUserPrincipal() != null) {
-			 loginName = request.getUserPrincipal().getName();
+			 return loginName = request.getUserPrincipal().getName();
+		}else {
+			return null;
 		}
-		return loginName;
+		
+	}
+	
+	@RequestMapping(value = "/cookie", method = RequestMethod.GET)
+	public Cookie setCookie(HttpServletRequest request) {
+		String loginName = null;
+		if (request.getUserPrincipal() != null) {
+			  loginName = request.getUserPrincipal().getName();
+		}
+		Cookie myCookie = new Cookie("username", loginName);
+		return myCookie;
 	}
 }

@@ -1,0 +1,18 @@
+
+<form data-ng-submit="submit()" name="form">
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" data-ng-model="customerId" required></td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td><button data-ng-disable="form.$invalid">Submit</button>
+		</tr>
+		<tr>
+			<td></td>
+			<td>{{result}}
+		</tr>
+	</table>
+</form>

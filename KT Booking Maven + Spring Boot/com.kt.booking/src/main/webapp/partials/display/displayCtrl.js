@@ -1,5 +1,3 @@
-var myApp =angular.module('spicyApp1', ['ngResource']);
-
 myApp.factory('Get', function($resource) {
   return $resource(
   'http://localhost:8080/rest/customer/list/:Id', 
@@ -11,7 +9,7 @@ myApp.factory('Get', function($resource) {
   });
 });
 
- myApp.controller ('SpicyController', function ($scope,Get) {
+ myApp.controller ('displayCtrl', function ($scope,Get) {
 	Get.query(function(data){
 		$scope.posts = data;
 	});

@@ -3,35 +3,31 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Java Restful Service</title>
-<script src="lib/angular.js"></script>
-<script src="lib/angular-resource.js"></script>
-<script src="lib/angular-route.js"></script>
-<script src="js/main.js"></script>
+
 </head>
 <body>
 	<h1>KT Booking API</h1>
 	Try the links below
 	<br />
-	<a href="http://localhost:8080/rest/status">http://localhost:8080/com.kt.booking.restful/api/v1/status</a>
-	<br />and
 	<br />
-	<a href="http://localhost:8080/rest/version">http://localhost:8080/com.kt.booking.restful/api/v1/version</a>
-	<br />and
 	<br />
-	<a href="http://localhost:8080/search_cus.html">search customer</a>
-	<br />and
-	<br />
-	<a href="http://localhost:8080/post_angular.html">enter customer
-		using Angular</a>
-	<br />and
-	<br />
-	<a href="http://localhost:8080/display_angular.html">Display data
-		using Angular</a>
-	<br />and
-	<br />
-	<a href="#/post">Angular Route</a>
-	<a href="#/test">Test Routing</a>
-		
+	<div data-ng-Controller="mainCtrl">
+		<a href="#/post">Post Customer</a>|| <a href="#/display">Display
+			Customer</a>|| <a href="#/search">Search Customer</a>|| <a
+			href="{{loginUrl}}">{{loginStatus}}</a> <br /> <br /> <br />
+	</div>
 	<div data-ng-view></div>
+
+	<!-- These are libs -->
+
+
+	<script src="lib/angular.js"></script>
+	<script src="lib/angular-resource.js"></script>
+	<script src="lib/angular-route.js"></script>
+	<script src="lib/angular-cookies.js"></script>
+	<script src="partials/app.js"></script>
+	<script src="partials/post/postCtrl.js"></script>
+	<script src="partials/search/searchCtrl.js"></script>
+	<script src="partials/display/displayCtrl.js"></script>
 </body>
 </html>
