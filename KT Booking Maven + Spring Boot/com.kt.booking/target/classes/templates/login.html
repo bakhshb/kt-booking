@@ -12,7 +12,10 @@
 	function createCookie(name, value, days) {
 		if (days) {
 			var date = new Date();
-			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			//in day
+			//date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			// hours
+			date.setTime(date.getTime() + (days * 60));
 			var expires = "; expires=" + date.toGMTString();
 		} else
 			var expires = "";
@@ -33,7 +36,7 @@
 			</label>
 		</div>
 		<div>
-			<input type="submit" value="Sign In" onclick="createCookie('username', escape(document.myform.username.value), 1) " />
+			<input type="submit" value="Sign In" onclick="createCookie('username', escape(document.myform.username.value), 30000) " />
 		</div>
 	</form>
 </body>

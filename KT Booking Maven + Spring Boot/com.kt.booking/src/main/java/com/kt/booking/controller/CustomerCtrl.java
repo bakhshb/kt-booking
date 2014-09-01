@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.booking.model.Customer;
 import com.kt.booking.service.CustomerService;
-import com.kt.booking.service.AccountService;
 
 @RestController
 @RequestMapping("/rest/customer")
@@ -22,9 +21,6 @@ public class CustomerCtrl {
 
 	@Autowired
 	private CustomerService customerService;
-
-	@Autowired
-	private AccountService userService;
 
 	/**
 	 * this method list all the customer
@@ -43,7 +39,7 @@ public class CustomerCtrl {
 	 * @param id
 	 * @return Customer and HttpStatus
 	 */
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
 	@Secured("ROLE_ADMIN")
 	public ResponseEntity<Customer> findById(@PathVariable Long id) {
 

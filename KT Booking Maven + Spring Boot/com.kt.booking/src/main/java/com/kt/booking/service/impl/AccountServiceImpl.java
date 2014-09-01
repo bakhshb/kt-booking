@@ -11,11 +11,11 @@ import com.kt.booking.repository.AccountRepository;
 import com.kt.booking.service.AccountService;
 
 @Service
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
 	@Autowired
-	private AccountRepository accountRepository ;
-	
+	private AccountRepository accountRepository;
+
 	@Override
 	@Transactional
 	public List<Account> findAll() {
@@ -26,6 +26,12 @@ public class AccountServiceImpl implements AccountService{
 	@Transactional
 	public Account findByUsername(String username) {
 		return accountRepository.findByUsername(username);
+	}
+
+	@Override
+	@Transactional
+	public Account save(Account account) {
+		return accountRepository.save(account);
 	}
 
 }

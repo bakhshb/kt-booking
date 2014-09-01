@@ -3,7 +3,7 @@
  *
  */
 myApp.factory('Search', function ($resource){
-	return $resource ('http://localhost:8080/rest/customer/:action',
+	return $resource ('http://localhost:8080/rest/customer/search/:action',
 			{action:'@id'},
 			{
 				query:{

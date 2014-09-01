@@ -9,4 +9,6 @@ public interface AccountService {
 	public List<Account> findAll ();
 	
 	public Account findByUsername(String username);
+	
+	public Account save(Account account);
 }
