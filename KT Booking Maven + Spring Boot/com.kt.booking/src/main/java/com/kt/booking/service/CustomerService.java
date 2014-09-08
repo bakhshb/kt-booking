@@ -28,4 +28,11 @@ public interface CustomerService {
 	 * @return
 	 */
 	public Customer save(Customer customer);
+	/**
+	 * this method update customer into database
+	 * 
+	 * @param customer
+	 * @return
+	 */
+	public Customer update(Customer customer);
 }

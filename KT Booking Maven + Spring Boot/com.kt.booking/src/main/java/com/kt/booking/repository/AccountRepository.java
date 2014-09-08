@@ -9,6 +9,6 @@ import java.lang.String;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
 
-	Account findByUsername(String username);
+	Account findByUserName(String username);
 
 }

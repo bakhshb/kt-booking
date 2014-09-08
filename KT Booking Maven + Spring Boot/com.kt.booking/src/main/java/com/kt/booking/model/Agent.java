@@ -1,5 +1,6 @@
 package com.kt.booking.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Agent")
@@ -22,6 +25,8 @@ public class Agent {
 	private String address;
 	private String email;
 	private String contactNo;
+	private Date created;
+	private String createdBy;
 	private List<Booking> booking;
 
 	@Id
@@ -31,7 +36,7 @@ public class Agent {
 		return id;
 	}
 
-	@OneToOne(targetEntity = Account.class, mappedBy = "agent", cascade = CascadeType.ALL)
+	@OneToOne(targetEntity = Account.class, mappedBy = "agent")
 	public Account getAccount() {
 		return account;
 	}
@@ -54,6 +59,17 @@ public class Agent {
 	@Column(name = "contact_no")
 	public String getContactNo() {
 		return contactNo;
+	}
+
+	@Column(name = "created")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCreated() {
+		return created;
+	}
+
+	@Column(name = "created_by")
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
 	@OneToMany(targetEntity = Booking.class, mappedBy = "agent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -83,6 +99,14 @@ public class Agent {
 
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public void setBooking(List<Booking> booking) {

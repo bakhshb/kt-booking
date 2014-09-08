@@ -1,5 +1,6 @@
 package com.kt.booking.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Customer")
@@ -21,13 +24,15 @@ public class Customer {
 	private String lastName;
 	private String nickName;
 	private String nationality;
-	private String dateOfBirth;
+	private Date birthDate;
 	private String gender;
 	private String permissionFrom;
 	private String address;
 	private String email;
 	private String contactNo;
 	private String additionalInfo;
+	private Date created;
+	private String createdBy;
 	private List<Booking> booking;
 
 	@Id
@@ -57,9 +62,9 @@ public class Customer {
 		return nationality;
 	}
 
-	@Column(name = "date_of_birth")
-	public String getDateOfBirth() {
-		return dateOfBirth;
+	@Column(name = "birth_date")
+	public Date getBirthDate() {
+		return birthDate;
 	}
 
 	@Column(name = "gender")
@@ -92,6 +97,17 @@ public class Customer {
 		return additionalInfo;
 	}
 
+	@Column(name = "created")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getCreated() {
+		return created;
+	}
+
+	@Column(name = "created_by")
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
 	@OneToMany(targetEntity = Booking.class, mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public List<Booking> getBooking() {
 		return booking;
@@ -117,8 +133,8 @@ public class Customer {
 		this.nationality = nationality;
 	}
 
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public void setGender(String gender) {
@@ -143,6 +159,14 @@ public class Customer {
 
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	public void setBooking(List<Booking> booking) {

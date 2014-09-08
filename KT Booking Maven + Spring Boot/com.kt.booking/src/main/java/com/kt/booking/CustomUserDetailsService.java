@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		try {
-			Account user = accountService.findByUsername(username);
+			Account user = accountService.findByUserName(username);
 			if (user == null) {
 				return null;
 			}

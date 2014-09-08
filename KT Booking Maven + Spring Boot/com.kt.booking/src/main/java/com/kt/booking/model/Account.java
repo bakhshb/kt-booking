@@ -1,5 +1,6 @@
 package com.kt.booking.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity(name = "Account")
-public class Account {
+public class Account{
 
 	private Long id;
 	private Agent agent;
 	private Role role;
-	private String username;
+	private String userName;
 	private String password;
 	private boolean isEnabled;
 
@@ -25,7 +26,7 @@ public class Account {
 		return id;
 	}
 
-	@OneToOne
+	@OneToOne (cascade=CascadeType.ALL)
 	@JoinColumn(name = "agent_id")
 	public Agent getAgent() {
 		return agent;
@@ -38,8 +39,8 @@ public class Account {
 	}
 
 	@Column(unique = true, name = "user_name")
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
 	@Column(name = "password")
@@ -64,8 +65,8 @@ public class Account {
 		this.role = role;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public void setPassword(String password) {

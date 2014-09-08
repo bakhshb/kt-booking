@@ -29,8 +29,13 @@ public class CustomerCtrl {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@Secured("ROLE_ADMIN")
-	public List<Customer> findAll() {
-		return (List<Customer>) customerService.findAll();
+	public ResponseEntity<List<Customer>> findAll() {
+		if (customerService.findAll() == null) {
+			return new ResponseEntity<List<Customer>>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<List<Customer>>(customerService.findAll(),HttpStatus.OK);
+		}
+		
 	}
 
 	/**
@@ -42,9 +47,12 @@ public class CustomerCtrl {
 	@RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
 	@Secured("ROLE_ADMIN")
 	public ResponseEntity<Customer> findById(@PathVariable Long id) {
-
-		return new ResponseEntity<Customer>(customerService.findById(id),
-				HttpStatus.OK);
+		if (customerService.findById(id) == null) {
+			return new ResponseEntity<Customer>(HttpStatus.NOT_FOUND);
+		}else {
+			return new ResponseEntity<Customer>(customerService.findById(id),
+					HttpStatus.OK);
+		}
 	}
 
 	/**
@@ -57,6 +65,19 @@ public class CustomerCtrl {
 	@Secured("ROLE_ADMIN")
 	public ResponseEntity<Customer> save(@RequestBody final Customer customer) {
 		return new ResponseEntity<Customer>(customerService.save(customer),
+				HttpStatus.OK);
+	}
+	
+	/**
+	 * this method update customer
+	 * 
+	 * @param customer
+	 * @return Customer and HttpStatus
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@Secured("ROLE_ADMIN")
+	public ResponseEntity<Customer> update(@RequestBody final Customer customer) {
+		return new ResponseEntity<Customer>(customerService.update(customer),
 				HttpStatus.OK);
 	}
 

@@ -1,0 +1,49 @@
+<form data-ng-submit="submit()" name="form">
+			<table>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" data-ng-model="firstName"  required></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" data-ng-model="lastName" required></td>
+				</tr>
+				<tr>
+					<td>NickName</td>
+					<td><input type="text" data-ng-model="nickName" required></td>
+				</tr>
+				<tr>
+					<td>Nationality</td>
+					<td><input type="text" data-ng-model="nationality" required></td>
+				</tr>
+				<tr>
+					<td>Date Of Birth</td>
+					<td><input type="date" data-ng-model="birthDate" placeholder="yyyy-MM-dd" min="2013-01-01" max="2013-12-31" required ></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td><input type="radio" data-ng-model="gender" value="Male">Male
+					<input type="radio" data-ng-model="gender" value="Female">Female</td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td><input type="text" data-ng-model="address" required></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" data-ng-model="email" required></td>
+				</tr>
+				<tr>
+					<td>ContactNo</td>
+					<td><input type="text" data-ng-model="contactNo" required></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><button data-ng-disable="form.$invalid">Submit</button>
+				</tr>
+				<tr>
+					<td></td>
+					<td>{{serverResponse}}
+				</tr>
+			</table>
+		</form>

@@ -12,9 +12,10 @@
 	<br />
 	<br />
 	<div data-ng-Controller="mainCtrl">
-		<a href="#/post">Post Customer</a>|| <a href="#/display">Display
-			Customer</a>|| <a href="#/search">Search Customer</a>|| <a
-			href="{{loginUrl}}">{{loginStatus}}</a> <br /> <br /> <br />
+		<a href="#/customer/post">Post Customer</a>|| <a
+			href="#/customer/display">Display Customer</a>|| <a
+			href="#/customer/search">Search Customer</a>|| <a href="#/agent/post">Post
+			Agent</a>||<a href="{{loginUrl}}">{{loginStatus}}</a> <br /> <br /> <br />
 	</div>
 	<div data-ng-view></div>
 
@@ -25,8 +26,11 @@
 	<script src="lib/angular-cookies.js"></script>
 	<!-- These are js -->
 	<script src="partials/app.js"></script>
-	<script src="partials/post/postCtrl.js"></script>
-	<script src="partials/search/searchCtrl.js"></script>
-	<script src="partials/display/displayCtrl.js"></script>
+	<script src="partials/customer/post_customerCtrl.js"></script>
+	<script src="partials/customer/search_customerCtrl.js"></script>
+	<script src="partials/customer/display_customerCtrl.js"></script>
+	<script src="partials/customer/edit_customerCtrl.js"></script>
+	<script src="partials/agent/post_agentCtrl.js"></script>
+	
 </body>
 </html>

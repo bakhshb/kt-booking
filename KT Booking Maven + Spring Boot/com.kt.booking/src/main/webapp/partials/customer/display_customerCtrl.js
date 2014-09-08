@@ -1,4 +1,4 @@
-myApp.factory('Get', function($resource) {
+myApp.factory('GetCustomer', function($resource) {
   return $resource(
   'http://localhost:8080/rest/customer/list/:Id', 
   {},{
@@ -9,8 +9,8 @@ myApp.factory('Get', function($resource) {
   });
 });
 
- myApp.controller ('displayCtrl', function ($scope,Get) {
-	Get.query(function(data){
+ myApp.controller ('display_customerCtrl', function ($scope,GetCustomer) {
+	 GetCustomer.query(function(data){
 		$scope.posts = data;
 	});
 });

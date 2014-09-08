@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kt.booking.model.Account;
 import com.kt.booking.service.AccountService;
+import com.kt.booking.wrapper.AgentAccount;
 
 @RestController
 @RequestMapping("/rest/account")
@@ -48,9 +48,8 @@ public class AccountCtrl {
 	 * @return Account and HttpStatus
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	@Secured("ROLE_ADMIN")
-	public ResponseEntity<Account> save(@RequestBody final Account account) {
-		return new ResponseEntity<Account>(accountService.save(account),
-				HttpStatus.OK);
+	public ResponseEntity<Account> save(@RequestBody final AgentAccount agentAccount) {
+		return new ResponseEntity<Account>(accountService.save(agentAccount),HttpStatus.OK);
 	}
+	
 }

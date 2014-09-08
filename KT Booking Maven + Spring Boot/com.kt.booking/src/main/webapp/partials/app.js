@@ -6,15 +6,21 @@ var myApp = angular.module('myApp', [ 'ngRoute', 'ngResource', 'ngCookies' ]);
 myApp.config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'partials/index.html'
-	}).when('/post', {
-		templateUrl : 'partials/post/post.html',
-		controller : 'postCtrl'
-	}).when('/search', {
-		templateUrl : 'partials/search/search.html',
-		controller : 'searchCtrl'
-	}).when('/display', {
-		templateUrl : 'partials/display/display.html',
-		controller : 'displayCtrl'
+	}).when('/customer/post', {
+		templateUrl : 'partials/customer/post_customer.html',
+		controller : 'post_customerCtrl'
+	}).when('/customer/search', {
+		templateUrl : 'partials/customer/search_customer.html',
+		controller : 'search_customerCtrl'
+	}).when('/customer/display', {
+		templateUrl : 'partials/customer/display_customer.html',
+		controller : 'display_customerCtrl'
+	}).when('/customer/edit/:id', {
+		templateUrl : 'partials/customer/edit_customer.html',
+		controller : 'edit_customerCtrl'
+	}).when('/agent/post', {
+		templateUrl : 'partials/agent/post_agent.html',
+		controller : 'post_agentCtrl'
 	}).otherwise({
 		redirectTo : ''
 	});

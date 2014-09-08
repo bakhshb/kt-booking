@@ -1,5 +1,7 @@
 package com.kt.booking.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ public class TourBooking {
 	private Long id;
 	private Booking booking;
 	private TourInfo tourInfo;
-	private String bookingDate;
+	private Date bookingDate;
 	private String additionalInfo;
 
 	@Id
@@ -38,7 +40,7 @@ public class TourBooking {
 	}
 
 	@Column(name = "booking_date")
-	public String getBookingDate() {
+	public Date getBookingDate() {
 		return bookingDate;
 	}
 
@@ -55,7 +57,7 @@ public class TourBooking {
 		this.booking = booking;
 	}
 
-	public void setBookingDate(String bookingDate) {
+	public void setBookingDate(Date bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 
