@@ -22,7 +22,7 @@ myApp.config(function($routeProvider) {
 		templateUrl : 'partials/agent/post_agent.html',
 		controller : 'post_agentCtrl'
 	}).otherwise({
-		redirectTo : ''
+		redirectTo : '/'
 	});
 });
 
@@ -38,8 +38,8 @@ myApp.config(function($routeProvider) {
  * }else{ $scope.loginStatus='Login'; $scope.loginUrl='/login'; } }
  */
 
-myApp.controller('mainCtrl', [ '$scope', '$cookies',
-		function($scope, $cookies) {
+myApp.controller('mainCtrl', [ '$scope', '$cookies','$window',
+		function($scope, $cookies,$window) {
 			var username = '';
 			// Retrieving a cookie
 			if ($cookies.username) {
@@ -52,7 +52,7 @@ myApp.controller('mainCtrl', [ '$scope', '$cookies',
 
 			} else {
 				$scope.loginStatus = 'Login';
-				$scope.loginUrl = '/login';
-
+				$scope.loginUrl = '/logout';
+				$window.location.href = 'logout';
 			}
 		} ]);
