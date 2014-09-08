@@ -15,9 +15,9 @@ myApp.config(function($routeProvider) {
 	}).when('/customer/display', {
 		templateUrl : 'partials/customer/display_customer.html',
 		controller : 'display_customerCtrl'
-	}).when('/customer/edit/:id', {
-		templateUrl : 'partials/customer/edit_customer.html',
-		controller : 'edit_customerCtrl'
+	}).when('/customer/update/:id', {
+		templateUrl : 'partials/customer/update_customer.html',
+		controller : 'update_customerCtrl'
 	}).when('/agent/post', {
 		templateUrl : 'partials/agent/post_agent.html',
 		controller : 'post_agentCtrl'

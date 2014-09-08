@@ -19,7 +19,7 @@ myApp.factory('UpdateCustomer', function($resource) {
 			});
 });
 
-myApp.controller('edit_customerCtrl', function($scope, $routeParams, $http,
+myApp.controller('update_customerCtrl', function($scope, $routeParams, $http,
 		SearchCustomer, UpdateCustomer) {
 
 	SearchCustomer.query({}, {
