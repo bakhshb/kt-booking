@@ -1,0 +1,19 @@
+{
+    "id": "1", 
+	"name": "South Island", 
+    "images": [
+		"img/tours/84bro.jpg",
+        "img/tours/headimage10.jpg", 
+        "img/tours/headimage11.jpg", 
+        "img/tours/headimage12.jpg", 
+        "img/tours/headimage20.jpg", 
+        "img/tours/headimage21.jpg"
+    ], 
+    "dates": [
+		"12 aug", 
+		"15 sep", 
+		"22 oct"
+	], 
+	"price": "800.00",
+    "description": "als djask jdljgfdf gsdklfghsdklfghskdl hfskd fghksdlhf gskdlhf gklsdhf gksdhf gskdlf ghskd fghskdlf gsdf"
+}

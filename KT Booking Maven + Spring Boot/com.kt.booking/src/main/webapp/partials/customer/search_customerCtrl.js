@@ -13,15 +13,21 @@ myApp.factory('SearchCustomer', function ($resource){
 		});
 });
 
-myApp.controller('search_customerCtrl', function ($scope, SearchCustomer){
+myApp.controller('search_customerCtrl', function ($scope,$timeout,$location,$route, SearchCustomer){
 	$scope.submit = function(){
-		SearchCustomer.query({},{'id':$scope.customerId}, function success (data){
+		SearchCustomer.query({},{'id':$scope.customer.id}, function success (data){
 			$scope.result =data;
-			$scope.customerId=null;
+			$scope.error='';
 		}, function error(data){
-			$scope.result =data.statusText;
+			$scope.error =data.statusText;
+			$scope.result ='';
+			$scope.customer={};
+			$scope.showMessage = true;
+			 $timeout(function () { 
+				 $scope.showMessage = false;
+				 }, 3000);  
 		});
 		
-	}
+	};
 	
 });

@@ -11,34 +11,39 @@ myApp.factory('PostAgent', function($resource) {
 });
 
 // call the controller defined in html file between <div>
-myApp.controller('post_agentCtrl', function($scope, PostAgent,$http) {
+myApp.controller('post_agentCtrl',
+		function($scope,$http,$timeout,$location,$route,PostAgent) {
 
-	// to get the login info
-	var LogedinUser = null;
-	var getLogedinUser = $http.get("http://localhost:8080/rest/account/login");
-	getLogedinUser.success(function(data, status, headers, config) {
-		LogedinUser=data;
-		console.log(data);
-    });
-	
-	$scope.submit = function() {
-		// put the data filed into object
-		var agent = new Object();
-		agent.createdBy=LogedinUser;
-		agent.name = $scope.commitData.name;
-		agent.address = $scope.commitData.address;
-		agent.email = $scope.commitData.email;
-		agent.contactNo = $scope.commitData.contactNo;
-		agent.userName = $scope.commitData.userName;
-		agent.password = $scope.commitData.password;
-		agent.isEnabled = true;
-		agent.role=$scope.commitData.role;
-		// insert the data into the api and get server response
-		PostAgent.create({}, agent, function success(data) {
-			$scope.serverResponse = 'was sent successfuly';
-			$scope.commitData.name = '';
-		}, function err() {
-			$scope.serverResponse = 'Please contact the admin';
+			// to get the login info
+			var LogedinUser = null;
+			var getLogedinUser = $http
+					.get("http://localhost:8080/rest/account/login");
+			getLogedinUser.success(function(data, status, headers, config) {
+				LogedinUser = data;
+			});
+
+			$scope.submit = function() {
+				$scope.agent.createdBy = LogedinUser;
+				$scope.agent.isEnabled = true;
+				// insert the data into the api and get server response
+				PostAgent.create({}, $scope.agent, function success(data) {
+					$scope.successResponse = 'was sent successfuly';
+					$scope.errorResponse = '';
+					$scope.agentForm.$setPristine();
+					$scope.agent = {};
+					$scope.showMessage = true;
+					 $timeout(function (data, status, headers, config) { 
+						 $scope.showMessage = false;
+						 $location.path('/');
+						 $route.reload();
+						 }, 3000);  
+				}, function err(data, status, headers, config) {
+					$scope.errorResponse = data.headers('MyResponseHeader');
+					$scope.successResponse = '';
+					$scope.showMessage = true;
+					 $timeout(function () { 
+						 $scope.showMessage = false;
+						 }, 3000);  
+				});
+			};
 		});
-	}
-});

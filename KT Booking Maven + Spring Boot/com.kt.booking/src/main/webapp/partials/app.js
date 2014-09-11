@@ -45,7 +45,6 @@ myApp.controller('mainCtrl', [ '$scope', '$cookies','$window',
 			if ($cookies.username) {
 				username = $cookies.username;
 			}
-			console.log(username);
 			if (username != '' && username != ' undefined') {
 				$scope.loginStatus = username + ' Logout';
 				$scope.loginUrl = '/logout';
@@ -53,6 +52,6 @@ myApp.controller('mainCtrl', [ '$scope', '$cookies','$window',
 			} else {
 				$scope.loginStatus = 'Login';
 				$scope.loginUrl = '/logout';
-				$window.location.href = 'logout';
+			//	$window.location.href = 'logout';
 			}
 		} ]);

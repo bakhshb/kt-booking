@@ -1,18 +1,12 @@
-
-<form data-ng-submit="submit()" name="form">
-	<table>
-		<tr>
-			<td>Name</td>
-			<td><input type="text" data-ng-model="customerId" required></td>
-		</tr>
-
-		<tr>
-			<td></td>
-			<td><button data-ng-disable="form.$invalid">Submit</button>
-		</tr>
-		<tr>
-			<td></td>
-			<td>{{result}}
-		</tr>
-	</table>
+<form class="navbar-form navbar-left" data-ng-submit="submit()" name="searchForm">
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Search"
+			data-ng-model="customer.id" required>
+	</div>
+	<button type="submit" class="btn btn-search"
+		data-ng-disable="form.$invalid"><span class="glyphicon glyphicon-search"></span>Search</button>
+	<div class="form-group">
+	<p class="text-info">{{result}}</p>
+	<p class="text-danger" data-ng-show="showMessage">{{error}}</p>
+	</div>
 </form>

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name = "Customer")
 public class Customer {
@@ -42,67 +44,80 @@ public class Customer {
 		return id;
 	}
 
+	@Audited
 	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
 	}
 
+	@Audited
 	@Column(name = "last_name")
 	public String getLastName() {
 		return lastName;
 	}
 
+	@Audited
 	@Column(name = "nick_name")
 	public String getNickName() {
 		return nickName;
 	}
 
+	@Audited
 	@Column(name = "nationality")
 	public String getNationality() {
 		return nationality;
 	}
 
+	@Audited
 	@Column(name = "birth_date")
 	public Date getBirthDate() {
 		return birthDate;
 	}
 
+	@Audited
 	@Column(name = "gender")
 	public String getGender() {
 		return gender;
 	}
 
+	@Audited
 	@Column(name = "permission_from")
 	public String getPermissionFrom() {
 		return permissionFrom;
 	}
 
+	@Audited
 	@Column(name = "address")
 	public String getAddress() {
 		return address;
 	}
 
+	@Audited
 	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
 
+	@Audited
 	@Column(name = "contact_no")
 	public String getContactNo() {
 		return contactNo;
 	}
 
+	@Audited
 	@Column(name = "additional_info", columnDefinition = "Text")
 	public String getAdditionalInfo() {
 		return additionalInfo;
 	}
 
+	@Audited
 	@Column(name = "created")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreated() {
 		return created;
 	}
 
+	@Audited
 	@Column(name = "created_by")
 	public String getCreatedBy() {
 		return createdBy;

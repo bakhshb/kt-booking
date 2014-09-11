@@ -1,0 +1,18 @@
+<div class="phone-images">
+  <img ng-src="{{img}}"
+       class="phone"
+       ng-repeat="img in tour.images"
+       ng-class="{active: mainImageUrl==img}">
+</div>
+
+<h1>{{tour.name}}</h1>
+
+<p>{{tour.description}}</p>
+
+<ul class="phone-thumbs">
+  <li ng-repeat="img in tour.images">
+    <img ng-src="{{img}}" ng-click="setImage(img)">
+  </li>
+</ul>
+
+

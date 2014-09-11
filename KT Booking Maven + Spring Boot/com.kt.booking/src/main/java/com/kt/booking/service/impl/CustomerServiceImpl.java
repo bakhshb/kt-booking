@@ -54,5 +54,11 @@ public class CustomerServiceImpl implements CustomerService{
 		updateCustomer.setCreatedBy(customer.getCreatedBy());
 		return customerRepository.save(updateCustomer);
 	}
+	
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		 customerRepository.delete(id);
+	}
 
 }
