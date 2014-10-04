@@ -1,0 +1,141 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+
+			<h1>Customer</h1>
+
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li data-ng-class="{active: !listDisplayModeEnabled}"
+						class="toolbaritem"><a href=""
+						data-ng-click="changeDisplayMode(DisplayModeEnum.Card)">&#xA0;<span
+							class="glyphicon glyphicon-th-large"></span>Card View
+					</a></li>
+					<li data-ng-class="{active: listDisplayModeEnabled}"
+						class="toolbaritem"><a href=""
+						data-ng-click="changeDisplayMode(DisplayModeEnum.List)">&#xA0;<span
+							class="glyphicon glyphicon-align-justify"></span>List View
+					</a></li>
+					<li class="toolbaritem"><a href=""
+						data-ng-click="navigate('/customer/edit/', 0)">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span>Add Customer
+					</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="alert alert-success" data-ng-show="updateStatus">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="errorMessage">
+				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+				{{ errorMessage }}
+			</div>
+			<div data-ng-show="customers.length == 0">
+				<div class="col-md-12 text-center">
+					<h4>No customers found</h4>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="col-sm-6 col-md-3"
+				dir-paginate="customer in customers | filter: searchText | itemsPerPage: 25"
+				data-ng-hide="listDisplayModeEnabled">
+				<div class="text-center">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<button class="btn close" title="Delete Customer"
+								data-ng-click="delete(customer.id)">&times;</button>
+							<a href="#/customer/edit/{{customer.id}}" class="white"><h3>{{customer.firstName
+									+" "+ customer.lastName}}</h3></a>
+						</div>
+						<div class="panel-body">
+							<a href="#/customer/edit/{{customer.id}}" class="white"><img
+								data-ng-src="/images/{{customer.gender | lowercase}}.png"
+								style="height: 90px;" class="img-rounded" /></a>
+							<p>Email: {{customer.email}}</p>
+							<p>Phone: {{customer.contactNo}}</p>
+							<button class="btn btn-primary text-center" title="Booking"
+								data-ng-click="navigate('/customer/booking/', customer.id)">
+								<span class=""></span>Bookings
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive" data-ng-show="listDisplayModeEnabled">
+				<table class="table table-striped"
+					data-ng-hide="customers.length == 0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Full Name<a href=""
+								ng-click="predicate = 'firstName';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Birthday<a href=""
+								ng-click="predicate = 'birthday';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Nationality<a href=""
+								ng-click="predicate = 'nationality';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Email<a href=""
+								ng-click="predicate = 'email';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Contact No</th>
+							<th>Created By<a href=""
+								ng-click="predicate = 'createdBy';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Created Date<a href=""
+								ng-click="predicate = 'createdDate';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="customer in customers | filter: searchText | itemsPerPage: 25 | orderBy:'createdDate':true | orderBy:predicate:reverse">
+							<td>{{customer.id}}</td>
+							<td>{{customer.firstName +" "+ customer.lastName}}</td>
+							<td>{{customer.birthday}}</td>
+							<td>{{customer.nationality}}</td>
+							<td>{{customer.email}}</td>
+							<td>{{customer.contactNo}}</td>
+							<td>{{customer.createdBy}}</td>
+							<td>{{customer.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>
+								<button type="submit"
+									ng-click="navigate('/customer/edit/', customer.id)" class="btn">
+									<span class="glyphicon glyphicon-pencil"></span> Edit
+								</button>
+								<button type="submit" ng-click="delete(customer.id)"
+									class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<dir-pagination-controls boundary-links="true"
+				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		</div>
+	</div>
+</div>

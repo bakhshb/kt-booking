@@ -1,0 +1,231 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h1>Tour Schedules</h1>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li class="toolbaritem"><a href="#/tour">&#xA0;<span
+							class="glyphicon glyphicon-home"></span>Tour
+					</a></li>
+					<li class="toolbaritem"><a href="" data-ng-click="clear()"
+						data-target="#saveTourScheduleModal" data-toggle="modal">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span>Add Tour Schedules
+					</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="alert alert-success" data-ng-show="updateStatus">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="errorMessage">
+				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+				{{ errorMessage }}
+			</div>
+			<div data-ng-show="tourSchedules.length == 0">
+				<div class="col-md-12 text-center">
+					<h4>No Tour Schedules found</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="saveTourScheduleModal" tabindex="-1"
+		role="dialog" aria-labelledby="myTourScheduleLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="form" role="form" novalidate
+					class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+					ng-submit="create()">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true" ng-click="clear()">&times;</button>
+						<h4 class="modal-title" id="myTourScheduleLabel">
+							<span class="glyphicon glyphicon-edit"></span> Create or edit a
+							Tour Schedule
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>ID</label> <input type="text" class="form-control"
+								name="id" ng-model="tourSchedule.id" readonly>
+						</div>
+						<div class="form-group">
+							<label>Tour</label> <select name="tourname" class="form-control"
+								ng-model="tourSchedule.tour.id" required>
+								<option selected disabled value="">-- Select Tour Name
+									--</option>
+								<option ng-repeat="tour in tours" value="{{tour.id}}">{{tour.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Departure Date</label>
+							<p class="input-group">
+								<input type="text" class="form-control" name="departureDate"
+									datepicker-popup="yyyy-MM-dd"
+									ng-model="tourSchedule.departureDate" is-open="departureopened"
+									min-date="minDate" max-date="'2015-06-22'"
+									datepicker-options="dateOptions"
+									date-disabled="disabled(date, mode)" ng-required="true"
+									close-text="Close" placeholder="yyyy-mm-dd" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="openDeparture($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+						</div>
+						<div class="form-group">
+							<label>Return Date</label>
+							<p class="input-group">
+								<input type="text" class="form-control" name="returnDate"
+									datepicker-popup="yyyy-MM-dd"
+									ng-model="tourSchedule.returnDate" is-open="returnopened"
+									min-date="minDate" max-date="'2015-06-22'"
+									datepicker-options="dateOptions"
+									date-disabled="disabled(date, mode)" ng-required="true"
+									close-text="Close" placeholder="yyyy-mm-dd" /> <span
+									class="input-group-btn">
+									<button type="button" class="btn btn-default"
+										ng-click="openReturn($event)">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</p>
+							<div class="error"
+								ng-show="form.returnDate.$dirty && form.returnDate.$invalid || tourSchedule.returnDate < tourSchedule.departureDate">
+								<span class="error"
+									ng-show="tourSchedule.returnDate < tourSchedule.departureDate">
+									Return Date cannot be lower than Departure Date. </span>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Price</label> <input type="number" class="form-control"
+								name="price" ng-model="tourSchedule.price" placeholder="Price"
+								required>
+							<div class="error"
+								ng-show="form.price.$dirty && form.price.$invalid">
+								<small class="error" ng-show="form.price.$error.required">
+									Price is required </small><small class="error"
+									ng-show="form.price.$error.number"> and has to be
+									number </small>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Repeat Tour</label>&nbsp;&nbsp; <input type="checkbox"
+								ng-model="checked" ng-disabled="disableCheck">
+						</div>
+						<div class="form-group" ng-if="checked == true">
+							<label>Times</label> <input type="number" class="form-control"
+								ng-model="tourSchedule.time" placeholder="How many times"
+								required only-num>
+						</div>
+						<div class="form-group" ng-if="checked == true">
+							<label>Every</label>
+							<!--  <input type="number" class="form-control"
+										ng-model="tourSchedule.day" required only-num> -->
+							<select name="tourname" class="form-control"
+								ng-model="tourSchedule.day" required>
+								<option selected disabled value="">-- Select Repetition
+									--</option>
+								<option value="2">2 days</option>
+								<option value="3">3 days</option>
+								<option value="4">4 days</option>
+								<option value="5">5 days</option>
+								<option value="7">1 week</option>
+								<option value="14">2 weeks</option>
+								<option value="30">4 weeks</option>
+							</select>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" ng-click="clear()">
+								<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+							</button>
+							<button type="submit" ng-disabled="form.$invalid"
+								class="btn btn-primary">
+								<span class="glyphicon glyphicon-save"></span> Save
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+
+				<table class="table table-striped"
+					data-ng-hide="tourSchedules.length == 0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Tour<a href="" 
+								ng-click="predicate = 'Tour';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Departure Date<a href="" 
+								ng-click="predicate = 'departureDate';  reverse=!reverse"><span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Retrun Date<a href="" 
+								ng-click="predicate = 'returnDate';  reverse=!reverse"><span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Price</th>
+							<th>Availability</th>
+							<th></th>
+							<th>Booking</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="tourSchedule in  tourSchedules | filter: searchText | itemsPerPage: 25 | orderBy:'departureDate':true | orderBy:predicate:reverse">
+							<td>{{tourSchedule.id}}</td>
+							<td>{{tourSchedule.tour.name}}</td>
+							<td>{{tourSchedule.departureDate}}</td>
+							<td>{{tourSchedule.returnDate}}</td>
+							<td>{{tourSchedule.price}} $</td>
+							<td>{{tourSchedule.availability}}</td>
+							<td>
+								<button type="submit" ng-click="update(tourSchedule.id)"
+									class="btn"
+									ng-disabled="tourSchedule.departureDate < {{yesterday}}">
+									<span class="glyphicon glyphicon-pencil"></span> Edit
+								</button>
+								<button type="submit" ng-click="delete(tourSchedule.id)"
+									class="btn btn-danger"
+									ng-disabled="tourSchedule.departureDate < {{yesterday}}">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+							<td>
+								<button type="submit"
+									ng-click="navigate('/tour/schedule/booking/',tourSchedule.id)"
+									class="btn">
+									<span class="glyphicon glyphicon-eye-open"></span> View
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<dir-pagination-controls boundary-links="true"
+				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,192 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h1>
+				Booking For <small>{{ customer.firstName + ' ' +
+					customer.lastName }}</small>
+			</h1>
+			<address>
+				Birthday:&#xA0;{{customer.birthday}}<br>
+				Nationality:&#xA0;{{customer.nationality}}<br>
+				Email:&#xA0;{{customer.email}}<br>
+				Phone:&#xA0;{{customer.contactNo}}
+			</address>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li class="toolbaritem"><a href="#/customer">&#xA0;<span
+							class="glyphicon glyphicon-home"></span>Customer
+					</a></li>
+					<li class="toolbaritem"><a
+						href="#/customer/edit/{{customer.id}}">&#xA0;<span
+							class="glyphicon glyphicon-edit"></span>Edit
+					</a></li>
+					<li class="toolbaritem"><a href=""
+						data-ng-click="addBooking(customer.id)">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span>Add Booking
+					</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+
+			<div class="alert alert-success" data-ng-show="updateStatus">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="errorMessage">
+				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+				{{ errorMessage }}
+			</div>
+			<div data-ng-show="bookings.length == 0">
+				<div class="col-md-12 text-center">
+					<h4>No Customer Bookings found</h4>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="modal fade" id="saveBookingModal" tabindex="-1"
+		role="dialog" aria-labelledby="myBookingLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="form" role="form" novalidate
+					class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+					ng-submit="create()">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true" ng-click="clear()">&times;</button>
+						<h4 class="modal-title" id="myBookingLabel">Add Booking</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Tour</label> <select name="tour_id" class="form-control"
+								ng-model="tour.id" required>
+								<option selected disabled value="">-- Select Tour Name
+									--</option>
+								<option ng-repeat="tour in tours" value="{{tour.id}}">{{tour.name}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Departure Date</label> <select name="tourSchedule_id"
+								class="form-control" data-ng-model="customer.tourSchedule.id"
+								required ng-disabled="form.tour_id.$invalid">
+								<option selected disabled value="">-- Select Departure
+									Date --</option>
+								<option
+									ng-repeat="tourSchedule in tourSchedules |filter: tour.id"
+									value="{{tourSchedule.id}}"
+									ng-hide="tourSchedule.departureDate < {{yesterday}}">{{tourSchedule.departureDate}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Payment Method</label> <select
+								name="tourSchedulePaymentMethod" class="form-control"
+								data-ng-model="customer.booking.paymentMethod" required
+								ng-disabled="form.tourSchedule_id.$invalid">
+								<option selected disabled value="">-- Select Payment
+									Method --</option>
+								<option value="Cash">Cash</option>
+								<option value="EFTPOS">EFTPOS</option>
+								<option value="Credit Card">Credit Card</option>
+							</select>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"
+							ng-click="">
+							<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+						</button>
+						<button type="submit" ng-disabled="customerForm.$invalid"
+							class="btn btn-primary" ng-click="saveBooking()">
+							<span class="glyphicon glyphicon-save"></span> Save
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+				<table class="table table-striped"
+					data-ng-hide="bookings.length == 0">
+					<thead>
+						<tr>
+							<th>Created By<a href=""
+								ng-click="predicate = 'booking.customer.createdBy';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Booking Date<a href=""
+								ng-click="predicate = 'booking.createdDate ';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Tour<a href=""
+								ng-click="predicate = 'tourSchedule.tour.name';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Departure Date<a href=""
+								ng-click="predicate = 'tourSchedule.departureDate';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Return Date<a href=""
+								ng-click="predicate = 'tourSchedule.returnDate';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Payment Method</th>
+							<th>Status</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							dir-paginate="booking in bookings | filter: customer.email |filter:searchText | itemsPerPage: 25  | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
+							<td>{{booking.booking.customer.createdBy}}</td>
+							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{booking.tourSchedule.tour.name}}</td>
+							<td>{{booking.tourSchedule.departureDate}}</td>
+							<td>{{booking.tourSchedule.returnDate}}</td>
+							<td>{{booking.booking.paymentMethod}}</td>
+							<td ng-if="booking.booking.status == 1">Approved</td>
+							<td ng-if="booking.booking.status == 2">Pending</td>
+							<td ng-if="booking.booking.status == 3">Refund</td>
+							<td ng-if="booking.booking.status == 4">Cancel</td>
+							<td><select name="status" data-ng-model="status"
+								ng-change="change(booking.booking.id,status)"
+								ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
+									<option selected disabled value="">Change Status</option>
+									<option value="1">Approve</option>
+									<option value="2">Pending</option>
+									<option value="3">Refund</option>
+									<option value="4">Cancel</option>
+							</select></td>
+							<td>
+								<button type="submit" ng-click="delete(booking.booking.id)"
+									class="btn btn-danger"
+									ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<dir-pagination-controls boundary-links="true"
+				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		</div>
+	</div>
+</div>

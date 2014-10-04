@@ -1,0 +1,79 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h1>
+				Tour Photos For <small>{{tour.name}}</small>
+			</h1>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li class="toolbaritem"><a href="#/tour">&#xA0;<span
+							class="glyphicon glyphicon-home"></span>Tour</a></li>
+					<li class="toolbaritem"><a
+						href="#/tourphoto/upload/{{tour.id}}">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span>Upload More Photos</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="alert alert-success" data-ng-show="updateStatus">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="errorMessage">
+				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+				{{ errorMessage }}
+			</div>
+			<br />
+			<div data-ng-show="tourphotos.length == 0">
+				<div class="col-md-12 text-center">
+					<h4>No Photos found</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+
+				<table class="table table-striped"
+					data-ng-hide="tourphotos.length == 0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Photo Name</th>
+							<th>Primary</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							ng-repeat="tourphoto in tourphotos |filter: tour.id | filter: searchText">
+							<td>{{tourphoto.id}}</td>
+							<td>{{tourphoto.photo}}</td>
+							<td>{{tourphoto.activated}}</td>
+							<td>
+								<button type="submit" ng-click="primary(tour.id,tourphoto.id)"
+									class="btn btn-primary">
+									<span class="glyphicon glyphicon-ok"></span> Primary
+								</button>
+								<button type="submit" ng-click="delete(tourphoto.id)"
+									class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

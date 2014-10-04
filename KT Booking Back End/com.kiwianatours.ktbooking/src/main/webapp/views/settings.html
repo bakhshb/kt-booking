@@ -1,0 +1,140 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h2 translate="settings.title"
+				translate-values="{username: '{{account.login}}'}">
+				User settings for [<b>{{settingsAccount.login}}</b>]
+			</h2>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li class="toolbaritem"><a href="#"
+						ng-show="isAuthorized(userRoles.admin)"><span
+							class="glyphicon glyphicon-home"></span> &#xA0;<span
+							translate="global.menu.account.management">Account</span></a></li>
+					<li class="toolbaritem"><a href="#/settings"><span
+							class="glyphicon glyphicon-wrench"></span>&#xA0;<span
+							translate="global.menu.account.settings">Settings</span></a></li>
+					<li class="toolbaritem"><a href="#/password"><span
+							class="glyphicon glyphicon-lock"></span>&#xA0;<span
+							translate="global.menu.account.password"> Password</span></a></li>
+					<li class="toolbaritem"><a href="#/sessions"><span
+							class="glyphicon glyphicon-cloud"></span>&#xA0;<span
+							translate="global.menu.account.sessions">Sessions</span></a></li>
+					<li class="toolbaritem"><a href="#/register"
+						ng-show="isAuthorized(userRoles.admin)"><span
+							class="glyphicon glyphicon-plus"></span>&#xA0;<span
+							translate="global.menu.account.register">Register</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+
+
+			<div class="alert alert-success" ng-show="success"
+				translate="settings.messages.success">
+				<strong>Settings saved!</strong>
+			</div>
+			<div class="alert alert-danger" ng-show="error"
+				translate="settings.messages.error">
+				<strong>An error has occured!</strong> Settings could not be saved.
+			</div>
+
+			<form name="form" role="form" novalidate
+				class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+				ng-submit="save()">
+
+				<div class="form-group">
+					<label translate="settings.form.firstname">First Name</label> <input
+						type="text" class="form-control" name="firstName"
+						placeholder="{{'settings.form.firstname.placeholder' | translate}}"
+						ng-model="settingsAccount.firstName" ng-minlength=1
+						ng-maxlength=50 required>
+					<div class="error"
+						ng-show="form.firstName.$dirty && form.firstName.$invalid">
+						<small class="error" ng-show="form.firstName.$error.required"
+							translate="settings.messages.validate.firstname.required">
+							Your first name is required. </small> <small class="error"
+							ng-show="form.firstName.$error.minlength"
+							translate="settings.messages.validate.firstname.minlength">
+							Your first name is required to be at least 1 character </small> <small
+							class="error" ng-show="form.firstName.$error.maxlength"
+							translate="settings.messages.validate.firstname.maxlength">
+							Your first name cannot be longer than 50 characters </small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label translate="settings.form.lastname">Last Name</label> <input
+						type="text" class="form-control" name="lastName"
+						placeholder="{{'settings.form.lastname.placeholder' | translate}}"
+						ng-model="settingsAccount.lastName" ng-minlength=1 ng-maxlength=50
+						required>
+					<div class="error"
+						ng-show="form.lastName.$dirty && form.lastName.$invalid">
+						<small class="error" ng-show="form.lastName.$error.required"
+							translate="settings.messages.validate.lastname.required">
+							Your last name is required. </small> <small class="error"
+							ng-show="form.lastName.$error.minlength"
+							translate="settings.messages.validate.lastname.minlength">
+							Your last name is required to be at least 1 character </small> <small
+							class="error" ng-show="form.lastName.$error.maxlength"
+							translate="settings.messages.validate.lastname.maxlength">
+							Your last name cannot be longer than 50 characters </small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label translate="global.form.email">E-mail</label> <input
+						type="email" class="form-control" name="email"
+						placeholder="{{'global.form.email.placeholder' | translate}}"
+						ng-model="settingsAccount.email" ng-minlength=5 ng-maxlength=100
+						required>
+					<div class="error"
+						ng-show="form.email.$dirty && form.email.$invalid">
+						<small class="error" ng-show="form.email.$error.required"
+							translate="global.messages.validate.email.required"> Your
+							e-mail is required. </small> <small class="error"
+							ng-show="form.email.$error.email"
+							translate="global.messages.validate.email.invalid"> Your
+							e-mail is invalid. </small> <small class="error"
+							ng-show="form.email.$error.minlength"
+							translate="global.messages.validate.email.minlength">
+							Your e-mail is required to be at least 5 characters </small> <small
+							class="error" ng-show="form.email.$error.maxlength"
+							translate="global.messages.validate.email.maxlength">
+							Your e-mail cannot be longer than 100 characters </small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label translate="global.form.contactNo">Contact No</label> <input
+						type="contactNo" class="form-control" name="contactNo"
+						placeholder="{{'global.form.contactNo.placeholder' | translate}}"
+						ng-model="settingsAccount.contactNo" ng-minlength=10
+						ng-maxlength=11 required>
+					<div class="error"
+						ng-show="form.contactNo.$dirty && form.email.$invalid">
+						<small class="error" ng-show="form.contactNo.$error.required"
+							translate="global.messages.validate.contactNo.required">
+							Your contact No is required. </small> <small class="error"
+							ng-show="form.contactNo.$error.email"
+							translate="global.messages.validate.contactNo.invalid">
+							Your contact No is invalid. </small> <small class="error"
+							ng-show="form.contactNo.$error.minlength"
+							translate="global.messages.validate.contactNo.minlength">
+							Your contact No is required to be at least 10 characters </small> <small
+							class="error" ng-show="form.contactNo.$error.maxlength"
+							translate="global.messages.validate.contactNo.maxlength">
+							Your contact No cannot be longer than 11 characters </small>
+					</div>
+				</div>
+
+
+				<button type="submit" ng-disabled="form.$invalid"
+					class="btn btn-primary" translate="settings.form.button">Save</button>
+			</form>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+
+</div>

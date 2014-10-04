@@ -1,0 +1,18 @@
+{
+  "generator-jhipster": {
+    "baseName": "ktbooking",
+    "packageName": "com.kiwianatours.ktbooking",
+    "packageFolder": "com/kiwianatours/ktbooking",
+    "authenticationType": "cookie",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "7"
+  }
+}
