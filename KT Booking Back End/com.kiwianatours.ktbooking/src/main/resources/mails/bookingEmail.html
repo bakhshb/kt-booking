@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{email.booking.title}">Kiwianatours Booking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p th:text="#{email.booking.greeting(${customer.firstName})}">Dear</p>
+	<p th:text="#{email.booking.text1}">Thank you for booking with us.
+		Please find your booking details below:</p>
+	<table>
+		<tr>
+			<th>Booking Date</th>
+			<th>Tour</th>
+			<th>Departure Date</th>
+			<th>Retrun Date</th>
+			<th>Amount</th>
+		</tr>
+		<tr>
+			<td th:text="${booking.createdDate}"></td>
+			<td th:text="${booking.tour.name}"></td>
+			<td th:text="${booking.departureDate}"></td>
+			<td th:text="${booking.returnDate}"></td>
+			<td th:text="${booking.amount}"></td>
+		</tr>
+	</table>
+	<p>
+		<span th:text="#{email.booking.text2}">Regards, </span> <br /> <em
+			th:text="#{email.signature}">Kiwianatours.</em>
+	</p>
+</body>
+</html>
