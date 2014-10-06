@@ -72,4 +72,11 @@ public class MailService {
         String subject = messageSource.getMessage("email.activation.title", null, locale);
         sendEmail(email, subject, content, false, true);
     }
+    
+    @Async
+    public void sendBookingEmail (final String email, String content, Locale locale){
+    	log.debug("Sending booking e-mail to '{}'", email);
+    	String subject = messageSource.getMessage("email.booking.title", null, locale);
+    	sendEmail(email, subject, content, false, true);
+    }
 }

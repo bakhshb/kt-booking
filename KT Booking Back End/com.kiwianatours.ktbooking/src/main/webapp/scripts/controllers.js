@@ -2,7 +2,9 @@
 
 /* Controllers */
 
-ktbookingApp.controller('MainController', function ($scope) {
+ktbookingApp.controller('MainController', function ($scope, $timeout, ngProgress) {
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);  
     });
 
 ktbookingApp.controller('AdminController', function ($scope) {
@@ -25,7 +27,9 @@ ktbookingApp.controller('LanguageController', function ($scope, $translate, Lang
 ktbookingApp.controller('MenuController', function ($scope) {
     });
 
-ktbookingApp.controller('LoginController', function ($scope, $location, AuthenticationSharedService) {
+ktbookingApp.controller('LoginController', function ($scope, $location, AuthenticationSharedService, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);  
         $scope.rememberMe = true;
         $scope.login = function () {
             AuthenticationSharedService.login({
@@ -36,11 +40,15 @@ ktbookingApp.controller('LoginController', function ($scope, $location, Authenti
         }
     });
 
-ktbookingApp.controller('LogoutController', function ($location, AuthenticationSharedService) {
+ktbookingApp.controller('LogoutController', function ($location, AuthenticationSharedService, $timeout, ngProgress) {
         AuthenticationSharedService.logout();
+        ngProgress.start();
+    	$timeout(function (){ngProgress.complete()}, 1000);  
     });
 
-ktbookingApp.controller('SettingsController', function ($scope, Account) {
+ktbookingApp.controller('SettingsController', function ($scope, Account, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);  
         $scope.success = null;
         $scope.error = null;
         $scope.settingsAccount = Account.get();
@@ -59,7 +67,9 @@ ktbookingApp.controller('SettingsController', function ($scope, Account) {
         };
     });
 
-ktbookingApp.controller('RegisterController', function ($scope, $translate, Register) {
+ktbookingApp.controller('RegisterController', function ($scope, $translate, Register, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
         $scope.success = null;
         $scope.error = null;
         $scope.doNotMatch = null;
@@ -91,7 +101,9 @@ ktbookingApp.controller('RegisterController', function ($scope, $translate, Regi
         }
     });
 
-ktbookingApp.controller('ActivationController', function ($scope, $routeParams, Activate) {
+ktbookingApp.controller('ActivationController', function ($scope, $routeParams, Activate, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);  
         Activate.get({key: $routeParams.key},
             function (value, responseHeaders) {
                 $scope.error = null;
@@ -103,7 +115,9 @@ ktbookingApp.controller('ActivationController', function ($scope, $routeParams, 
             });
     });
 
-ktbookingApp.controller('PasswordController', function ($scope, Password) {
+ktbookingApp.controller('PasswordController', function ($scope, Password, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
         $scope.success = null;
         $scope.error = null;
         $scope.doNotMatch = null;
@@ -125,7 +139,9 @@ ktbookingApp.controller('PasswordController', function ($scope, Password) {
         };
     });
 
-ktbookingApp.controller('SessionsController', function ($scope, resolvedSessions, Sessions) {
+ktbookingApp.controller('SessionsController', function ($scope, resolvedSessions, Sessions, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
         $scope.success = null;
         $scope.error = null;
         $scope.sessions = resolvedSessions;
@@ -143,8 +159,10 @@ ktbookingApp.controller('SessionsController', function ($scope, resolvedSessions
         };
     });
 
- ktbookingApp.controller('MetricsController', function ($scope, MetricsService, HealthCheckService, ThreadDumpService) {
+ ktbookingApp.controller('MetricsController', function ($scope, MetricsService, HealthCheckService, ThreadDumpService, $timeout, ngProgress) {
 
+	 	ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
         $scope.refresh = function() {
             HealthCheckService.check().then(function(promise) {
                 $scope.healthCheck = promise.data;
@@ -221,7 +239,9 @@ ktbookingApp.controller('SessionsController', function ($scope, resolvedSessions
         };
     });
 
-ktbookingApp.controller('LogsController', function ($scope, resolvedLogs, LogsService) {
+ktbookingApp.controller('LogsController', function ($scope, resolvedLogs, LogsService, $timeout, ngProgress) {
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
         $scope.loggers = resolvedLogs;
 
         $scope.changeLevel = function (name, level) {
@@ -231,8 +251,10 @@ ktbookingApp.controller('LogsController', function ($scope, resolvedLogs, LogsSe
         }
     });
 
-ktbookingApp.controller('AuditsController', function ($scope, $translate, $filter, AuditsService) {
-        $scope.onChangeDate = function() {
+ktbookingApp.controller('AuditsController', function ($scope, $translate, $filter, AuditsService, $timeout, ngProgress) {
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);  
+	$scope.onChangeDate = function() {
             AuditsService.findByDates($scope.fromDate, $scope.toDate).then(function(data){
                 $scope.audits = data;
             });

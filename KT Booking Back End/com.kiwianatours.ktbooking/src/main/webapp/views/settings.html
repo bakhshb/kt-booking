@@ -1,38 +1,14 @@
 <div>
+	<ol class="breadcrumb">
+		<li class="active">Settings</li>
+	</ol>
 	<div class="row">
-		<div class="col-sm-12 col-md-12">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
 			<h2 translate="settings.title"
 				translate-values="{username: '{{account.login}}'}">
 				User settings for [<b>{{settingsAccount.login}}</b>]
 			</h2>
-			<div class="navbar">
-				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#"
-						ng-show="isAuthorized(userRoles.admin)"><span
-							class="glyphicon glyphicon-home"></span> &#xA0;<span
-							translate="global.menu.account.management">Account</span></a></li>
-					<li class="toolbaritem"><a href="#/settings"><span
-							class="glyphicon glyphicon-wrench"></span>&#xA0;<span
-							translate="global.menu.account.settings">Settings</span></a></li>
-					<li class="toolbaritem"><a href="#/password"><span
-							class="glyphicon glyphicon-lock"></span>&#xA0;<span
-							translate="global.menu.account.password"> Password</span></a></li>
-					<li class="toolbaritem"><a href="#/sessions"><span
-							class="glyphicon glyphicon-cloud"></span>&#xA0;<span
-							translate="global.menu.account.sessions">Sessions</span></a></li>
-					<li class="toolbaritem"><a href="#/register"
-						ng-show="isAuthorized(userRoles.admin)"><span
-							class="glyphicon glyphicon-plus"></span>&#xA0;<span
-							translate="global.menu.account.register">Register</span></a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-
-
 			<div class="alert alert-success" ng-show="success"
 				translate="settings.messages.success">
 				<strong>Settings saved!</strong>

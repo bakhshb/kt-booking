@@ -1,6 +1,6 @@
 'use strict';
 
-ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $location, $timeout, Tour, TourPhoto, resolvedTourPhoto, modalService){
+ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $location, $timeout, Tour, TourPhoto, resolvedTourPhoto, modalService, ngProgress){
 	
 	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0, timer;
 	$scope.tours = tourId;
@@ -13,6 +13,8 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 		if (tourId > 0) {
 			$scope.tour = Tour.get({id:tourId}, function (){
 				$scope.tourphotos = resolvedTourPhoto; 
+				ngProgress.start();
+				$timeout(function (){ngProgress.complete()}, 1000);
 			}, function (data){
 				processError(data.statusText);
 			});
@@ -34,7 +36,7 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 			};
 			modalService.showModal({}, modalOptions).then(function (result) {
 				if (!result) {
-					TourPhoto.save({tourId:tourId, tourPhotoId: tourPhotoId},function () {
+					TourPhoto.update({tourId:tourId, tourPhotoId: tourPhotoId},function () {
 						$scope.tourphotos = TourPhoto.query();
 						processSuccess(tourName+' is Primary!');
 					});

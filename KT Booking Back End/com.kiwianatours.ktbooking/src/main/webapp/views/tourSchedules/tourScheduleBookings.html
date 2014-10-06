@@ -1,6 +1,11 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="#/tour">Tour</a></li>
+				<li><a href="#/tour/schedule">Tour Schedule</a></li>
+				<li class="active">Tour Booking</li>
+			</ol>
 			<h1>
 				Booking For Tour <small>{{tourSchedule.tour.name }}</small>
 			</h1>
@@ -9,14 +14,6 @@
 			<h5></h5>
 			<h5>There are {{bookings.length}} bookings</h5>
 			<div class="navbar">
-				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#/tour">&#xA0;<span
-							class="glyphicon glyphicon-home"></span>Tour
-					</a></li>
-					<li class="toolbaritem"><a href="#/tour/schedule">&#xA0;<span
-							class="glyphicon glyphicon-calendar"></span>Tour Schedule
-					</a></li>
-				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
 						<label class="navbarText col-sm-2">Filter:</label>

@@ -1,24 +1,19 @@
 <div>
 	<div class="row">
 		<div class="col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="#/customer">Customer</a></li>
+				<li class="active" data-ng-hide="customer.id != null">Add Customer</li>
+				<li class="active" data-ng-hide="customer.id == null">{{ customer.firstName + ' ' + customer.lastName }}</li>
+			</ol>
 			<h1>
 				<span class="glyphicon glyphicon-edit"></span> {{title}} Customer <small>{{
 					customer.firstName + ' ' + customer.lastName }} <span
-					data-ng-hide="customer.id == null"> </span>
+					data-ng-hide="customer.id == null"></span><a
+					href="#/customer/booking/{{customer.id}}"
+					data-ng-hide="customer.id == null">View Booking</a>
 				</small>
 			</h1>
-
-			<div class="navbar">
-				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#/customer">&#xA0;<span
-							class="glyphicon glyphicon-home"></span>Customer
-					</a></li>
-					<li class="toolbaritem" data-ng-hide="customer.id == null"><a
-						href="#/customer/booking/{{customer.id}}">&#xA0;<span
-							class="glyphicon glyphicon-eye-open"></span>View Booking
-					</a></li>
-				</ul>
-			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -122,8 +117,8 @@
 						ng-show="form.contactNo.$dirty && form.contactNo.$invalid">
 						<small class="error" ng-show="form.contactNo.$error.required">
 							Phone No is required </small><small class="error"
-							ng-show="form.contactNo.$error.maxlength">Phone
-							cannot be longer than 11 characters </small>
+							ng-show="form.contactNo.$error.maxlength">Phone cannot be
+							longer than 11 characters </small>
 					</div>
 				</div>
 				<div class="form-group">
@@ -169,7 +164,7 @@
 						<span class="glyphicon glyphicon-save"></span> {{buttonText}}
 					</button>
 					&nbsp;&nbsp;
-					<button type="reset" class="btn ">
+					<button type="button" class="btn " ng-click="clear()">
 						<span class="glyphicon glyphicon-refresh"></span> Clear
 					</button>
 					&nbsp;&nbsp;

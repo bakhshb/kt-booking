@@ -1,11 +1,13 @@
 'use strict';
 
-ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routeParams,$location,Tour, TourPhoto, FileUploader){
+ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routeParams, $timeout, $location,Tour, TourPhoto, FileUploader, ngProgress){
 
 	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0;
 
 	if (tourId > 0) {
 		$scope.tour = Tour.get({id:tourId});
+		ngProgress.start();
+		$timeout(function (){ngProgress.complete()}, 1000);
 
 	} else {
 		$scope.tour ={};

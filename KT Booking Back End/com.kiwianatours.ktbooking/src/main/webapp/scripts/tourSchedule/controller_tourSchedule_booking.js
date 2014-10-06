@@ -1,6 +1,6 @@
 'use strict';
 
-ktbookingApp.controller('TourScheduleBookingController', function ($scope, $routeParams, $location, $timeout, Customer, TourScheduleBooking, TourSchedule, modalService){
+ktbookingApp.controller('TourScheduleBookingController', function ($scope, $routeParams, $location, $timeout, Customer, TourScheduleBooking, TourSchedule, modalService,ngProgress){
 
 	var tourinfoId = ($routeParams.Id) ? parseInt($routeParams.Id): 0, timer;
 	$scope.currentPage = 1;
@@ -22,6 +22,8 @@ ktbookingApp.controller('TourScheduleBookingController', function ($scope, $rout
 		if (tourinfoId > 0) {
 			$scope.tourSchedule = TourSchedule.get({id:tourinfoId});
 			$scope.bookings = TourScheduleBooking.get({id:tourinfoId});
+			ngProgress.start();
+			$timeout(function (){ngProgress.complete()}, 1000);
 
 		} else {
 			$scope.bookings ={};

@@ -1,12 +1,14 @@
 'use strict';
 
-ktbookingApp.controller('TourController', function ($scope, $location,$timeout, resolvedTour, Tour, modalService) {
+ktbookingApp.controller('TourController', function ($scope, $location,$timeout, resolvedTour, Tour, modalService, ngProgress) {
 
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
 	$scope.tours = resolvedTour;
-
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);
+	
 	$scope.create = function () {
 		if ($scope.form.$valid) {
 			Tour.save($scope.tour,function () {

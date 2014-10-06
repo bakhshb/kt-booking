@@ -1,6 +1,6 @@
 'use strict';
 
-ktbookingApp.controller('TourScheduleController', function ($scope, $location, $timeout, resolvedTourSchedule, TourSchedule,resolvedTour ,Tour, modalService) {
+ktbookingApp.controller('TourScheduleController', function ($scope, $location, $timeout, resolvedTourSchedule, TourSchedule,resolvedTour ,Tour, modalService, ngProgress) {
 
 	var timer;
 	$scope.currentPage = 1;
@@ -8,6 +8,8 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
 
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);
 	/*
 	 * yesterday date
 	 */
@@ -67,10 +69,10 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 	/*
 	 * date picker
 	 */
-	/*$scope.toggleMin = function() {
+	$scope.toggleMin = function() {
 		$scope.minDate = $scope.minDate ? null : new Date();
 	};
-	$scope.toggleMin();*/
+	$scope.toggleMin();
 
 	$scope.openDeparture = function($event) {
 		$event.preventDefault();

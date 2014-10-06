@@ -1,17 +1,23 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="#/tour">Tour</a></li>
+				<li class="active">View Photo</li>
+			</ol>
 			<h1>
-				Tour Photos For <small>{{tour.name}}</small>
+				Tour Photo For <small>{{tour.name}}</small>
 			</h1>
 			<div class="navbar">
-				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#/tour">&#xA0;<span
-							class="glyphicon glyphicon-home"></span>Tour</a></li>
-					<li class="toolbaritem"><a
-						href="#/tourphoto/upload/{{tour.id}}">&#xA0;<span
-							class="glyphicon glyphicon-plus"></span>Upload More Photos</a></li>
-				</ul>
+				<!-- <ul class="nav navbar-nav">
+					<div class="sup-header">ss</div>
+					<li><a href="#/tour">&#xA0;<span
+							class="glyphicon glyphicon-road"></span> Tour
+					</a></li>
+					<li><a href="#/tourphoto/upload/{{tour.id}}">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span> Upload More Photos
+					</a></li>
+				</ul> -->
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
 						<label class="navbarText col-sm-2">Filter:</label>

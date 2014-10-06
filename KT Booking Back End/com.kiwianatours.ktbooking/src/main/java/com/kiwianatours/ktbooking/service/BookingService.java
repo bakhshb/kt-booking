@@ -135,14 +135,14 @@ public class BookingService {
 			case 2:
 				System.out.println(status);
 				// pending 
-				if (booking.getStatus() == 2 || booking.getStatus() == 3 || booking.getStatus() == 4){
+				if (booking.getStatus() == 1 || booking.getStatus() == 2){
 					booking.setStatus(status);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
 				}else{
 					booking.setStatus(status);
-					tourSchedule.setAvailability(-1);
+					tourSchedule.setAvailability(+1);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);

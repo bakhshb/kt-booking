@@ -1,11 +1,13 @@
 'use strict';
 
-ktbookingApp.controller('CustomerController', function ($scope, $location,$timeout, resolvedCustomer, Customer, modalService) {
+ktbookingApp.controller('CustomerController', function ($scope, $location,$timeout, resolvedCustomer, Customer, modalService, ngProgress) {
 
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
 	$scope.customers = resolvedCustomer;
-
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);
+	
 	$scope.delete = function (id) {
 		Customer.get({id: id}, function success(data){
 			var custName = data.firstName + ' '+ data.lastName;

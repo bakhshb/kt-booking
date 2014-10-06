@@ -30,4 +30,16 @@ ktbookingApp
 			authorizedRoles: [USER_ROLES.all]
 		}
 	})
+	.when('/tour/schedule/calendar', {
+		templateUrl: 'views/tourSchedules/calendar.html',
+		controller: 'CalendarController',
+		resolve:{
+			resolvedTourSchedule: ['TourSchedule', function (TourSchedule) {
+				return TourSchedule.query();
+			}]
+		},
+		access: {
+			authorizedRoles: [USER_ROLES.all]
+		}
+	})
 });

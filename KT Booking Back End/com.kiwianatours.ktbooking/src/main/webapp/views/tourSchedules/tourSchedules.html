@@ -1,15 +1,16 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="#/tour/">Tour</a></li>
+				<li class="active">Tour Schedule</li>
+			</ol>
 			<h1>Tour Schedules</h1>
 			<div class="navbar">
 				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#/tour">&#xA0;<span
-							class="glyphicon glyphicon-home"></span>Tour
-					</a></li>
-					<li class="toolbaritem"><a href="" data-ng-click="clear()"
+					<li><a href="" data-ng-click="clear()"
 						data-target="#saveTourScheduleModal" data-toggle="modal">&#xA0;<span
-							class="glyphicon glyphicon-plus"></span>Add Tour Schedules
+							class="glyphicon glyphicon-plus"></span> Add Tour Schedules
 					</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
@@ -173,13 +174,13 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Tour<a href="" 
+							<th>Tour<a href=""
 								ng-click="predicate = 'Tour';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Departure Date<a href="" 
+							<th>Departure Date<a href=""
 								ng-click="predicate = 'departureDate';  reverse=!reverse"><span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Retrun Date<a href="" 
+							<th>Retrun Date<a href=""
 								ng-click="predicate = 'returnDate';  reverse=!reverse"><span
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>Price</th>

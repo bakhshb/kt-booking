@@ -3,7 +3,7 @@
 /* App Module */
 
 var ktbookingApp = angular.module('ktbookingApp', ['http-auth-interceptor', 'tmh.dynamicLocale',
-    'ngResource', 'ngRoute', 'ngCookies', 'ktbookingAppUtils', 'pascalprecht.translate', 'truncate','ui.bootstrap', 'countrySelect','angularFileUpload','pagination']);
+    'ngResource', 'ngRoute', 'ngCookies', 'ktbookingAppUtils', 'pascalprecht.translate', 'truncate','ui.bootstrap', 'countrySelect','angularFileUpload','pagination','ui.calendar','ngProgress']);
 
 ktbookingApp
     .config(function ($routeProvider, $httpProvider, $translateProvider, tmhDynamicLocaleProvider, USER_ROLES) {

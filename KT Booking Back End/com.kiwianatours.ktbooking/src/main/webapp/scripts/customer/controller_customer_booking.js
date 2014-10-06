@@ -1,12 +1,13 @@
 'use strict';
 
-ktbookingApp.controller('CustomerBookingController',function($scope, $routeParams,$timeout, $location, Customer, Booking, resolvedBooking, resolvedTour, resolvedTourSchedule,  modalService){
+ktbookingApp.controller('CustomerBookingController',function($scope, $routeParams,$timeout, $location, Customer, Booking, resolvedBooking, resolvedTour, resolvedTourSchedule,  modalService, ngProgress){
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId): 0, timer;
 	$scope.customers = customerId;
 	$scope.tours = resolvedTour;
 	$scope.tourSchedules = resolvedTourSchedule;
-	
+	ngProgress.start();
+	$timeout(function (){ngProgress.complete()}, 1000);
 	/*
 	 * yesterday date
 	 */

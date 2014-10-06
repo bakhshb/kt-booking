@@ -1,6 +1,11 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
+		<ol class="breadcrumb">
+				<li><a href="#/tour">Customer</a></li>
+				<li><a href="#/customer/edit/{{customer.id}}"> {{ customer.firstName + ' ' + customer.lastName }}</a></li>
+				<li class="active">View Booking</li>
+			</ol>
 			<h1>
 				Booking For <small>{{ customer.firstName + ' ' +
 					customer.lastName }}</small>
@@ -13,16 +18,9 @@
 			</address>
 			<div class="navbar">
 				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="#/customer">&#xA0;<span
-							class="glyphicon glyphicon-home"></span>Customer
-					</a></li>
-					<li class="toolbaritem"><a
-						href="#/customer/edit/{{customer.id}}">&#xA0;<span
-							class="glyphicon glyphicon-edit"></span>Edit
-					</a></li>
-					<li class="toolbaritem"><a href=""
+					<li><a href=""
 						data-ng-click="addBooking(customer.id)">&#xA0;<span
-							class="glyphicon glyphicon-plus"></span>Add Booking
+							class="glyphicon glyphicon-plus"></span> Add Booking
 					</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">

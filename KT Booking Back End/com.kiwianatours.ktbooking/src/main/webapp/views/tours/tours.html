@@ -1,14 +1,16 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li class="active">Tour</li>
+			</ol>
 			<h1>Tour</h1>
 			<div class="navbar">
 				<ul class="nav navbar-nav">
-					<li class="toolbaritem"><a href="" data-ng-click="clear()"
+					<li><a href="" data-ng-click="clear()"
 						data-target="#saveTourModal" data-toggle="modal">&#xA0;<span
-							class="glyphicon glyphicon-plus"></span>Add Tour</a></li>
-					<li class="toolbaritem"><a href="#/tour/schedule">&#xA0;<span
-							class="glyphicon glyphicon-calendar"></span>Tour Schedule</a></li>
+							class="glyphicon glyphicon-plus"></span> Add Tour
+					</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
@@ -61,8 +63,8 @@
 
 						<div class="form-group">
 							<label>Name</label> <input type="text" class="form-control"
-								name="tour" ng-model="tour.name" placeholder="Tour Name" ng-minlength=1 ng-maxlength=50
-								required>
+								name="tour" ng-model="tour.name" placeholder="Tour Name"
+								ng-minlength=1 ng-maxlength=50 required>
 							<div class="error"
 								ng-show="form.tour.$dirty && form.tour.$invalid">
 								<small class="error" ng-show="form.tour.$error.required">
@@ -96,8 +98,8 @@
 						<div class="form-group">
 							<label>Long Description</label>
 							<textarea name="description" class="form-control"
-								ng-model="tour.description"
-								placeholder="Long Description" rows="8"></textarea>
+								ng-model="tour.description" placeholder="Long Description"
+								rows="8"></textarea>
 						</div>
 					</div>
 					<div class="modal-footer">
