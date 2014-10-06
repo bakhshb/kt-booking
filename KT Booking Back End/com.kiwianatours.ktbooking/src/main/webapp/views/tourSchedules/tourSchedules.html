@@ -168,7 +168,6 @@
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<div class="table-responsive">
-
 				<table class="table table-striped"
 					data-ng-hide="tourSchedules.length == 0">
 					<thead>
@@ -185,6 +184,7 @@
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>Price</th>
 							<th>Availability</th>
+							<th></th>
 							<th></th>
 							<th>Booking</th>
 						</tr>
@@ -204,6 +204,8 @@
 									ng-disabled="tourSchedule.departureDate < {{yesterday}}">
 									<span class="glyphicon glyphicon-pencil"></span> Edit
 								</button>
+							</td>
+							<td>
 								<button type="submit" ng-click="delete(tourSchedule.id)"
 									class="btn btn-danger"
 									ng-disabled="tourSchedule.departureDate < {{yesterday}}">

@@ -8,16 +8,15 @@
 
 			<div class="navbar">
 				<ul class="nav navbar-nav">
-					<li data-ng-class="{active: !listDisplayModeEnabled}"><a href=""
-						data-ng-click="changeDisplayMode(DisplayModeEnum.Card)">&#xA0;<span
+					<li data-ng-class="{active: !listDisplayModeEnabled}"><a
+						href="" data-ng-click="changeDisplayMode(DisplayModeEnum.Card)">&#xA0;<span
 							class="glyphicon glyphicon-th-large"></span> Card View
 					</a></li>
-					<li data-ng-class="{active: listDisplayModeEnabled}"><a href=""
-						data-ng-click="changeDisplayMode(DisplayModeEnum.List)">&#xA0;<span
+					<li data-ng-class="{active: listDisplayModeEnabled}"><a
+						href="" data-ng-click="changeDisplayMode(DisplayModeEnum.List)">&#xA0;<span
 							class="glyphicon glyphicon-align-justify"></span> List View
 					</a></li>
-					<li><a href=""
-						data-ng-click="navigate('/customer/edit/', 0)">&#xA0;<span
+					<li><a href="" data-ng-click="navigate('/customer/edit/', 0)">&#xA0;<span
 							class="glyphicon glyphicon-plus"></span> Add Customer
 					</a></li>
 				</ul>
@@ -89,6 +88,7 @@
 							<th>Birthday<a href=""
 								ng-click="predicate = 'birthday';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Gender</th>
 							<th>Nationality<a href=""
 								ng-click="predicate = 'nationality';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
@@ -96,12 +96,13 @@
 								ng-click="predicate = 'email';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>Contact No</th>
-							<th>Created By<a href=""
-								ng-click="predicate = 'createdBy';  reverse=!reverse"> <span
-									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Created Date<a href=""
+							<th>Created<a href=""
 								ng-click="predicate = 'createdDate';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>By<a href=""
+								ng-click="predicate = 'createdBy';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -111,16 +112,25 @@
 							<td>{{customer.id}}</td>
 							<td>{{customer.firstName +" "+ customer.lastName}}</td>
 							<td>{{customer.birthday}}</td>
+							<td>{{customer.gender}}</td>
 							<td>{{customer.nationality}}</td>
 							<td>{{customer.email}}</td>
 							<td>{{customer.contactNo}}</td>
-							<td>{{customer.createdBy}}</td>
 							<td>{{customer.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{customer.createdBy}}</td>
+							<td>
+								<button class="btn btn-primary text-center" title="Booking"
+								data-ng-click="navigate('/customer/booking/', customer.id)">
+								<span class=""></span>Bookings
+							</button>
+							</td>
 							<td>
 								<button type="submit"
 									ng-click="navigate('/customer/edit/', customer.id)" class="btn">
 									<span class="glyphicon glyphicon-pencil"></span> Edit
 								</button>
+							</td>
+							<td>
 								<button type="submit" ng-click="delete(customer.id)"
 									class="btn btn-danger">
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete

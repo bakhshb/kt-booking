@@ -135,7 +135,8 @@
 							dir-paginate="tour in tours | filter: searchText | itemsPerPage: 25">
 							<td>{{tour.id}}</td>
 							<td>{{tour.name}}</td>
-							<td>{{tour.activated}}</td>
+							<td ng-if="tour.activated == 1" class="success">Enabled</td>
+							<td ng-if="tour.activated == 0" class="danger">Disabled</td>
 							<td>
 								<button type="submit" ng-click="update(tour.id)" class="btn">
 									<span class="glyphicon glyphicon-pencil"></span> Edit

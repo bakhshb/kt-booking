@@ -60,7 +60,8 @@
 								ng-click="predicate = 'booking.createdDate';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
-							<th>Payment Method</th>
+							<th>Payment</th>
+							<th>Amount</th>
 							<th>Status</th>
 						</tr>
 					</thead>
@@ -69,24 +70,21 @@
 							dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.id}}</td>
 							<td>{{booking.booking.customer.firstName +" "+
-								booking.booking.customer.lastName}}</td>
+								booking.booking.customer.lastName}} <a
+								href="#/customer/booking/{{booking.booking.customer.id}}"><span
+									class="glyphicon glyphicon-eye-open"></span></a>
+							</td>
 							<td>{{booking.booking.customer.birthday}}</td>
 							<td>{{booking.booking.customer.email}}</td>
 							<td>{{booking.booking.customer.contactNo}}</td>
 							<td>{{booking.booking.customer.nationality}}</td>
 							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
-							<td ng-if="booking.booking.status == 1">Approved</td>
-							<td ng-if="booking.booking.status == 2">Pending</td>
-							<td ng-if="booking.booking.status == 3">Refund</td>
-							<td ng-if="booking.booking.status == 4">Cancel</td>
-							<td>
-								<button type="submit" ng-click="delete(booking.id)"
-									class="btn btn-danger"
-									ng-disabled="tourSchedule.departureDate < {{yesterday}}">
-									<span class="glyphicon glyphicon-remove-circle"></span> Delete
-								</button>
-							</td>
+							<td>{{booking.booking.amount}} $</td>
+							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
+							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
+							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
+							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
 						</tr>
 					</tbody>
 				</table>

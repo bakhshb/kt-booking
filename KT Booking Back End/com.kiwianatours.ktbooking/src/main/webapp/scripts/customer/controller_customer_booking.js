@@ -58,6 +58,11 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 			});
 		});
 	};
+	
+	$scope.clear = function(){
+		$scope.tour ={};
+		$scope.customer.tourSchedule = {};
+	}
 
 	/*
 	 * Make booking when the url has customer id
@@ -66,13 +71,12 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 		$('#saveBookingModal').modal('show');
 
 		Customer.get({id:id}, function success (data){
-
 			$scope.saveBooking = function (){
 				if ($scope.form.$valid) {
 					Booking.save($scope.customer,function () {
+						$scope.clear();
 						$scope.bookings = Booking.get({id:customerId});
 						$('#saveBookingModal').modal('hide');
-						$scope.customer = {};
 						processSuccess('Booking has been made!');
 					});
 				};

@@ -1,9 +1,10 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
-		<ol class="breadcrumb">
+			<ol class="breadcrumb">
 				<li><a href="#/tour">Customer</a></li>
-				<li><a href="#/customer/edit/{{customer.id}}"> {{ customer.firstName + ' ' + customer.lastName }}</a></li>
+				<li><a href="#/customer/edit/{{customer.id}}">{{
+						customer.firstName + ' ' + customer.lastName }}</a></li>
 				<li class="active">View Booking</li>
 			</ol>
 			<h1>
@@ -18,8 +19,7 @@
 			</address>
 			<div class="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href=""
-						data-ng-click="addBooking(customer.id)">&#xA0;<span
+					<li><a href="" data-ng-click="addBooking(customer.id)">&#xA0;<span
 							class="glyphicon glyphicon-plus"></span> Add Booking
 					</a></li>
 				</ul>
@@ -117,7 +117,7 @@
 		<div class="col-sm-12 col-md-12">
 			<div class="table-responsive">
 				<table class="table table-striped"
-					data-ng-hide="bookings.length == 0">
+					data-ng-hide="bookings.length == 0" style="font-size: 13px;">
 					<thead>
 						<tr>
 							<th>Created By<a href=""
@@ -132,15 +132,16 @@
 								ng-click="predicate = 'tourSchedule.tour.name';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
-							<th>Departure Date<a href=""
+							<th>Departure<a href=""
 								ng-click="predicate = 'tourSchedule.departureDate';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
-							<th>Return Date<a href=""
+							<th>Return<a href=""
 								ng-click="predicate = 'tourSchedule.returnDate';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
-							<th>Payment Method</th>
+							<th>Payment</th>
+							<th>amount</th>
 							<th>Status</th>
 							<th></th>
 							<th></th>
@@ -151,14 +152,17 @@
 							dir-paginate="booking in bookings | filter: customer.email |filter:searchText | itemsPerPage: 25  | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.booking.customer.createdBy}}</td>
 							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
-							<td>{{booking.tourSchedule.tour.name}}</td>
+							<td>{{booking.tourSchedule.tour.name}} <a
+								href="#/tour/schedule/booking/{{booking.tourSchedule.id}}"><span
+									class="glyphicon glyphicon-eye-open"></span></a></td>
 							<td>{{booking.tourSchedule.departureDate}}</td>
 							<td>{{booking.tourSchedule.returnDate}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
-							<td ng-if="booking.booking.status == 1">Approved</td>
-							<td ng-if="booking.booking.status == 2">Pending</td>
-							<td ng-if="booking.booking.status == 3">Refund</td>
-							<td ng-if="booking.booking.status == 4">Cancel</td>
+							<td>{{booking.booking.amount}} $</td>
+							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
+							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
+							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
+							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
 							<td><select name="status" data-ng-model="status"
 								ng-change="change(booking.booking.id,status)"
 								ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
@@ -168,13 +172,11 @@
 									<option value="3">Refund</option>
 									<option value="4">Cancel</option>
 							</select></td>
-							<td>
-								<button type="submit" ng-click="delete(booking.booking.id)"
-									class="btn btn-danger"
+							<td><button type="submit"
+									ng-click="delete(booking.booking.id)" class="btn btn-danger"
 									ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete
-								</button>
-							</td>
+								</button></td>
 						</tr>
 					</tbody>
 				</table>

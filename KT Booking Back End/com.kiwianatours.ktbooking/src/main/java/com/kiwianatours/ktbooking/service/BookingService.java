@@ -151,7 +151,7 @@ public class BookingService {
 				break;
 			case 3:
 				// refund
-				if (booking.getStatus() == 2 || booking.getStatus() == 3 || booking.getStatus() == 4){
+				if (booking.getStatus() == 3 || booking.getStatus() == 4){
 					booking.setStatus(status);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
@@ -168,7 +168,7 @@ public class BookingService {
 				break;
 			case 4: 
 				// cancel
-				if (booking.getStatus() == 2 || booking.getStatus() == 3 || booking.getStatus() == 4){
+				if (booking.getStatus() == 3 || booking.getStatus() == 4){
 					booking.setStatus(status);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
