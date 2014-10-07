@@ -9,7 +9,10 @@
 			</ol>
 			<h1>
 				Booking For <small>{{ customer.firstName + ' ' +
-					customer.lastName }}</small>
+					customer.lastName }}<a href="#/customer/edit/{{customer.id}}">
+						<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+				</small>
 			</h1>
 			<address>
 				Birthday:&#xA0;{{customer.birthday}}<br>
