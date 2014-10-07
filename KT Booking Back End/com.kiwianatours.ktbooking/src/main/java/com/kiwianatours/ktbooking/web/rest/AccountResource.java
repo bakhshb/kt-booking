@@ -74,7 +74,7 @@ public class AccountResource {
             return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
         } else {
             user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(), userDTO.getFirstName(),
-                    userDTO.getLastName(), userDTO.getEmail().toLowerCase(), userDTO.getContactNo(), userDTO.getLangKey());
+                    userDTO.getLastName(), userDTO.getEmail().toLowerCase(), userDTO.getContactNo(), userDTO.getLangKey(), userDTO.getRole());
             final Locale locale = Locale.forLanguageTag(user.getLangKey());
             String content = createHtmlContentFromTemplate(user, locale, request, response);
             mailService.sendActivationEmail(user.getEmail(), content, locale);
@@ -133,6 +133,7 @@ public class AccountResource {
                 user.getEmail(),
                 user.getContactNo(),
                 user.getLangKey(),
+                null,
                 roles),
             HttpStatus.OK);
     }

@@ -124,8 +124,12 @@
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Name</th>
-							<th>Active statue</th>
+							<th>Name <a href=""
+								ng-click="predicate = 'name';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Active statue <a href=""
+								ng-click="predicate = 'activated';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
 							<th></th>
 							<th>Photo</th>
 							<th></th>
@@ -133,7 +137,7 @@
 					</thead>
 					<tbody>
 						<tr
-							dir-paginate="tour in tours | filter: searchText | itemsPerPage: 25">
+							dir-paginate="tour in tours | filter: searchText | itemsPerPage: 25 | orderBy:predicate:reverse">
 							<td>{{tour.id}}</td>
 							<td>{{tour.name}}</td>
 							<td ng-if="tour.activated == 1" class="success">Enabled</td>

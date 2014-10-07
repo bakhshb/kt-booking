@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<ol class="breadcrumb">
-				<li><a href="#/tour">Customer</a></li>
+				<li><a href="#/customer">Customer</a></li>
 				<li><a href="#/customer/edit/{{customer.id}}">{{
 						customer.firstName + ' ' + customer.lastName }}</a></li>
 				<li class="active">View Booking</li>
@@ -77,8 +77,7 @@
 							<label>Departure Date</label> <select name="tourSchedule_id"
 								class="form-control" data-ng-model="customer.tourSchedule.id"
 								required ng-disabled="form.tour_id.$invalid">
-								<option selected disabled value="">-- Select Departure
-									Date --</option>
+								<option selected disabled value="">-- Select Role --</option>
 								<option
 									ng-repeat="tourSchedule in tourSchedules |filter: tour.id"
 									value="{{tourSchedule.id}}"

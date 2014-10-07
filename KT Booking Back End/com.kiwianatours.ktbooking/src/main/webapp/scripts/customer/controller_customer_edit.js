@@ -1,7 +1,7 @@
 'use strict';
 
 ktbookingApp
-.controller('CustomerEditController',function($rootScope, $scope, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, resolvedTourSchedule, modalService,  ngProgress) {
+.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, resolvedTourSchedule, modalService,  ngProgress) {
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId)
 			: 0, timer, onRouteChangeOff;
@@ -14,7 +14,7 @@ ktbookingApp
 
 	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
-
+	var customers = resolvedCustomer;
 	/*
 	 * yesterday date
 	 */
@@ -23,7 +23,16 @@ ktbookingApp
 	$scope.yesterday = parse;
 
 	init() ;
-
+	$scope.$watch('customer.email', function (){
+		for (var i =0 ; i<customers.length; i++){
+			if (customers[i].email == $scope.customer.email){
+				$scope.id = customers[i].id;
+				$scope.errorEmailExists ='Ok';
+			}else{
+				$scope.errorEmailExists ='';
+			}
+		}
+	});
 	/*
 	 * save customer
 	 */
@@ -33,7 +42,7 @@ ktbookingApp
 				var birthdayParse= Date.parse($scope.customer.birthday);
 				$scope.customer.birthday = birthdayParse;
 				Booking.save($scope.customer, function success () {
-					processSuccess();
+					$scope.success ='OK';
 				}, function err (data){
 					processError(data.statusText);
 				});
@@ -114,7 +123,7 @@ ktbookingApp
 		modalService.showModal({}, modalOptions).then(function (result) {
 			if (!result) {
 				onRouteChangeOff(); //Stop listening for location changes
-				$location.path(newUrl); //Go to page they're interested in
+				$window.location.href = newUrl; //Go to page they're interested in
 			}
 		});
 

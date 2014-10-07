@@ -3,8 +3,10 @@
 		<div class="col-md-12">
 			<ol class="breadcrumb">
 				<li><a href="#/customer">Customer</a></li>
-				<li class="active" data-ng-hide="customer.id != null">Add Customer</li>
-				<li class="active" data-ng-hide="customer.id == null">{{ customer.firstName + ' ' + customer.lastName }}</li>
+				<li class="active" data-ng-hide="customer.id != null">Add
+					Customer</li>
+				<li class="active" data-ng-hide="customer.id == null">{{
+					customer.firstName + ' ' + customer.lastName }}</li>
 			</ol>
 			<h1>
 				<span class="glyphicon glyphicon-edit"></span> {{title}} Customer <small>{{
@@ -19,7 +21,14 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<form name="form" novalidate>
+			<div class="alert alert-success" data-ng-show="success">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
+				inserted! click <a href="javascript:history.go(0)">here</a> to enter
+				new customer
+			</div>
+			<form ng-show="!success" name="form"
+				class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+				novalidate>
 				<div class="form-group">
 					<label>First Name</label> <input type="text" name="firstName"
 						class="form-control" data-ng-model="customer.firstName"
@@ -108,6 +117,13 @@
 							ng-show="form.email.$error.maxlength"> Email cannot be
 							longer than 100 characters </small>
 					</div>
+					<div class="error" ng-show="errorEmailExists">
+						Email is exists!!
+					</div>
+					<br />
+					<div class="alert alert-warning" ng-show="errorEmailExists">Click <a href="#/customer/booking/{{id}}">here</a>
+						to book right now, unless
+						you want to update the customer details.</div>
 				</div>
 				<div class="form-group">
 					<label>Phone:</label> <input type="text" name="contactNo"

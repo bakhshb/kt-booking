@@ -17,6 +17,8 @@ public class UserDTO {
     private String contactNo;
 
     private String langKey;
+    
+    private String role;
 
     private List<String> roles;
 
@@ -24,7 +26,7 @@ public class UserDTO {
     }
 
     public UserDTO(String login, String password, String firstName, String lastName, String email,
-    		String contactNo, String langKey, List<String> roles) {
+    		String contactNo, String langKey, String role, List<String> roles) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -32,6 +34,7 @@ public class UserDTO {
         this.email = email;
         this.contactNo = contactNo;
         this.langKey = langKey;
+        this.role= role;
         this.roles = roles;
     }
 
@@ -63,7 +66,11 @@ public class UserDTO {
         return langKey;
     }
 
-    public List<String> getRoles() {
+    public String getRole() {
+		return role;
+	}
+
+	public List<String> getRoles() {
         return roles;
     }
 
@@ -79,6 +86,7 @@ public class UserDTO {
         sb.append(", email='").append(email).append('\'');
         sb.append(", contactNo='").append(contactNo).append('\'');
         sb.append(", langKey='").append(langKey).append('\'');
+        sb.append(", role=").append(role);
         sb.append(", roles=").append(roles);
         sb.append('}');
         return sb.toString();
