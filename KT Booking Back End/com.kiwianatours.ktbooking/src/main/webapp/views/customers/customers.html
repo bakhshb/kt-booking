@@ -16,7 +16,7 @@
 						href="" data-ng-click="changeDisplayMode(DisplayModeEnum.List)">&#xA0;<span
 							class="glyphicon glyphicon-align-justify"></span> List View
 					</a></li>
-					<li><a href="" data-ng-click="navigate('/customer/edit/', 0)">&#xA0;<span
+					<li><a href="#/customer/edit/0">&#xA0;<span
 							class="glyphicon glyphicon-plus"></span> Add Customer
 					</a></li>
 				</ul>
@@ -59,8 +59,10 @@
 						<div class="panel-heading">
 							<button class="btn close" title="Delete Customer"
 								data-ng-click="delete(customer.id)">&times;</button>
-							<a href="#/customer/edit/{{customer.id}}" class="white"><h3>{{customer.firstName
-									+" "+ customer.lastName}}</h3></a>
+							<a href="#/customer/edit/{{customer.id}}" class="white"><h3>
+									{{customer.firstName +" "+ customer.lastName}} <span
+										class="glyphicon glyphicon-pencil"></span>
+								</h3></a>
 						</div>
 						<div class="panel-body">
 							<a href="#/customer/edit/{{customer.id}}" class="white"><img
@@ -68,10 +70,9 @@
 								style="height: 90px;" class="img-rounded" /></a>
 							<p>Email: {{customer.email}}</p>
 							<p>Phone: {{customer.contactNo}}</p>
-							<button class="btn btn-primary text-center" title="Booking"
+							<button class="btn btn-primary"
 								data-ng-click="navigate('/customer/booking/', customer.id)">
-								<span class=""></span>Bookings
-							</button>
+								Bookings</button>
 						</div>
 					</div>
 				</div>
@@ -102,7 +103,7 @@
 							<th>By<a href=""
 								ng-click="predicate = 'createdBy';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th></th>
+							<th>Booking</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -118,12 +119,9 @@
 							<td>{{customer.contactNo}}</td>
 							<td>{{customer.createdDate | date:'yyyy-MM-dd'}}</td>
 							<td>{{customer.createdBy}}</td>
-							<td>
-								<button class="btn btn-primary text-center" title="Booking"
-								data-ng-click="navigate('/customer/booking/', customer.id)">
-								<span class=""></span>Bookings
-							</button>
-							</td>
+							<td><a href="#/customer/booking/{{customer.id}}"
+								class="btn btn-default"><span
+									class="glyphicon glyphicon-eye-open"></span> View</a></td>
 							<td>
 								<button type="submit"
 									ng-click="navigate('/customer/edit/', customer.id)" class="btn">

@@ -10,7 +10,7 @@ ktbookingApp.factory('Tour', function ($resource) {
 ktbookingApp.factory('TourPhoto', function ($resource) {
 	return $resource('app/rest/tourphotos/:id', {}, {
 		'query': { method: 'GET', isArray: true},
-		'get': { method: 'GET'},
+		'get': { method: 'GET', isArray:true},
 		'update':{method:'PUT'}
 	});
 });

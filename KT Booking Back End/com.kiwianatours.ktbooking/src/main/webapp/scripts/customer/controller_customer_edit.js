@@ -14,16 +14,16 @@ ktbookingApp
 
 	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
-	
+
 	/*
 	 * yesterday date
 	 */
 	var parse = new Date();
 	parse.setDate(parse.getDate()-1);
 	$scope.yesterday = parse;
-	
+
 	init() ;
-	
+
 	/*
 	 * save customer
 	 */
@@ -78,16 +78,21 @@ ktbookingApp
 	 */
 	function init() {
 		if (customerId > 0) {
-			$scope.customer =  Customer.get({id:customerId}, function success(){
-				ngProgress.start();
-				$timeout(function (){ngProgress.complete()}, 1000);
-			}, function err (data){
-				processError(data.statusText);
-			});
-		} else {
-			$scope.customer = {};	
 			ngProgress.start();
-			$timeout(function (){ngProgress.complete()}, 1000);
+			$timeout(function (){
+				$scope.customer =  Customer.get({id:customerId}, function success(){
+					ngProgress.complete();
+				}, function err (data){
+					processError(data.statusText);
+				});
+			}, 100);
+		} else {
+
+			ngProgress.start();
+			$timeout(function (){
+				$scope.customer = {};	
+				ngProgress.complete();
+			}, 500);
 		}
 		/*
 		 * Make sure they're warned if they made a change but didn't save it
@@ -170,12 +175,5 @@ ktbookingApp
 			return Math.abs(ageDate.getUTCFullYear() - 1970);
 		}
 	};          
-
-	/*
-	 * route to different url
-	 */
-	$scope.navigate = function (url) {
-		$location.path(url);
-	};
 
 });

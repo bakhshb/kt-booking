@@ -4,10 +4,13 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-	$scope.customers = resolvedCustomer;
+
 	ngProgress.start();
-	$timeout(function (){ngProgress.complete()}, 1000);
-	
+	$timeout(function (){
+		$scope.customers = resolvedCustomer;
+		ngProgress.complete();
+	}, 100);
+
 	$scope.delete = function (id) {
 		Customer.get({id: id}, function success(data){
 			var custName = data.firstName + ' '+ data.lastName;
@@ -44,10 +47,6 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 		}
 	};
 
-	$scope.navigate = function (url, id) {
-		$location.path(url+id);
-	};
-
 	function processSuccess(success) {
 		$scope.updateStatus = success;
 		startTimer();
@@ -65,5 +64,9 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 			$scope.updateStatus = '';
 		}, 3000);
 	};
+	
+	$scope.navigate = function (url, id){
+		$location.path(url+id);
+	}
 
 });

@@ -75,10 +75,10 @@ public class TourPhotosResource {
 	 */
 	@RequestMapping(value = "/rest/tourphotos/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<TourPhoto> get(@PathVariable Long id,
+	public ResponseEntity<List<TourPhoto>> get(@PathVariable Long id,
 			HttpServletResponse response) {
 		log.debug("REST request to get TourPhotos : {}", id);
-		TourPhoto tourPhoto = tourPhotoRepository.findOne(id);
+		List<TourPhoto> tourPhoto = tourPhotoRepository.getTourPhotos(id);
 		if (tourPhoto == null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}	

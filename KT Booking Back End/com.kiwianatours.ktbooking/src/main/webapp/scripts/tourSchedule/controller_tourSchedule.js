@@ -5,11 +5,14 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-	$scope.tourSchedules = resolvedTourSchedule;
+
 	$scope.tours= resolvedTour;
 
 	ngProgress.start();
-	$timeout(function (){ngProgress.complete()}, 1000);
+	$timeout(function (){
+		$scope.tourSchedules = resolvedTourSchedule;
+		ngProgress.complete();
+	}, 100);
 	/*
 	 * yesterday date
 	 */
@@ -109,9 +112,4 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 			$scope.updateStatus = '';
 		}, 3000);
 	};
-
-	$scope.navigate = function (url, id){
-		$location.path(url+id);
-	};
-
 });

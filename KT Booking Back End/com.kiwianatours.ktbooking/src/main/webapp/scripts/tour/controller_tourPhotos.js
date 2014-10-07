@@ -1,30 +1,34 @@
 'use strict';
 
 ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $location, $timeout, Tour, TourPhoto, resolvedTourPhoto, modalService, ngProgress){
-	
+
 	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0, timer;
 	$scope.tours = tourId;
 	init() ;
-	
+
 	/*
 	 * first starts when app runs
 	 */
 	function init() {
 		if (tourId > 0) {
-			$scope.tour = Tour.get({id:tourId}, function (){
-				$scope.tourphotos = resolvedTourPhoto; 
-				ngProgress.start();
-				$timeout(function (){ngProgress.complete()}, 1000);
-			}, function (data){
-				processError(data.statusText);
-			});
-			
+			ngProgress.start();
+			$timeout(function (){
+				$scope.tour = Tour.get({id:tourId}, function (){
+
+					$scope.tourphotos = TourPhoto.get({id:tourId}); 
+					ngProgress.complete();
+
+				}, function (data){
+					processError(data.statusText);
+				});
+			}, 100);
+
 		} else {
 			$scope.tour ={};
 			$location.path('/tour');
 		}
 	};
-	
+
 	$scope.primary = function (tourId,tourPhotoId) {
 		TourPhoto.get({id:tourPhotoId}, function success (data){
 			var tourName = data.photo;
@@ -44,7 +48,7 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 			});
 		});
 	};
-	
+
 	$scope.delete = function (id) {
 		TourPhoto.get({id:id}, function success (data){
 			var tourName = data.photo;
@@ -64,8 +68,8 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 			});
 		});
 	};
-	
-	
+
+
 	function processSuccess(success) {
 		$scope.updateStatus = success;
 		startTimer();
@@ -83,6 +87,6 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 			$scope.updateStatus = '';
 		}, 3000);
 	};
-	
-	
+
+
 });

@@ -128,6 +128,7 @@
 							<th>Active statue</th>
 							<th></th>
 							<th>Photo</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -137,6 +138,12 @@
 							<td>{{tour.name}}</td>
 							<td ng-if="tour.activated == 1" class="success">Enabled</td>
 							<td ng-if="tour.activated == 0" class="danger">Disabled</td>
+							<td></td>
+							<td><a href="#/tourphoto/{{tour.id}}"
+								class="btn btn-default"><span
+									class="glyphicon glyphicon-eye-open"></span> View</a>  <a
+								href="#/tourphoto/upload/{{tour.id}}" class="btn btn-success"><span
+									class="glyphicon glyphicon-open"></span> Upload</a></td>
 							<td>
 								<button type="submit" ng-click="update(tour.id)" class="btn">
 									<span class="glyphicon glyphicon-pencil"></span> Edit
@@ -146,17 +153,7 @@
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete
 								</button>
 							</td>
-							<td>
-								<button type="submit"
-									ng-click="navigate('/tourphoto/upload/',tour.id)"
-									class="btn btn-success">
-									<span class="glyphicon glyphicon-open"></span> Upload
-								</button>
-								<button type="submit" ng-click="navigate('/tourphoto/',tour.id)"
-									class="btn ">
-									<span class="glyphicon glyphicon-eye-open"></span> View
-								</button>
-							</td>
+
 						</tr>
 					</tbody>
 				</table>

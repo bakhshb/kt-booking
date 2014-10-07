@@ -25,18 +25,18 @@
 					</div>
 				</form>
 			</div>
-		</div>
-		<div class="alert alert-success" data-ng-show="updateStatus">
-			<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
-		</div>
+			<div class="alert alert-success" data-ng-show="updateStatus">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			</div>
 
-		<div class="alert alert-danger" data-ng-show="errorMessage">
-			<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-			{{ errorMessage }}
-		</div>
-		<div data-ng-show="bookings.length == 0">
-			<div class="col-md-12 text-center">
-				<h4>No Tour Bookings found</h4>
+			<div class="alert alert-danger" data-ng-show="errorMessage">
+				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+				{{ errorMessage }}
+			</div>
+			<div data-ng-show="bookings.length == 0">
+				<div class="col-md-12 text-center">
+					<h4>No Tour Bookings found</h4>
+				</div>
 			</div>
 		</div>
 	</div>

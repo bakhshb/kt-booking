@@ -5,9 +5,12 @@ ktbookingApp.controller('BookingController', function ($scope, $location,$timeou
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-	$scope.bookings = resolvedBooking;
+	
 	ngProgress.start();
-	$timeout(function (){ngProgress.complete()}, 1000);
+	$timeout(function (){
+		$scope.bookings = resolvedBooking;
+		ngProgress.complete();
+	}, 100);
 	/*
 	 * yesterday date
 	 */

@@ -5,20 +5,22 @@ ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filte
 	$scope.tourSchedules ={};
 	$scope.tourSchedules.events = [];
 
-
-	if( window.localStorage )
-	{
-		if( !localStorage.getItem( 'firstLoad' ) )
+	ngProgress.start();
+	$timeout(function (){
+		if( window.localStorage )
 		{
-			localStorage[ 'firstLoad' ] = true;
-			window.location.reload();
+			if( !localStorage.getItem( 'firstLoad' ) )
+			{
+				localStorage[ 'firstLoad' ] = true;
+				window.location.reload();
 
-		}  
-		else
-			localStorage.removeItem( 'firstLoad' );
-			ngProgress.start();
-			$timeout(function (){ngProgress.complete()}, 1000);
-	}
+			}  
+			else
+				localStorage.removeItem( 'firstLoad' );
+		}
+		ngProgress.complete();
+	}, 1000);
+
 	init();
 	$scope.eventSource = {
 			url: "https://www.google.com/calendar/feeds/en-gb.new_zealand%23holiday%40group.v.calendar.google.com/public/basic",
@@ -35,7 +37,6 @@ ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filte
 				start: tours[i].departureDate,
 				end: $filter('date')(new Date(e), 'yyyy-MM-dd')
 			});
-			console.log(e);
 		}
 	};
 

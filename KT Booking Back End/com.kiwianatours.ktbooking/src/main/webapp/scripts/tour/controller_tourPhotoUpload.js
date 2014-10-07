@@ -5,9 +5,11 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0;
 
 	if (tourId > 0) {
-		$scope.tour = Tour.get({id:tourId});
 		ngProgress.start();
-		$timeout(function (){ngProgress.complete()}, 1000);
+		$timeout(function (){
+			$scope.tour = Tour.get({id:tourId});
+			ngProgress.complete();
+		}, 100);
 
 	} else {
 		$scope.tour ={};

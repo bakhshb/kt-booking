@@ -62,7 +62,7 @@
 					</thead>
 					<tbody>
 						<tr
-							ng-repeat="tourphoto in tourphotos |filter: tour.id | filter: searchText">
+							ng-repeat="tourphoto in tourphotos | filter: searchText">
 							<td>{{tourphoto.id}}</td>
 							<td>{{tourphoto.photo}}</td>
 							<td>{{tourphoto.activated}}</td>

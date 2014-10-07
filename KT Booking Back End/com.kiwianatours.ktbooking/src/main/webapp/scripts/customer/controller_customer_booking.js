@@ -6,8 +6,7 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 	$scope.customers = customerId;
 	$scope.tours = resolvedTour;
 	$scope.tourSchedules = resolvedTourSchedule;
-	ngProgress.start();
-	$timeout(function (){ngProgress.complete()}, 1000);
+	
 	/*
 	 * yesterday date
 	 */
@@ -20,7 +19,11 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 	function init() {
 		if (customerId > 0) {
 			$scope.customer =  Customer.get({id:customerId}, function(){
-				$scope.bookings = Booking.get({id:customerId});
+				ngProgress.start();
+				$timeout(function (){
+					$scope.bookings = Booking.get({id:customerId});
+					ngProgress.complete();
+				}, 100);
 			}, function(data){
 				processError(data.statusText);
 			});

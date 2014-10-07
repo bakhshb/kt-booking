@@ -5,10 +5,12 @@ ktbookingApp.controller('TourController', function ($scope, $location,$timeout, 
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-	$scope.tours = resolvedTour;
 	ngProgress.start();
-	$timeout(function (){ngProgress.complete()}, 1000);
-	
+	$timeout(function (){
+		$scope.tours = resolvedTour;
+		ngProgress.complete();
+	}, 100);
+
 	$scope.create = function () {
 		if ($scope.form.$valid) {
 			Tour.save($scope.tour,function () {
@@ -46,12 +48,10 @@ ktbookingApp.controller('TourController', function ($scope, $location,$timeout, 
 		});
 	};
 
-
-
 	$scope.clear = function () {
 		$scope.tour = {};
 	};
-	
+
 	/*
 	 * display message
 	 */
@@ -71,9 +71,5 @@ ktbookingApp.controller('TourController', function ($scope, $location,$timeout, 
 			$scope.errorMessage = '';
 			$scope.updateStatus = '';
 		}, 3000);
-	};
-
-	$scope.navigate = function (url, id){
-		$location.path(url+id);
 	};
 });

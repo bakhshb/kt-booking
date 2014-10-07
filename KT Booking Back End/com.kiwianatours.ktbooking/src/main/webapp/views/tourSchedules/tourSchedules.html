@@ -184,9 +184,9 @@
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>Price</th>
 							<th>Availability</th>
-							<th></th>
-							<th></th>
 							<th>Booking</th>
+							<th></th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -198,6 +198,9 @@
 							<td>{{tourSchedule.returnDate}}</td>
 							<td>{{tourSchedule.price}} $</td>
 							<td>{{tourSchedule.availability}}</td>
+							<td><a href="#/tour/schedule/booking/{{tourSchedule.id}}"
+								class="btn btn-default"><span
+									class="glyphicon glyphicon-eye-open"></span> View</a></td>
 							<td>
 								<button type="submit" ng-click="update(tourSchedule.id)"
 									class="btn"
@@ -212,13 +215,7 @@
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete
 								</button>
 							</td>
-							<td>
-								<button type="submit"
-									ng-click="navigate('/tour/schedule/booking/',tourSchedule.id)"
-									class="btn">
-									<span class="glyphicon glyphicon-eye-open"></span> View
-								</button>
-							</td>
+
 						</tr>
 					</tbody>
 				</table>
