@@ -20,6 +20,7 @@ import org.springframework.security.web.authentication.RememberMeServices;
 import javax.inject.Inject;
 
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
@@ -97,6 +98,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .headers()
                 .frameOptions().disable()
             .authorizeRequests()
+            	.antMatchers("/app/rest/customers").permitAll()
+            	.antMatchers("/app/rest/bookings").permitAll()
+            	.antMatchers("/app/rest/tours").permitAll()
+            	.antMatchers("/app/rest/tourphotos").hasAuthority(AuthoritiesConstants.ADMIN)
+            	.antMatchers("/app/rest/tourschedules").permitAll()
                 .antMatchers("/app/rest/register").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/app/rest/activate").permitAll()
                 .antMatchers("/app/rest/authenticate").permitAll()

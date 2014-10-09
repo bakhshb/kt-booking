@@ -62,7 +62,7 @@ public class BookingService {
 			log.debug("Created Information for  Booking {}", booking);
 			TourBooking tourBooking = new TourBooking();
 			tourBooking.setBooking(booking);
-			tourSchedule.setAvailability(1);
+			tourSchedule.setAttending(1);
 			tourBooking.setTourSchedule(tourSchedule);
 			tourBookingRepository.save(tourBooking);
 			log.debug("Created Information for tour booking {}", tourBooking);
@@ -88,7 +88,7 @@ public class BookingService {
 			log.debug("Created Information for  Booking {}", booking);
 			TourBooking tourBooking = new TourBooking();
 			tourBooking.setBooking(booking);
-			tourSchedule.setAvailability(1);
+			tourSchedule.setAttending(1);
 			tourBooking.setTourSchedule(tourSchedule);
 			tourBookingRepository.save(tourBooking);
 			log.debug("Created Information for tour booking {}", tourBooking);
@@ -117,15 +117,15 @@ public class BookingService {
 			case 1: 
 				System.out.println(status);
 				// approved
-				if (booking.getStatus() == 1){
-					System.out.println(status);
+				if (booking.getStatus() == 1 || booking.getStatus() == 2){
+					booking.setStatus(status);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
 					log.debug("Updated Information for Booking {}", booking);
 				}else{
 					booking.setStatus(status);
-					tourSchedule.setAvailability(1);
+					tourSchedule.setAttending(+1);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
@@ -142,7 +142,7 @@ public class BookingService {
 					bookingRepository.save(booking);
 				}else{
 					booking.setStatus(status);
-					tourSchedule.setAvailability(+1);
+					tourSchedule.setAttending(+1);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
@@ -159,7 +159,7 @@ public class BookingService {
 					log.debug("Updated Information for Booking {}", booking);
 				}else{
 					booking.setStatus(status);
-					tourSchedule.setAvailability(-1);
+					tourSchedule.setAttending(-1);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
@@ -176,7 +176,7 @@ public class BookingService {
 					log.debug("Updated Information for Booking {}", booking);
 				}else{
 					booking.setStatus(status);
-					tourSchedule.setAvailability(-1);
+					tourSchedule.setAttending(-1);
 					tourScheduleRepository.save(tourSchedule);
 					log.debug("Updated Information for tour Schedule {}", tourSchedule);
 					bookingRepository.save(booking);
@@ -195,7 +195,7 @@ public class BookingService {
 	public void deleteBooking (Long id){
 		TourBooking tourBooking= tourBookingRepository.findTourBookingByBooking(id);
 		TourSchedule tourSchedule = tourBooking.getTourSchedule();
-		tourSchedule.setAvailability(-1);
+		tourSchedule.setAttending(-1);
 		tourScheduleRepository.save(tourSchedule);
 		log.debug("Updated Information for tour Schedule {}", tourSchedule);
 		bookingRepository.delete(id);

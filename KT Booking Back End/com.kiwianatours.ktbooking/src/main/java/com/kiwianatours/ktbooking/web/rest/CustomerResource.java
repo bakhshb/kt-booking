@@ -3,11 +3,14 @@ package com.kiwianatours.ktbooking.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Customer;
 import com.kiwianatours.ktbooking.repository.CustomerRepository;
+import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -45,6 +48,7 @@ public class CustomerResource {
     @RequestMapping(value = "/rest/customers",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.USER})
     @Timed
     public List<Customer> getAll() {
         log.debug("REST request to get all Customers");
@@ -57,6 +61,7 @@ public class CustomerResource {
     @RequestMapping(value = "/rest/customers/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.USER})
     @Timed
     public ResponseEntity<Customer> get(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get Customer : {}", id);
@@ -73,6 +78,7 @@ public class CustomerResource {
     @RequestMapping(value = "/rest/customers/{id}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured(AuthoritiesConstants.ADMIN)
     @Timed
     public void delete(@PathVariable Long id) {
         log.debug("REST request to delete Customer : {}", id);

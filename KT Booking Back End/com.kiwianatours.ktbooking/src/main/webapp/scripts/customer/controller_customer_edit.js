@@ -9,8 +9,6 @@ ktbookingApp
 	$scope.customer = {};
 	$scope.title = (customerId > 0) ? 'Edit' : 'Add';
 	$scope.buttonText = (customerId > 0) ? 'Update' : 'Add';
-	$scope.updateStatus = false;
-	$scope.errorMessage = '';
 
 	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
@@ -24,15 +22,19 @@ ktbookingApp
 
 	init() ;
 	$scope.$watch('customer.email', function (){
+		$scope.errorEmailExists =null;
+
 		for (var i =0 ; i<customers.length; i++){
-			if (customers[i].email == $scope.customer.email){
+			if (customers[i].email == $scope.customer.email && customerId == 0){
 				$scope.id = customers[i].id;
-				$scope.errorEmailExists ='Ok';
-			}else{
-				$scope.errorEmailExists ='';
+				onRouteChangeOff();
+				$scope.errorEmailExists ='OK';
 			}
 		}
+
 	});
+
+
 	/*
 	 * save customer
 	 */
@@ -42,7 +44,9 @@ ktbookingApp
 				var birthdayParse= Date.parse($scope.customer.birthday);
 				$scope.customer.birthday = birthdayParse;
 				Booking.save($scope.customer, function success () {
+					onRouteChangeOff(); 
 					$scope.success ='OK';
+					$scope.insertStatus ='OK';
 				}, function err (data){
 					processError(data.statusText);
 				});
@@ -50,7 +54,9 @@ ktbookingApp
 				var birthdayParse= Date.parse($scope.customer.birthday);
 				$scope.customer.birthday = birthdayParse;
 				Customer.save($scope.customer, function success () {
-					processSuccess();
+					onRouteChangeOff();
+					$scope.success ='OK';
+					$scope.updateStatus = 'OK';
 				}, function err (data){
 					processError(data.statusText);
 				});
@@ -136,24 +142,18 @@ ktbookingApp
 	};
 
 
-	function processSuccess() {
-		$scope.form.$dirty = false;
-		$scope.updateStatus = true;
-		$scope.title = 'Edit';
-		$scope.buttonText = 'Update';
-		startTimer();
-	};
-
+	/*
+	 * display message
+	 */
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
 
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
-			$scope.updateStatus = false;
+			$scope.error = null;
 		}, 3000);
 	};
 

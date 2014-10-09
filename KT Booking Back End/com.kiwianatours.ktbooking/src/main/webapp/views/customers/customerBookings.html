@@ -8,14 +8,15 @@
 				<li class="active">View Booking</li>
 			</ol>
 			<h1>
-				Booking For <small>{{ customer.firstName + ' ' +
+				Customer Booking Details <small>{{ customer.firstName + ' ' +
 					customer.lastName }}<a href="#/customer/edit/{{customer.id}}">
-						<span class="glyphicon glyphicon-pencil"></span>
-				</a>
-				</small>
+									 <span
+										class="glyphicon glyphicon-pencil"></span>
+								</a></small>
 			</h1>
 			<address>
 				Birthday:&#xA0;{{customer.birthday}}<br>
+				Gender:&#xA0;{{customer.gender}}<br>
 				Nationality:&#xA0;{{customer.nationality}}<br>
 				Email:&#xA0;{{customer.email}}<br>
 				Phone:&#xA0;{{customer.contactNo}}
@@ -38,13 +39,13 @@
 				</form>
 			</div>
 
-			<div class="alert alert-success" data-ng-show="updateStatus">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			<div class="alert alert-success" data-ng-show="status">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
 			</div>
 
-			<div class="alert alert-danger" data-ng-show="errorMessage">
+			<div class="alert alert-danger" data-ng-show="error">
 				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ errorMessage }}
+				{{ error }}
 			</div>
 			<div data-ng-show="bookings.length == 0">
 				<div class="col-md-12 text-center">
@@ -80,7 +81,7 @@
 							<label>Departure Date</label> <select name="tourSchedule_id"
 								class="form-control" data-ng-model="customer.tourSchedule.id"
 								required ng-disabled="form.tour_id.$invalid">
-								<option selected disabled value="">-- Select Role --</option>
+								<option selected disabled value="">-- Select Departure Date --</option>
 								<option
 									ng-repeat="tourSchedule in tourSchedules |filter: tour.id"
 									value="{{tourSchedule.id}}"

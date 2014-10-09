@@ -4,6 +4,8 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
+	$scope.status = null;
+	$scope.error = null;
 
 	ngProgress.start();
 	$timeout(function (){
@@ -47,26 +49,34 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 		}
 	};
 
+	/*
+	 * display message
+	 */
 	function processSuccess(success) {
-		$scope.updateStatus = success;
+		$scope.status = success;
 		startTimer();
 	};
 
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
-	var timer;
+
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
-			$scope.updateStatus = '';
+			$scope.error = null;
+			$scope.status = null;
 		}, 3000);
 	};
 	
 	$scope.navigate = function (url, id){
 		$location.path(url+id);
 	}
+	
+	$scope.shortenStr = function (value, num) {
+		var newvalue = value.length > num ? value.substr(0,num-1)+'...' : value;
+		return newvalue;
+	};
 
 });

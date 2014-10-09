@@ -12,7 +12,7 @@ ktbookingApp
                     templateUrl: 'views/register.html',
                     controller: 'RegisterController',
                     access: {
-                        authorizedRoles: [USER_ROLES.admin]
+                        authorizedRoles: [USER_ROLES.all]
                     }
                 })
                 .when('/activate', {

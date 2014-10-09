@@ -46,7 +46,7 @@ public class TourSchedule implements Serializable {
 
 	private double price;
 	
-	private int availability;
+	private int attending;
 	
 	@JsonIgnore
 	@OneToMany(targetEntity = TourBooking.class, mappedBy = "tourSchedule", cascade = CascadeType.ALL)
@@ -92,12 +92,12 @@ public class TourSchedule implements Serializable {
 		this.price = price;
 	}
 
-	public int getAvailability() {
-		return availability;
+	public int getAttending() {
+		return attending;
 	}
 
-	public void setAvailability(int availability) {
-		this.availability = this.availability + availability;
+	public void setAttending(int attending) {
+		this.attending = this.attending + attending;
 	}
 
 	public Set<TourBooking> getTourBooking() {
@@ -138,7 +138,7 @@ public class TourSchedule implements Serializable {
                 ", departureDate=" + departureDate +
                 ", returnDate=" + returnDate +
                 ", price=" + price +
-                ", availability=" + availability +
+                ", attending=" + attending +
                 '}';
     }
 }

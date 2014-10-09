@@ -17,9 +17,9 @@
 <link rel="stylesheet" href="styles/main.css">
 <link rel="stylesheet" href="styles/documentation.css">
 <link rel="stylesheet"
-	href="bower_components/full-calendar/fullcalendar.css">
+	href="bower_components/fullcalendar/dist/fullcalendar.css">
 <link rel="stylesheet"
-	href="bower_components/angular-ngProgress/ngProgress.css">
+	href="bower_components/ngprogress/ngProgress.css">
 <!-- endbuild -->
 </head>
 <body ng-app="ktbookingApp" ng-controller="MainController">
@@ -88,13 +88,12 @@
 									translate="global.menu.account.password">Password</span></a></li>
 							<li ng-switch-when="true"><a href="#/sessions">&#xA0;<span
 									translate="global.menu.account.sessions">Sessions</span></a></li>
+							<li ng-switch-when="true"><a href="#/register">&#xA0;<span
+									translate="global.menu.account.register">Register</span></a></li>
 							<li ng-switch-when="true"><a href="#/logout">&#xA0;<span
 									translate="global.menu.account.logout">Log out</span></a></li>
 							<li ng-switch-when="false"><a href="#/login">&#xA0;<span
 									translate="global.menu.account.login">Authenticate</span></a></li>
-
-							<li ng-switch-when="true"><a href="#/register">&#xA0;<span
-									translate="global.menu.account.register">Register</span></a></li>
 						</ul></li>
 
 					<li ng-switch-when="true" ng-show="isAuthorized(userRoles.admin)"
@@ -164,24 +163,24 @@
 	<script
 		src="bower_components/angular-file-upload/angular-file-upload.js"></script>
 	<!-- calendar -->
-	<script src="bower_components/full-calendar/jquery-ui.custom.min.js"></script>
-	<script src="bower_components/full-calendar/moment.min.js"></script>
-	<script src="bower_components/angular-calendar/calendar.js"></script>
-	<script src="bower_components/full-calendar/fullcalendar.js"></script>
-	<script src="bower_components/full-calendar/gcal.js"></script>
-
+	<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+	<script src="bower_components/moment/min/moment.min.js"></script>
+	<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+	<script src="bower_components/fullcalendar/dist/gcal.js"></script>
+	
+	<script src="bower_components/jquery-ui/ui/jquery-ui.custom.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 	<script src="bower_components/angular-translate/angular-translate.js"></script>
+	<!-- Pagination -->
+	<script src="bower_components/angular-pagination/dirPagination.js"></script>
+	<!-- nprogress -->
+	<script src="bower_components/ngprogress/build/ngProgress.min.js"></script>
 	<script
 		src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
 	<script
 		src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
 	<script
 		src="bower_components/angular-dynamic-locale/src/tmhDinamicLocale.js"></script>
-	<!-- Pagination -->
-	<script src="bower_components/angular-pagination/dirPagination.js"></script>
-	<!-- nprogress -->
-	<script src="bower_components/angular-ngProgress/ngProgress.min.js"></script>
 	<script src="scripts/http-auth-interceptor.js"></script>
 	<script src="scripts/truncate.js"></script>
 	<script src="scripts/utils.js"></script>

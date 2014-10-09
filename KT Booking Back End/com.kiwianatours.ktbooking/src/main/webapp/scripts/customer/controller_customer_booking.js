@@ -6,6 +6,8 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 	$scope.customers = customerId;
 	$scope.tours = resolvedTour;
 	$scope.tourSchedules = resolvedTourSchedule;
+	$scope.status = null;
+	$scope.error = null;
 	
 	/*
 	 * yesterday date
@@ -38,8 +40,7 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 		Booking.update({id:id, status: status}, function (){
 			$scope.bookings = Booking.get({id:customerId});
 		});
-		
-	}
+	};
 
 	$scope.delete = function (id) {
 		Customer.get({id:customerId}, function (data){
@@ -88,20 +89,20 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 	};
 
 	function processSuccess(success) {
-		$scope.updateStatus = success;
+		$scope.status = success;
 		startTimer();
 	};
 
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
 
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
-			$scope.updateStatus = '';
+			$scope.status = null;
+			$scope.error = null;
 		}, 3000);
 	};
 

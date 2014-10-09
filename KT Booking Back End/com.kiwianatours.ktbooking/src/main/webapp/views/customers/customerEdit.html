@@ -21,11 +21,21 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<div class="alert alert-success" data-ng-show="success">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
-				inserted! click <a href="javascript:history.go(0)">here</a> to enter
-				new customer
-			</div>
+			<div data-ng-show="success">
+				<div class="alert alert-success" data-ng-show="insertStatus">
+					<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
+					has been inserted!
+				</div>
+				<div class="alert alert-warning" data-ng-show="insertStatus">
+					<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;click
+					<a href="javascript:history.go(0)">here</a> to enter new customer
+				</div>
+			
+				<div class="alert alert-success" data-ng-show="updateStatus">
+					<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
+					has been Updated!
+				</div>
+				</div>
 			<form ng-show="!success" name="form"
 				class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
 				novalidate>
@@ -107,7 +117,7 @@
 					<!-- type="email" causing a problem with Breeze so using regex -->
 					<input type="email" name="email" class="form-control"
 						data-ng-model="customer.email" placeholder="Email" ng-minlength=1
-						ng-maxlength=100 required />
+						ng-maxlength=100 required ng-change="change()" />
 					<div class="error"
 						ng-show="form.email.$dirty && form.email.$invalid">
 						<small class="error" ng-show="form.email.$error.required">
@@ -117,13 +127,15 @@
 							ng-show="form.email.$error.maxlength"> Email cannot be
 							longer than 100 characters </small>
 					</div>
-					<div class="error" ng-show="errorEmailExists">
-						Email is exists!!
+					<div ng-show="errorEmailExists">
+						<div class="error">Email is exists!!</div>
+						<br />
+						<div class="alert alert-warning">
+							<span class="glyphicon glyphicon-info-sign"></span> Click <a
+								href="#/customer/booking/{{id}}">here</a> to book right now,
+							unless you want to update the customer details.
+						</div>
 					</div>
-					<br />
-					<div class="alert alert-warning" ng-show="errorEmailExists">Click <a href="#/customer/booking/{{id}}">here</a>
-						to book right now, unless
-						you want to update the customer details.</div>
 				</div>
 				<div class="form-group">
 					<label>Phone:</label> <input type="text" name="contactNo"
@@ -190,14 +202,9 @@
 					</button>
 				</div>
 				<div class="form-group">
-					<div class="alert alert-success" data-ng-show="updateStatus">
-						<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
-						updated!
-					</div>
-					<br />
-					<div class="alert alert-danger" data-ng-show="errorMessage">
+					<div class="alert alert-danger" data-ng-show="error">
 						<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-						{{ errorMessage }}
+						{{ error }}
 					</div>
 				</div>
 			</form>

@@ -25,13 +25,13 @@
 				</form>
 			</div>
 
-			<div class="alert alert-success" data-ng-show="updateStatus">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			<div class="alert alert-success" data-ng-show="status">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
 			</div>
 
-			<div class="alert alert-danger" data-ng-show="errorMessage">
+			<div class="alert alert-danger" data-ng-show="error">
 				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ errorMessage }}
+				{{ error }}
 			</div>
 			<div data-ng-show="tourSchedules.length == 0">
 				<div class="col-md-12 text-center">
@@ -184,7 +184,7 @@
 								ng-click="predicate = 'returnDate';  reverse=!reverse"><span
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>Price</th>
-							<th>Availability</th>
+							<th>Attending</th>
 							<th>Booking</th>
 							<th></th>
 							<th></th>
@@ -198,7 +198,7 @@
 							<td>{{tourSchedule.departureDate}}</td>
 							<td>{{tourSchedule.returnDate}}</td>
 							<td>{{tourSchedule.price}} $</td>
-							<td>{{tourSchedule.availability}}</td>
+							<td>{{tourSchedule.attending}}</td>
 							<td><a href="#/tour/schedule/booking/{{tourSchedule.id}}"
 								class="btn btn-default"><span
 									class="glyphicon glyphicon-eye-open"></span> View</a></td>

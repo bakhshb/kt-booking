@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.TourBooking;
 import com.kiwianatours.ktbooking.repository.TourBookingRepository;
+import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.BookingService;
 import com.kiwianatours.ktbooking.web.rest.dto.BookingDTO;
 
@@ -104,6 +106,7 @@ public class BookingResource {
     @RequestMapping(value = "/rest/bookings/{id}",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Secured(AuthoritiesConstants.ADMIN)
     @Timed
     public void delete(@PathVariable Long id) {
         log.debug("REST request to delete booking : {}", id);

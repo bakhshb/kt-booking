@@ -15,7 +15,7 @@ public class TourScheduleDTO {
 
 	private double price;
 	
-	private int availability;
+	private int attending;
 	
 	private int time = 1;
 	
@@ -65,12 +65,12 @@ public class TourScheduleDTO {
 		this.price = price;
 	}
 
-	public int getAvailability() {
-		return availability;
+	public int getAttending() {
+		return attending;
 	}
 
-	public void setAvailability(int availability) {
-		this.availability = availability;
+	public void setAttending(int attending) {
+		this.attending = attending;
 	}
 
 	public int getTime() {

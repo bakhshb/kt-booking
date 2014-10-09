@@ -79,40 +79,6 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	init() ;
 
 	/*
@@ -139,7 +105,6 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 
 		}
 	};
-
 
 	$scope.uploadFile = function(files) {
 		var fd = new FormData();

@@ -1,12 +1,13 @@
 'use strict';
 
-ktbookingApp.controller('TourScheduleController', function ($scope, $location, $timeout, resolvedTourSchedule, TourSchedule,resolvedTour ,Tour, modalService, ngProgress) {
+ktbookingApp.controller('TourScheduleController', function ($scope, $location, $timeout, resolvedTourSchedule, TourSchedule, TourScheduleBooking,  resolvedTour ,Tour, modalService, ngProgress) {
 
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-
 	$scope.tours= resolvedTour;
+	$scope.status = null;
+	$scope.error = null;
 
 	ngProgress.start();
 	$timeout(function (){
@@ -45,11 +46,11 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 
 	$scope.delete = function (id) {
 		TourSchedule.get({id:id}, function success(data){
-			var tourScheduleDate = data.depatureDate +' for '+ data.tour.name +" tour ";
+			var tourScheduleDate = data.departureDate +' for '+ data.tour.name +" tour ";
 			var modalOptions = {
 					closeButtonText : 'Cancel',
 					actionButtonText : 'Delete TourInfo',
-					headerText : 'Delete Depature Date' + tourScheduleDate + '?',
+					headerText : 'Delete Depature Date ' + tourScheduleDate + '?',
 					bodyText : 'Are you sure you want to delete this tourSchedule?'
 			};
 			modalService.showModal({}, modalOptions).then(function (result) {
@@ -57,14 +58,14 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 					TourSchedule.delete({id: id},
 							function () {
 						$scope.tourSchedules = TourSchedule.query();
-						processSuccess(tourScheduleDate+' has been deleted!');
+						processSuccess(tourScheduleDate +' has been deleted!');
 					});
 				}
 			});
 
 		});
 	};
-
+		
 	$scope.clear = function () {
 		$scope.tourSchedule = {};
 	};
@@ -96,20 +97,20 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 	 * display message
 	 */
 	function processSuccess(success) {
-		$scope.updateStatus = success;
+		$scope.status = success;
 		startTimer();
 	};
 
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
 
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
-			$scope.updateStatus = '';
+			$scope.error = null;
+			$scope.status = null;
 		}, 3000);
 	};
 });

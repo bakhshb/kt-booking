@@ -4,6 +4,8 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 
 	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0, timer;
 	$scope.tours = tourId;
+	$scope.status = null;
+	$scope.error = null;
 	init() ;
 
 	/*
@@ -30,61 +32,59 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 	};
 
 	$scope.primary = function (tourId,tourPhotoId) {
-		TourPhoto.get({id:tourPhotoId}, function success (data){
-			var tourName = data.photo;
-			var modalOptions = {
-					closeButtonText : 'Cancel',
-					actionButtonText : 'Make it Primary ',
-					headerText : 'Primary ' + tourName + '?',
-					bodyText : 'Are you sure you want to make this tour photo primary?'
-			};
-			modalService.showModal({}, modalOptions).then(function (result) {
-				if (!result) {
-					TourPhoto.update({tourId:tourId, tourPhotoId: tourPhotoId},function () {
-						$scope.tourphotos = TourPhoto.query();
-						processSuccess(tourName+' is Primary!');
-					});
-				}
-			});
+		var modalOptions = {
+				closeButtonText : 'Cancel',
+				actionButtonText : 'Make it Primary ',
+				headerText : 'Primary Photo Id: ' + tourPhotoId + '?',
+				bodyText : 'Are you sure you want to make this tour photo primary?'
+		};
+		modalService.showModal({}, modalOptions).then(function (result) {
+			if (!result) {
+				TourPhoto.update({tourId:tourId, tourPhotoId: tourPhotoId},function () {
+					$scope.tourphotos = TourPhoto.query();
+					processSuccess('Photo Id '+tourPhotoId+' is Primary!');
+				});
+			}
 		});
 	};
 
 	$scope.delete = function (id) {
-		TourPhoto.get({id:id}, function success (data){
-			var tourName = data.photo;
-			var modalOptions = {
-					closeButtonText : 'Cancel',
-					actionButtonText : 'Delete Photo',
-					headerText : 'Delete ' + tourName + '?',
-					bodyText : 'Are you sure you want to delete this tour photo?'
-			};
-			modalService.showModal({}, modalOptions).then(function (result) {
-				if (!result) {
-					TourPhoto.delete({id: id},function () {
-						$scope.tourphotos = TourPhoto.query();
-						processSuccess(tourName+' was deleted!');
-					});
-				}
-			});
+		var modalOptions = {
+				closeButtonText : 'Cancel',
+				actionButtonText : 'Delete Photo',
+				headerText : 'Delete Photo Id ' + id + '?',
+				bodyText : 'Are you sure you want to delete this tour photo?'
+		};
+		modalService.showModal({}, modalOptions).then(function (result) {
+			if (!result) {
+				TourPhoto.delete({id: id},function () {
+					$scope.tourphotos = TourPhoto.query();
+					processSuccess('Photo Id: '+id+' was deleted!');
+				});
+			}
 		});
+
 	};
 
 
+	/*
+	 * display message
+	 */
 	function processSuccess(success) {
-		$scope.updateStatus = success;
+		$scope.status = success;
 		startTimer();
 	};
 
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
 
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
-			$scope.updateStatus = '';
+			$scope.error = null;
+			$scope.status = null;
 		}, 3000);
 	};
 

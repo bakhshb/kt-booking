@@ -7,7 +7,7 @@
 				<li class="active">Tour Booking</li>
 			</ol>
 			<h1>
-				Booking For Tour <small>{{tourSchedule.tour.name }}</small>
+				Tour Booking Details <small>{{tourSchedule.tour.name }}</small>
 			</h1>
 			<h5>Departure: {{tourSchedule.departureDate}}&#xA0;&#xA0;
 				Return: {{tourSchedule.returnDate}}</h5>
@@ -25,13 +25,13 @@
 					</div>
 				</form>
 			</div>
-			<div class="alert alert-success" data-ng-show="updateStatus">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			<div class="alert alert-success" data-ng-show="status">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
 			</div>
 
-			<div class="alert alert-danger" data-ng-show="errorMessage">
+			<div class="alert alert-danger" data-ng-show="error">
 				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ errorMessage }}
+				{{ error }}
 			</div>
 			<div data-ng-show="bookings.length == 0">
 				<div class="col-md-12 text-center">

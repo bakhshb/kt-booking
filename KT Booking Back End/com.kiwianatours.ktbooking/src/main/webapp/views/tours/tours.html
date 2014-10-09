@@ -23,13 +23,13 @@
 					</div>
 				</form>
 			</div>
-			<div class="alert alert-success" data-ng-show="updateStatus">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			<div class="alert alert-success" data-ng-show="status">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
 			</div>
 
-			<div class="alert alert-danger" data-ng-show="errorMessage">
+			<div class="alert alert-danger" data-ng-show="error">
 				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ errorMessage }}
+				{{ error }}
 			</div>
 			<div data-ng-show="tours.length == 0">
 				<div class="col-md-12 text-center">
@@ -145,7 +145,7 @@
 							<td></td>
 							<td><a href="#/tourphoto/{{tour.id}}"
 								class="btn btn-default"><span
-									class="glyphicon glyphicon-eye-open"></span> View</a>  <a
+									class="glyphicon glyphicon-eye-open"></span> View</a> <a
 								href="#/tourphoto/upload/{{tour.id}}" class="btn btn-success"><span
 									class="glyphicon glyphicon-open"></span> Upload</a></td>
 							<td>

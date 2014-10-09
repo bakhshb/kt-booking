@@ -10,6 +10,7 @@ import com.kiwianatours.ktbooking.security.SecurityUtils;
 import com.kiwianatours.ktbooking.service.MailService;
 import com.kiwianatours.ktbooking.service.UserService;
 import com.kiwianatours.ktbooking.web.rest.dto.UserDTO;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.*;
