@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Customer;
 import com.kiwianatours.ktbooking.repository.CustomerRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
+import com.kiwianatours.ktbooking.service.CustomerService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,9 @@ public class CustomerResource {
 
     @Inject
     private CustomerRepository customerRepository;
+    
+    @Inject
+    private CustomerService customerService;
     
     /**
      * POST  /rest/customers -> Create a new customer.
@@ -82,7 +86,7 @@ public class CustomerResource {
     @Timed
     public void delete(@PathVariable Long id) {
         log.debug("REST request to delete Customer : {}", id);
-        customerRepository.delete(id);
+        customerService.deleteCustomer(id);
     }
     
 }

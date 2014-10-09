@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,13 +16,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.springframework.boot.actuate.audit.listener.AuditListener;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A Booking.
  */
 @Entity
+@EntityListeners(value = AuditListener.class)
 @Table(name = "T_BOOKING")
+@Audited
 public class Booking extends AbstractAuditingEntity implements Serializable {
 
 	@Id

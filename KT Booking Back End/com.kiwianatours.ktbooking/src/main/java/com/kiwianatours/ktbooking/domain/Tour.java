@@ -6,6 +6,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.springframework.boot.actuate.audit.listener.AuditListener;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -13,7 +16,9 @@ import java.util.Set;
  * A Tour.
  */
 @Entity
+@EntityListeners(value = AuditListener.class)
 @Table(name = "T_TOUR")
+@Audited
 public class Tour implements Serializable {
 
 	@Id

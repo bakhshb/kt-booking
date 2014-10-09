@@ -2,7 +2,7 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
-			<h1>Bookings</h1>
+			<h1>All Bookings</h1>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
@@ -84,16 +84,10 @@
 							<td>{{booking.tourSchedule.returnDate}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
 							<td>{{booking.booking.amount}}</td>
-							<td ng-if="booking.booking.status == 1">Approved</td>
-							<td ng-if="booking.booking.status == 2">Pending</td>
-							<td ng-if="booking.booking.status == 3">Refund</td>
-							<td ng-if="booking.booking.status == 4">Cancel</td>
-							<td>
-								<!-- <button type="submit" ng-click="delete(booking.id)"
-									class="btn btn-danger" ng-disabled = "booking.tourSchedule.departureDate < {{yesterday}}">
-									<span class="glyphicon glyphicon-remove-circle"></span> Delete
-								</button> -->
-							</td>
+							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
+							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
+							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
+							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
 						</tr>
 					</tbody>
 				</table>

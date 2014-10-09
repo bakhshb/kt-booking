@@ -4,6 +4,7 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
+	var timer;
 	$scope.status = null;
 	$scope.error = null;
 

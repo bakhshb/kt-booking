@@ -7,8 +7,10 @@ import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 import com.kiwianatours.ktbooking.domain.util.CustomLocalDateSerializer;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
+import org.springframework.boot.actuate.audit.listener.AuditListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,7 +23,9 @@ import java.util.List;
  * A Customer.
  */
 @Entity
+@EntityListeners(value = AuditListener.class)
 @Table(name = "T_CUSTOMER")
+@Audited
 public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @Id

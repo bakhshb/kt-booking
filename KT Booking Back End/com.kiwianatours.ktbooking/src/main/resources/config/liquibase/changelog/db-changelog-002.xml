@@ -41,7 +41,7 @@
 			<column name="customer_id" type="bigint" />
 			<column name="payment_method" type="varchar(50)" />
 			<column name="amount" type="double" />
-			<column name="status" type="bigint" defaultValue="1"/>
+			<column name="status" type="bigint" defaultValue="1" />
 			<column name="created_by" type="varchar(50)" defaultValue="system">
 				<constraints nullable="false" />
 			</column>
@@ -62,14 +62,15 @@
 		</createTable>
 
 		<createTable tableName="T_TOUR">
-		<column name="id" type="bigint">
+			<column name="id" type="bigint">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
-			<column name="name" type="varchar(100)"/>
-            <column name="activated" type="boolean" defaultValueBoolean="false" valueBoolean="false">
-                <constraints nullable="false" />
-            </column>
-            <column name="short_description" type="text" />
+			<column name="name" type="varchar(100)" />
+			<column name="activated" type="boolean" defaultValueBoolean="false"
+				valueBoolean="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="short_description" type="text" />
 			<column name="description" type="text" />
 		</createTable>
 
@@ -81,7 +82,7 @@
 			<column name="depature_date" type="date" />
 			<column name="return_date" type="date" />
 			<column name="price" type="double" />
-			<column name="attending" type="int" defaultValue="0"/>
+			<column name="attending" type="int" defaultValue="0" />
 		</createTable>
 
 		<createTable tableName="T_TOUR_PHOTO">
@@ -90,7 +91,8 @@
 			</column>
 			<column name="tour_id" type="bigint" />
 			<column name="photo" type="varchar(100)" />
-			<column name="activated" type="boolean" defaultValueBoolean="false" valueBoolean="false"/>
+			<column name="activated" type="boolean" defaultValueBoolean="false"
+				valueBoolean="false" />
 		</createTable>
 
 		<addForeignKeyConstraint baseColumnNames="customer_id"
@@ -114,5 +116,4 @@
 			referencedColumnNames="id" referencedTableName="T_TOUR" />
 
 	</changeSet>
-
 </databaseChangeLog>

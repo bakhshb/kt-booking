@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,11 +13,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.springframework.boot.actuate.audit.listener.AuditListener;
+
 /**
  * A TourPhoto.
  */
 @Entity
+@EntityListeners(value = AuditListener.class)
 @Table(name = "T_TOUR_PHOTO")
+@Audited
 public class TourPhoto implements Serializable {
 
 	@Id
