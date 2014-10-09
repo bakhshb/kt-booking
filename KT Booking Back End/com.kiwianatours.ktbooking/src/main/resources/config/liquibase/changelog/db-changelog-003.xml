@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<property name="now" value="now()" dbms="mysql,h2" />
+	<property name="now" value="current_timestamp" dbms="postgresql" />
+
+	<changeSet id="3" author="baraa">
+		<createTable tableName="REVINFO">
+			<column name="REV" type="int(11)" autoIncrement="true"
+				incrementBy="1" startWith="1">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REVTSTMP" type="bigint" />
+		</createTable>
+
+		<createTable tableName="T_CUSTOMER_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="first_name" type="varchar(50)" />
+			<column name="last_name" type="varchar(50)" />
+			<column name="birthday" type="date" />
+			<column name="permission_from" type="varchar(100)" />
+			<column name="gender" type="varchar(10)" />
+			<column name="nationality" type="varchar(100)" />
+			<column name="email" type="varchar(100)" />
+			<column name="contact_no" type="varchar(11)" />
+			<column name="additional_info" type="text" />
+			<column name="created_by" type="varchar(50)" defaultValue="system">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="varchar(50)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_CUSTOMER_AUD" constraintName="fk_revinfo_customer"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+		<createTable tableName="T_BOOKING_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="customer_id" type="bigint" />
+			<column name="payment_method" type="varchar(50)" />
+			<column name="amount" type="double" />
+			<column name="status" type="bigint" defaultValue="1" />
+			<column name="created_by" type="varchar(50)" defaultValue="system">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="varchar(50)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_BOOKING_AUD" constraintName="fk_revinfo_booking"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+		<createTable tableName="T_TOUR_BOOKING_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="booking_id" type="bigint" />
+			<column name="tour_schedule_id" type="bigint" />
+			<column name="booking_date" type="timestamp" defaultValueDate="${now}" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_TOUR_BOOKING_AUD" constraintName="fk_revinfo_booking_tour"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+		<createTable tableName="T_TOUR_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="name" type="varchar(100)" />
+			<column name="activated" type="boolean"/>
+			<column name="short_description" type="text" />
+			<column name="description" type="text" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_TOUR_AUD" constraintName="fk_revinfo_tour"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+
+		<createTable tableName="T_TOUR_SCHEDULE_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="tour_id" type="bigint" />
+			<column name="depature_date" type="date" />
+			<column name="return_date" type="date" />
+			<column name="price" type="double" />
+			<column name="attending" type="int" />
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_TOUR_SCHEDULE_AUD" constraintName="fk_revinfo_tour_schedule_aud"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+
+		<createTable tableName="T_TOUR_PHOTO_AUD">
+			<column name="id" type="bigint" />
+			<column name="REV" type="int(11)" />
+			<column name="REVTYPE " type="tinyint" />
+			<column name="tour_id" type="bigint" />
+			<column name="photo" type="varchar(100)" />
+			<column name="activated" type="boolean"/>
+		</createTable>
+
+		<addForeignKeyConstraint baseColumnNames="REV"
+			baseTableName="T_TOUR_PHOTO_AUD" constraintName="fk_revinfo_tour_photo"
+			referencedColumnNames="REV" referencedTableName="REVINFO" />
+
+
+	</changeSet>
+</databaseChangeLog>

@@ -34,6 +34,7 @@ public class CustomerResource {
     @Inject
     private CustomerService customerService;
     
+    
     /**
      * POST  /rest/customers -> Create a new customer.
      */
