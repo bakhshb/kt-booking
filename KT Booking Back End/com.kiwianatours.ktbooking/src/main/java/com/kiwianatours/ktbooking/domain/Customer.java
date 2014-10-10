@@ -28,7 +28,12 @@ import java.util.List;
 @Audited
 public class Customer extends AbstractAuditingEntity implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3093536565704440588L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 

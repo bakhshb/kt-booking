@@ -7,7 +7,9 @@ import com.kiwianatours.ktbooking.domain.TourPhoto;
 import com.kiwianatours.ktbooking.domain.Tour;
 
 import java.util.List;
-
+/**
+ * Spring Data JPA repository for the TourPhoto entity.
+ */
 public interface TourPhotoRepository extends JpaRepository<TourPhoto, Long>{
 
 	List<TourPhoto> findByTour(Tour tour);

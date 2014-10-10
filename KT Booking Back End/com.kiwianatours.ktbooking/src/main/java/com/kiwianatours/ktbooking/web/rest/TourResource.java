@@ -2,6 +2,8 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Tour;
+import com.kiwianatours.ktbooking.domain.TourAudit;
+import com.kiwianatours.ktbooking.repository.TourAuditRepository;
 import com.kiwianatours.ktbooking.repository.TourRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 
@@ -29,6 +31,10 @@ public class TourResource {
 
     @Inject
     private TourRepository tourRepository;
+    
+    @Inject
+    private TourAuditRepository tourAuditRepository;
+
 
     /**
      * POST  /rest/tours -> Create a new tour.
@@ -52,6 +58,9 @@ public class TourResource {
     @Timed
     public List<Tour> getAll() {
         log.debug("REST request to get all Tours");
+        for (TourAudit tour: tourAuditRepository.findAll()){
+        	System.err.println(tour.getName() +" " + tour.isActivated());
+        }
         return tourRepository.findAll();
     }
 

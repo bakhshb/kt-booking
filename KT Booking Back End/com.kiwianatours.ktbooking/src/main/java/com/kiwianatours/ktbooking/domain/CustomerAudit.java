@@ -7,12 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
@@ -27,26 +22,24 @@ import com.kiwianatours.ktbooking.domain.util.CustomLocalDateSerializer;
  */
 @Entity
 @Table(name = "T_CUSTOMER_AUD")
-public class CustomerAUD implements Serializable {
+public class CustomerAudit implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4955483111996589598L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-
 	
-	@ManyToOne
-	@JoinColumn(name="REV")
-	private Revinfo revinfo;
-
 	@Column(name = "REVTYPE")
 	private int revType;
 
-	@Size(min = 1, max = 50)
-    @Column(name = "first_name", length = 50)
+    @Column(name = "first_name")
 	private String firstName;
 
-	@Size(min = 1, max = 50)
-    @Column(name = "last_name", length = 50)
+    @Column(name = "last_name")
 	private String lastName;
 
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
@@ -55,8 +48,7 @@ public class CustomerAUD implements Serializable {
 	@Column(name = "birthday", nullable = false)
 	private LocalDate birthday;
 
-	@Size(min = 1, max = 100)
-	@Column(name = "permission_from", length = 100)
+	@Column(name = "permission_from")
 	private String permissionFrom;
 
 	private String gender;
@@ -64,12 +56,10 @@ public class CustomerAUD implements Serializable {
 	private String nationality;
 
 	@Email
-	@Size(min = 1, max = 100)
 	@Column(length = 100)
 	private String email;
 
-	@Size(min = 1, max = 11)
-	@Column(name = "contact_no", length = 11)
+	@Column(name = "contact_no")
 	private String contactNo;
 
 	@Column(name = "additional_info", columnDefinition = "Text")
@@ -81,14 +71,6 @@ public class CustomerAUD implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Revinfo getRevinfo() {
-		return revinfo;
-	}
-
-	public void setRevinfo(Revinfo revinfo) {
-		this.revinfo = revinfo;
 	}
 
 	public int getRevType() {
@@ -180,7 +162,7 @@ public class CustomerAUD implements Serializable {
 			return false;
 		}
 
-		CustomerAUD customerAUD = (CustomerAUD) o;
+		CustomerAudit customerAUD = (CustomerAudit) o;
 
 		if (id != customerAUD.id) {
 			return false;

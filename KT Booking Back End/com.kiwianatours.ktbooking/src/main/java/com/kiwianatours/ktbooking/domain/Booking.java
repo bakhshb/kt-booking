@@ -30,6 +30,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Audited
 public class Booking extends AbstractAuditingEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5964789986490916404L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;

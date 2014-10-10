@@ -25,6 +25,11 @@ import org.springframework.boot.actuate.audit.listener.AuditListener;
 @Audited
 public class TourPhoto implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1926979399994530402L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;

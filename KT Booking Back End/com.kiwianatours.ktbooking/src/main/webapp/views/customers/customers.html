@@ -58,26 +58,24 @@
 					<div class="panel-heading">
 						<button class="btn close" title="Delete Customer"
 							data-ng-click="delete(customer.id)">&times;</button>
-						<a href="#/customer/edit/{{customer.id}}" class="white">
+						<a href="#/customer/booking/{{customer.id}}" class="white">
 							<h4 title="{{customer.firstName + ' ' +customer.lastName}}">
 								{{shortenStr(customer.firstName, 14) +" "+
-								shortenStr(customer.lastName, 14)}} <span
-									class="glyphicon glyphicon-pencil"></span>
+								shortenStr(customer.lastName, 14)}}
 							</h4>
 						</a>
 					</div>
 					<div class="panel-body">
 						<div class="pull-left">
-							<a href="#/customer/edit/{{customer.id}}"><img
+							<a href="#/customer/booking/{{customer.id}}"><img
 								data-ng-src="/images/{{customer.gender | lowercase}}.png"
 								style="height: 90px;" class="img-rounded" /></a>
 						</div>
 						<div class="pull-right">
 							<p>E: {{customer.email}}</p>
 							<p>Ph: {{customer.contactNo}}</p>
-							<button class="btn btn-primary"
-								data-ng-click="navigate('/customer/booking/', customer.id)">
-								Bookings</button>
+							<a href="#/customer/edit/{{customer.id}}" class="btn btn-primary"><span
+									class="glyphicon glyphicon-pencil"></span></a>
 						</div>
 					</div>
 				</div>

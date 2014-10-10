@@ -1,62 +1,56 @@
 package com.kiwianatours.ktbooking.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.envers.Audited;
-import org.springframework.boot.actuate.audit.listener.AuditListener;
-
 import java.io.Serializable;
-import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * A Tour.
  */
 @Entity
-@EntityListeners(value = AuditListener.class)
-@Table(name = "T_TOUR")
-@Audited
-public class Tour implements Serializable {
-
+@Table(name = "T_TOUR_AUD")
+public class TourAudit implements Serializable  {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1737217776399254239L;
+	private static final long serialVersionUID = -7118240741843360185L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@NotNull
-    @Size(min = 0, max = 100)
-    @Column(length = 100)
+	@Column(name = "REVTYPE")
+	private int revType;
+	
     private String name;
     
 	private boolean activated = false;
 	
-	@Column(name = "short_description", columnDefinition="text")
+	@Column(name = "short_description")
 	private String shortDescription;
 
 	@Column(columnDefinition="text")
 	private String description;
 	
-    @JsonIgnore
-    @OneToMany(targetEntity = TourSchedule.class, mappedBy = "tour", cascade = CascadeType.ALL)
-    private Set<TourSchedule> tourSchedule;
-    
-    @JsonIgnore
-	@OneToMany(targetEntity = TourPhoto.class, mappedBy = "tour", cascade = CascadeType.ALL)
-	private Set<TourPhoto> tourPhoto;
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public int getRevType() {
+		return revType;
+	}
+
+	public void setRevType(int revType) {
+		this.revType = revType;
 	}
 
 	public String getName() {
@@ -91,22 +85,6 @@ public class Tour implements Serializable {
 		this.description = description;
 	}
 
-	public Set<TourSchedule> getTourSchedule() {
-		return tourSchedule;
-	}
-
-	public void setTourSchedule(Set<TourSchedule> tourSchedule) {
-		this.tourSchedule = tourSchedule;
-	}
-
-	public Set<TourPhoto> getTourPhoto() {
-		return tourPhoto;
-	}
-
-	public void setTourPhoto(Set<TourPhoto> tourPhoto) {
-		this.tourPhoto = tourPhoto;
-	}
-
 	@Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -116,9 +94,9 @@ public class Tour implements Serializable {
             return false;
         }
 
-        Tour tour = (Tour) o;
+        TourAudit tourAudit = (TourAudit) o;
 
-        if (id != tour.id) {
+        if (id != tourAudit.id) {
             return false;
         }
 

@@ -17,8 +17,12 @@
 		</createTable>
 
 		<createTable tableName="T_CUSTOMER_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="first_name" type="varchar(50)" />
 			<column name="last_name" type="varchar(50)" />
@@ -29,12 +33,8 @@
 			<column name="email" type="varchar(100)" />
 			<column name="contact_no" type="varchar(11)" />
 			<column name="additional_info" type="text" />
-			<column name="created_by" type="varchar(50)" defaultValue="system">
-				<constraints nullable="false" />
-			</column>
-			<column name="created_date" type="timestamp" defaultValueDate="${now}">
-				<constraints nullable="false" />
-			</column>
+			<column name="created_by" type="varchar(50)" />
+			<column name="created_date" type="timestamp" defaultValueDate="${now}" />
 			<column name="last_modified_by" type="varchar(50)" />
 			<column name="last_modified_date" type="timestamp" />
 		</createTable>
@@ -44,19 +44,19 @@
 			referencedColumnNames="REV" referencedTableName="REVINFO" />
 
 		<createTable tableName="T_BOOKING_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="customer_id" type="bigint" />
 			<column name="payment_method" type="varchar(50)" />
 			<column name="amount" type="double" />
-			<column name="status" type="bigint" defaultValue="1" />
-			<column name="created_by" type="varchar(50)" defaultValue="system">
-				<constraints nullable="false" />
-			</column>
-			<column name="created_date" type="timestamp" defaultValueDate="${now}">
-				<constraints nullable="false" />
-			</column>
+			<column name="status" type="bigint" />
+			<column name="created_by" type="varchar(50)" />
+			<column name="created_date" type="timestamp" defaultValueDate="${now}" />
 			<column name="last_modified_by" type="varchar(50)" />
 			<column name="last_modified_date" type="timestamp" />
 		</createTable>
@@ -66,8 +66,12 @@
 			referencedColumnNames="REV" referencedTableName="REVINFO" />
 
 		<createTable tableName="T_TOUR_BOOKING_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="booking_id" type="bigint" />
 			<column name="tour_schedule_id" type="bigint" />
@@ -79,11 +83,15 @@
 			referencedColumnNames="REV" referencedTableName="REVINFO" />
 
 		<createTable tableName="T_TOUR_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="name" type="varchar(100)" />
-			<column name="activated" type="boolean"/>
+			<column name="activated" type="boolean" />
 			<column name="short_description" type="text" />
 			<column name="description" type="text" />
 		</createTable>
@@ -94,8 +102,12 @@
 
 
 		<createTable tableName="T_TOUR_SCHEDULE_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="tour_id" type="bigint" />
 			<column name="depature_date" type="date" />
@@ -110,12 +122,16 @@
 
 
 		<createTable tableName="T_TOUR_PHOTO_AUD">
-			<column name="id" type="bigint" />
-			<column name="REV" type="int(11)" />
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="REV" type="int(11)">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
 			<column name="REVTYPE " type="tinyint" />
 			<column name="tour_id" type="bigint" />
 			<column name="photo" type="varchar(100)" />
-			<column name="activated" type="boolean"/>
+			<column name="activated" type="boolean" />
 		</createTable>
 
 		<addForeignKeyConstraint baseColumnNames="REV"

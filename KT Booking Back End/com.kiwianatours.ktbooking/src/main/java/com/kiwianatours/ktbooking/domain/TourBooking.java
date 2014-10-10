@@ -1,5 +1,7 @@
 package com.kiwianatours.ktbooking.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,8 +18,6 @@ import org.hibernate.envers.Audited;
 import org.joda.time.DateTime;
 import org.springframework.boot.actuate.audit.listener.AuditListener;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
  * A Tour Booking.
  */
@@ -25,7 +25,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @EntityListeners(value = AuditListener.class)
 @Table(name = "T_TOUR_BOOKING")
 @Audited
-public class TourBooking {
+public class TourBooking implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1159892595772092286L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;

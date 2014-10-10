@@ -17,7 +17,12 @@ import java.util.Set;
 @Table(name = "T_USER")
 public class User extends AbstractAuditingEntity implements Serializable {
 
-    @NotNull
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3999149407702666686L;
+
+	@NotNull
     @Size(min = 0, max = 50)
     @Id
     @Column(length = 50)

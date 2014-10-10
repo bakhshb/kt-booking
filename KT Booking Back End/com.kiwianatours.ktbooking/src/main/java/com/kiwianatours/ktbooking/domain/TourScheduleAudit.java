@@ -1,63 +1,57 @@
 package com.kiwianatours.ktbooking.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDate;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 import com.kiwianatours.ktbooking.domain.util.CustomLocalDateSerializer;
 
-import org.hibernate.annotations.Type;
-import org.hibernate.envers.Audited;
-import org.joda.time.LocalDate;
-import org.springframework.boot.actuate.audit.listener.AuditListener;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.Set;
-
 /**
- * A Tour Schedule.
+ * A Tour Schedule Audit.
  */
 @Entity
-@EntityListeners(value = AuditListener.class)
-@Table(name = "T_TOUR_SCHEDULE")
-@Audited
-public class TourSchedule implements Serializable {
+@Table(name = "T_TOUR_SCHEDULE_AUD")
+
+public class TourScheduleAudit implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3371021503546680236L;
+	private static final long serialVersionUID = 8206091880783858863L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-
-	@ManyToOne
-	private Tour tour;
 	
-	@NotNull
+	@Column(name = "REVTYPE")
+	private int revType;	
+	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = CustomLocalDateSerializer.class)
-	@Column(name = "depature_date", nullable = false)
+	@Column(name = "depature_date")
 	private LocalDate departureDate;
 
-	@NotNull
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@JsonDeserialize(using = LocalDateDeserializer.class)
 	@JsonSerialize(using = CustomLocalDateSerializer.class)
-	@Column(name = "return_date", nullable = false)
+	@Column(name = "return_date")
 	private LocalDate returnDate;
 
 	private double price;
 	
 	private int attending;
-	
-	@JsonIgnore
-	@OneToMany(targetEntity = TourBooking.class, mappedBy = "tourSchedule", cascade = CascadeType.ALL)
-	private Set<TourBooking> tourBooking;
 	
 	public Long getId() {
 		return id;
@@ -67,12 +61,12 @@ public class TourSchedule implements Serializable {
 		this.id = id;
 	}
 
-	public Tour getTour() {
-		return tour;
+	public int getRevType() {
+		return revType;
 	}
 
-	public void setTour(Tour tour) {
-		this.tour = tour;
+	public void setRevType(int revType) {
+		this.revType = revType;
 	}
 
 	public LocalDate getDepartureDate() {
@@ -107,14 +101,6 @@ public class TourSchedule implements Serializable {
 		this.attending = this.attending + attending;
 	}
 
-	public Set<TourBooking> getTourBooking() {
-		return tourBooking;
-	}
-
-	public void setTourBooking(Set<TourBooking> tourBooking) {
-		this.tourBooking = tourBooking;
-	}
-
 	@Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -124,9 +110,9 @@ public class TourSchedule implements Serializable {
             return false;
         }
 
-        TourSchedule tourinfo = (TourSchedule) o;
+        TourScheduleAudit tourScheduleAudit = (TourScheduleAudit) o;
 
-        if (id != tourinfo.id) {
+        if (id != tourScheduleAudit.id) {
             return false;
         }
 

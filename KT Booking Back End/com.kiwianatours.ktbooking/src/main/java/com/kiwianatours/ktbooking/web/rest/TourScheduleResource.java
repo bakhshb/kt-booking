@@ -2,6 +2,8 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.TourSchedule;
+import com.kiwianatours.ktbooking.domain.TourScheduleAudit;
+import com.kiwianatours.ktbooking.repository.TourScheduleAuditRepository;
 import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.TourScheduleService;
@@ -30,10 +32,13 @@ public class TourScheduleResource {
 	private final Logger log = LoggerFactory.getLogger(TourScheduleResource.class);
 
 	@Inject
-	private TourScheduleRepository tourinfoRepository;
+	private TourScheduleRepository tourScheduleRepository;
 
 	@Inject
 	private TourScheduleService tourinfoService;
+	
+	@Inject
+	private TourScheduleAuditRepository tourScheduleAuditRepository;
 
 	/**
 	 * POST /rest/tourschedules -> Create a new tourSchedule.
@@ -54,7 +59,10 @@ public class TourScheduleResource {
 	@Timed
 	public List<TourSchedule> getAll() {
 		log.debug("REST request to get all TourSchedules");
-		return tourinfoRepository.findAll();
+		for(TourScheduleAudit tourS: tourScheduleAuditRepository.findAll()){
+			System.err.println(tourS.getDepartureDate() +" " + tourS.getAttending());
+		}
+		return tourScheduleRepository.findAll();
 	}
 
 	/**
@@ -65,7 +73,7 @@ public class TourScheduleResource {
 	public ResponseEntity<TourSchedule> get(@PathVariable Long id,
 			HttpServletResponse response) {
 		log.debug("REST request to get TourSchedule : {}", id);
-		TourSchedule tourinfo = tourinfoRepository.findOne(id);
+		TourSchedule tourinfo = tourScheduleRepository.findOne(id);
 		if (tourinfo == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -80,7 +88,7 @@ public class TourScheduleResource {
 	@Timed
 	public void delete(@PathVariable Long id) {
 		log.debug("REST request to delete TourSchedule : {}", id);
-		tourinfoRepository.delete(id);
+		tourScheduleRepository.delete(id);
 	}
 		
 }

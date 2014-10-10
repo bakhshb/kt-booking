@@ -16,7 +16,11 @@ import java.io.Serializable;
 @Table(name = "T_AUTHORITY")
 public class Authority implements Serializable {
 
-    @NotNull
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4813946324782464029L;
+	@NotNull
     @Size(min = 0, max = 50)
     @Id
     @Column(length = 50)
