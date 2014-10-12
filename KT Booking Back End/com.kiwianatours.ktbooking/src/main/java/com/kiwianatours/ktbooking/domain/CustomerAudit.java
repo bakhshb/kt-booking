@@ -34,7 +34,7 @@ public class CustomerAudit implements Serializable {
 	private Long id;
 	
 	@Column(name = "REVTYPE")
-	private int revType;
+	private byte revType;
 
     @Column(name = "first_name")
 	private String firstName;
@@ -73,11 +73,11 @@ public class CustomerAudit implements Serializable {
 		this.id = id;
 	}
 
-	public int getRevType() {
+	public byte getRevType() {
 		return revType;
 	}
 
-	public void setRevType(int revType) {
+	public void setRevType(byte revType) {
 		this.revType = revType;
 	}
 

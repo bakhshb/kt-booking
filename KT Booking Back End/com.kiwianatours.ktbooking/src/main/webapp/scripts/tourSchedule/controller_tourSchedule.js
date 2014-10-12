@@ -49,7 +49,7 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 			var tourScheduleDate = data.departureDate +' for '+ data.tour.name +" tour ";
 			var modalOptions = {
 					closeButtonText : 'Cancel',
-					actionButtonText : 'Delete TourInfo',
+					actionButtonText : 'Delete Tour Schedule',
 					headerText : 'Delete Depature Date ' + tourScheduleDate + '?',
 					bodyText : 'Are you sure you want to delete this tourSchedule?'
 			};

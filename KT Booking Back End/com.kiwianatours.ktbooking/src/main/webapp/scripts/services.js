@@ -8,6 +8,9 @@ ktbookingApp.factory('LanguageService', function ($http, $translate, LANGUAGES) 
                 if (language == undefined) {
                     language = $translate.storage().get('NG_TRANSLATE_LANG_KEY');
                 }
+                if (language == undefined) {
+                    language = 'en';
+                }
 
                 var promise =  $http.get('/i18n/' + language + '.json').then(function(response) {
                     return LANGUAGES;
@@ -44,10 +47,15 @@ ktbookingApp.factory('Sessions', function ($resource) {
         });
     });
 
-ktbookingApp.factory('MetricsService',function ($resource) {
-        return $resource('metrics/metrics', {}, {
-            'get': { method: 'GET'}
-        });
+ktbookingApp.factory('MetricsService',function ($http) {
+    		return {
+            get: function() {
+                var promise = $http.get('metrics/metrics').then(function(response){
+                    return response.data;
+                });
+                return promise;
+            }
+        };
     });
 
 ktbookingApp.factory('ThreadDumpService', function ($http) {
@@ -117,7 +125,7 @@ ktbookingApp.factory('Session', function () {
 ktbookingApp.factory('AuthenticationSharedService', function ($rootScope, $http, authService, Session, Account) {
         return {
             login: function (param) {
-                var data ="j_username=" + param.username +"&j_password=" + param.password +"&_spring_security_remember_me=" + param.rememberMe +"&submit=Login";
+                var data ="j_username=" + encodeURIComponent(param.username) +"&j_password=" + encodeURIComponent(param.password) +"&_spring_security_remember_me=" + param.rememberMe +"&submit=Login";
                 $http.post('app/authentication', data, {
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded"
@@ -143,19 +151,16 @@ ktbookingApp.factory('AuthenticationSharedService', function ($rootScope, $http,
                         Account.get(function(data) {
                             Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
                             $rootScope.account = Session;
-
-                            if (!$rootScope.isAuthorized(authorizedRoles)) {
-                                event.preventDefault();
-                                // user is not allowed
-                                $rootScope.$broadcast("event:auth-notAuthorized");
-                            }
-
                             $rootScope.authenticated = true;
                         });
                     }
                     $rootScope.authenticated = !!Session.login;
                 }).error(function (data, status, headers, config) {
                     $rootScope.authenticated = false;
+
+                    if (!$rootScope.isAuthorized(authorizedRoles)) {
+                        $rootScope.$broadcast('event:auth-loginRequired', data);
+                    }
                 });
             },
             isAuthorized: function (authorizedRoles) {
@@ -190,4 +195,3 @@ ktbookingApp.factory('AuthenticationSharedService', function ($rootScope, $http,
             }
         };
     });
-

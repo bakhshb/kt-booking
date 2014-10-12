@@ -41,7 +41,7 @@
 			<column name="customer_id" type="bigint" />
 			<column name="payment_method" type="varchar(50)" />
 			<column name="amount" type="double" />
-			<column name="status" type="bigint" defaultValue="1" />
+			<column name="status" type="int" defaultValue="1" />
 			<column name="created_by" type="varchar(50)" defaultValue="system">
 				<constraints nullable="false" />
 			</column>
@@ -66,8 +66,7 @@
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="name" type="varchar(100)" />
-			<column name="activated" type="boolean" defaultValueBoolean="false"
-				valueBoolean="false">
+			<column name="activated" type="boolean" defaultValueBoolean="false"	valueBoolean="false">
 				<constraints nullable="false" />
 			</column>
 			<column name="short_description" type="text" />
@@ -91,9 +90,8 @@
 			</column>
 			<column name="tour_id" type="bigint" />
 			<column name="photo" type="varchar(100)" />
-			<column name="activated" type="boolean" defaultValueBoolean="false"
-				valueBoolean="false" />
-		</createTable>
+			<column name="activated" type="boolean" defaultValueBoolean="false"	valueBoolean="false" />
+		</createTable>			
 
 		<addForeignKeyConstraint baseColumnNames="customer_id"
 			baseTableName="T_BOOKING" constraintName="fk_customer_booking"
@@ -114,6 +112,22 @@
 		<addForeignKeyConstraint baseColumnNames="tour_id"
 			baseTableName="T_TOUR_PHOTO" constraintName="fk_tour_tour_photo"
 			referencedColumnNames="id" referencedTableName="T_TOUR" />
+
+		<loadData encoding="UTF-8"
+                  file="config/liquibase/customers.csv"
+                  separator=";"
+                  tableName="T_CUSTOMER"/>
+                  
+		<loadData encoding="UTF-8" 
+				file="config/liquibase/tours.csv"
+				separator=";" 
+				tableName="T_TOUR">
+			<column name="activated" type="boolean" />
+		</loadData>
+		<loadData encoding="UTF-8"
+                  file="config/liquibase/tourSchedules.csv"
+                  separator=";"
+                  tableName="T_TOUR_SCHEDULE"/>
 
 	</changeSet>
 </databaseChangeLog>

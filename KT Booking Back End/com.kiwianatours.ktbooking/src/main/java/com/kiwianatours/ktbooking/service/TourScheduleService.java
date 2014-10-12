@@ -36,7 +36,7 @@ public class TourScheduleService {
         	tourSchedule.setReturnDate(returnDate);
         	tourSchedule.setPrice(price);
         	tourScheduleRepository.save(tourSchedule);
-        	log.debug("Updated Information for Tourinfo: {}", tourSchedule);
+        	log.debug("Updated Information for TourSchedule: {}", tourSchedule);
     	}else{
     		LocalDate fixedDepature = depatureDate;
     		LocalDate fixedReturn = returnDate;
@@ -47,7 +47,7 @@ public class TourScheduleService {
             	tourSchedule.setReturnDate(fixedReturn);
             	tourSchedule.setPrice(price);
             	tourScheduleRepository.save(tourSchedule);
-            	log.debug("Created Information for Tourinfo: {}", tourSchedule);
+            	log.debug("Created Information for TourSchedule: {}", tourSchedule);
             	fixedDepature  = new LocalDate (fixedDepature.plusDays(day));
             	fixedReturn = new LocalDate(fixedReturn.plusDays(day));
     		}

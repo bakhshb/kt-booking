@@ -2,7 +2,7 @@
 
 ktbookingApp.controller('TourScheduleBookingController', function ($scope, $routeParams, $location, $timeout, TourScheduleBooking, TourSchedule, modalService, ngProgress){
 
-	var tourinfoId = ($routeParams.Id) ? parseInt($routeParams.Id): 0, timer;
+	var tourScheduleId = ($routeParams.Id) ? parseInt($routeParams.Id): 0, timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
 	$scope.status = null;
@@ -20,11 +20,11 @@ ktbookingApp.controller('TourScheduleBookingController', function ($scope, $rout
 	 * first starts when app runs
 	 */
 	function init() {
-		if (tourinfoId > 0) {
+		if (tourScheduleId > 0) {
 			ngProgress.start();
 			$timeout(function (){
-				$scope.tourSchedule = TourSchedule.get({id:tourinfoId}, function (){
-					$scope.bookings = TourScheduleBooking.get({id:tourinfoId});
+				$scope.tourSchedule = TourSchedule.get({id:tourScheduleId}, function (){
+					$scope.bookings = TourScheduleBooking.get({id:tourScheduleId});
 					ngProgress.complete();
 				}, function (data){
 					processError(data.status);

@@ -101,7 +101,7 @@ public class TourPhoto implements Serializable {
     
     @Override
     public String toString() {
-        return "Tourinfo{" +
+        return "TourPhoto{" +
                 "id=" + id +
                 ", photo='" + photo + '\'' +
                 ", activated='" + activated + '\'' +

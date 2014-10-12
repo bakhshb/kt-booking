@@ -54,7 +54,7 @@
 			<column name="customer_id" type="bigint" />
 			<column name="payment_method" type="varchar(50)" />
 			<column name="amount" type="double" />
-			<column name="status" type="bigint" />
+			<column name="status" type="int" />
 			<column name="created_by" type="varchar(50)" />
 			<column name="created_date" type="timestamp" defaultValueDate="${now}" />
 			<column name="last_modified_by" type="varchar(50)" />

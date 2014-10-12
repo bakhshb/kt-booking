@@ -91,7 +91,7 @@ public class TourPhotosResource {
 	@RequestMapping(value = "/rest/tourphotos/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void delete(@PathVariable Long id) {
-		log.debug("REST request to delete Tourinfo : {}", id);
+		log.debug("REST request to delete TourPhoto : {}", id);
 		tourPhotoService.deletePhoto(id);
 	}
 

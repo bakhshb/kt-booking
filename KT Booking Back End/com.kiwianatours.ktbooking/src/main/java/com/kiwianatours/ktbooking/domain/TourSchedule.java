@@ -124,9 +124,9 @@ public class TourSchedule implements Serializable {
             return false;
         }
 
-        TourSchedule tourinfo = (TourSchedule) o;
+        TourSchedule tourSchedule = (TourSchedule) o;
 
-        if (id != tourinfo.id) {
+        if (id != tourSchedule.id) {
             return false;
         }
 
@@ -140,7 +140,7 @@ public class TourSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "Tourinfo{" +
+        return "TourSchedule{" +
                 "id=" + id +
                 ", departureDate=" + departureDate +
                 ", returnDate=" + returnDate +

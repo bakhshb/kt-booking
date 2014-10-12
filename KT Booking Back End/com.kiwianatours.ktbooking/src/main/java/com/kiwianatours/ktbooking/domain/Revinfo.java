@@ -15,15 +15,15 @@ public class Revinfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	private Long REV;
+	private int REV;
 	
 	private Long REVTSTMP;
 	
-	public Long getREV() {
+	public int getREV() {
 		return REV;
 	}
 
-	public void setREV(Long rEV) {
+	public void setREV(int rEV) {
 		REV = rEV;
 	}
 

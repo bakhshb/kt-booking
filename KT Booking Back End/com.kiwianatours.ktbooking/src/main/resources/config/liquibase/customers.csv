@@ -1,0 +1,2 @@
+id;first_name;last_name;birthday;permission_from;gender;nationality;email;contact_no;additional_info;created_by
+1;test;test;1986-04-25;test;male;test;test@test.com;02777777;null;admin

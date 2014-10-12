@@ -38,10 +38,6 @@ ktbookingApp.controller('BookingController', function ($scope, $location,$timeou
 			});
 	};
 
-	$scope.navigate= function (url){
-		$location.path('/tourinfo');
-	};
-	
 	function processSuccess(success) {
 		$scope.updateStatus = success;
 		startTimer();

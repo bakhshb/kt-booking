@@ -25,13 +25,13 @@ public class TourAudit implements Serializable  {
 	private Long id;
 	
 	@Column(name = "REVTYPE")
-	private int revType;
+	private byte revType;
 	
     private String name;
     
 	private boolean activated = false;
 	
-	@Column(name = "short_description")
+	@Column(name = "short_description" , columnDefinition="text")
 	private String shortDescription;
 
 	@Column(columnDefinition="text")
@@ -45,11 +45,11 @@ public class TourAudit implements Serializable  {
 		this.id = id;
 	}
 
-	public int getRevType() {
+	public byte getRevType() {
 		return revType;
 	}
 
-	public void setRevType(int revType) {
+	public void setRevType(byte revType) {
 		this.revType = revType;
 	}
 

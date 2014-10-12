@@ -2,8 +2,6 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.TourSchedule;
-import com.kiwianatours.ktbooking.domain.TourScheduleAudit;
-import com.kiwianatours.ktbooking.repository.TourScheduleAuditRepository;
 import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.TourScheduleService;
@@ -35,10 +33,8 @@ public class TourScheduleResource {
 	private TourScheduleRepository tourScheduleRepository;
 
 	@Inject
-	private TourScheduleService tourinfoService;
+	private TourScheduleService tourScheduleService;
 	
-	@Inject
-	private TourScheduleAuditRepository tourScheduleAuditRepository;
 
 	/**
 	 * POST /rest/tourschedules -> Create a new tourSchedule.
@@ -46,10 +42,10 @@ public class TourScheduleResource {
 	@RequestMapping(value = "/rest/tourschedules", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured(AuthoritiesConstants.ADMIN)
 	@Timed
-	public void create(@RequestBody TourScheduleDTO tourinfoDTO) {
-		log.debug("REST request to save TourSchedule : {}", tourinfoDTO);
-		tourinfoService.createTourSchedule(tourinfoDTO.getTour().getId(), tourinfoDTO.getId(), tourinfoDTO.getDepartureDate(),
-				tourinfoDTO.getReturnDate(), tourinfoDTO.getPrice(),tourinfoDTO.getTime(), tourinfoDTO.getDay());
+	public void create(@RequestBody TourScheduleDTO tourScheduleDTO) {
+		log.debug("REST request to save TourSchedule : {}", tourScheduleDTO);
+		tourScheduleService.createTourSchedule(tourScheduleDTO.getTour().getId(), tourScheduleDTO.getId(), tourScheduleDTO.getDepartureDate(),
+				tourScheduleDTO.getReturnDate(), tourScheduleDTO.getPrice(),tourScheduleDTO.getTime(), tourScheduleDTO.getDay());
 	}
 
 	/**
@@ -59,9 +55,6 @@ public class TourScheduleResource {
 	@Timed
 	public List<TourSchedule> getAll() {
 		log.debug("REST request to get all TourSchedules");
-		for(TourScheduleAudit tourS: tourScheduleAuditRepository.findAll()){
-			System.err.println(tourS.getDepartureDate() +" " + tourS.getAttending());
-		}
 		return tourScheduleRepository.findAll();
 	}
 
@@ -73,11 +66,11 @@ public class TourScheduleResource {
 	public ResponseEntity<TourSchedule> get(@PathVariable Long id,
 			HttpServletResponse response) {
 		log.debug("REST request to get TourSchedule : {}", id);
-		TourSchedule tourinfo = tourScheduleRepository.findOne(id);
-		if (tourinfo == null) {
+		TourSchedule tourSchedule = tourScheduleRepository.findOne(id);
+		if (tourSchedule == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(tourinfo, HttpStatus.OK);
+		return new ResponseEntity<>(tourSchedule, HttpStatus.OK);
 	}
 
 	/**

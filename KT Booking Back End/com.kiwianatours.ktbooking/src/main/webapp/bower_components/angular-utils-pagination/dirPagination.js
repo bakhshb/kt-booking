@@ -19,8 +19,8 @@
     /**
      * Config
      */
-    var moduleName = 'pagination';
-    var templatePath = 'views/dirPagination.tpl.html';
+    var moduleName = 'angularUtils.directives.dirPagination';
+    var templatePath = 'bower_components/angular-utils-pagination/dirPagination.tpl.html';
 
     /**
      * Module
@@ -74,7 +74,7 @@
                         scope.$watch(function() {
                             return $parse(attrs.totalItems)(scope);
                         }, function (result) {
-                            if (0 < result) {
+                            if (0 <= result) {
                                 paginationService.setCollectionLength(paginationId, result);
                             }
                         });

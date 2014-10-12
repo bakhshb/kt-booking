@@ -2,8 +2,6 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Customer;
-import com.kiwianatours.ktbooking.domain.CustomerAudit;
-import com.kiwianatours.ktbooking.repository.CustomerAuditRepository;
 import com.kiwianatours.ktbooking.repository.CustomerRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.CustomerService;
@@ -36,10 +34,6 @@ public class CustomerResource {
 	@Inject
 	private CustomerService customerService;
 
-	@Inject
-	private CustomerAuditRepository customerAuditRepository;
-
-
 	/**
 	 * POST  /rest/customers -> Create a new customer.
 	 */
@@ -62,10 +56,6 @@ public class CustomerResource {
 	@Timed
 	public List<Customer> getAll() {
 		log.debug("REST request to get all Customers");
-		for (CustomerAudit c: customerAuditRepository.findAll()){
-			System.err.println(c.getFirstName() +" "+c.getBirthday());
-
-		}
 		return customerRepository.findAll();
 	}
 

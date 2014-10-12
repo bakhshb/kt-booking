@@ -35,7 +35,7 @@ public class TourScheduleAudit implements Serializable {
 	private Long id;
 	
 	@Column(name = "REVTYPE")
-	private int revType;	
+	private byte revType;	
 	
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
 	@JsonDeserialize(using = LocalDateDeserializer.class)
@@ -61,11 +61,11 @@ public class TourScheduleAudit implements Serializable {
 		this.id = id;
 	}
 
-	public int getRevType() {
+	public byte getRevType() {
 		return revType;
 	}
 
-	public void setRevType(int revType) {
+	public void setRevType(byte revType) {
 		this.revType = revType;
 	}
 
@@ -126,7 +126,7 @@ public class TourScheduleAudit implements Serializable {
 
     @Override
     public String toString() {
-        return "Tourinfo{" +
+        return "TourScheduleAudit{" +
                 "id=" + id +
                 ", departureDate=" + departureDate +
                 ", returnDate=" + returnDate +

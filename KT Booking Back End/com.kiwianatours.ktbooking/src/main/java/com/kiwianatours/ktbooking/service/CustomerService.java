@@ -34,18 +34,23 @@ public class CustomerService {
     
     public void deleteCustomer (Long id){
     	List<TourBooking> tourBookings = tourBookingRepository.findCustomerBookingByCustomer(id);
-    	List<TourSchedule> tourSchedules = new ArrayList<TourSchedule>();
-    	for (TourBooking tourBooking : tourBookings){
-    		TourSchedule tourSchedule = tourBooking.getTourSchedule(); 
-    		tourSchedules.add(tourSchedule);
+    	if (tourBookings.size() !=0){
+    		List<TourSchedule> tourSchedules = new ArrayList<TourSchedule>();
+        	for (TourBooking tourBooking : tourBookings){
+        		TourSchedule tourSchedule = tourBooking.getTourSchedule(); 
+        		tourSchedules.add(tourSchedule);
+        	}
+        	
+        	for (TourSchedule tourSchedule : tourSchedules){
+        		tourSchedule.setAttending(-1);
+        		tourScheduleRepository.save(tourSchedule);
+        		log.debug("Updated Information for tour Schedule {}", tourSchedule);
+        	}
+        	customerRepository.delete(id);
     	}
+
+    		customerRepository.delete(id);
     	
-    	for (TourSchedule tourSchedule : tourSchedules){
-    		tourSchedule.setAttending(-1);
-    		tourScheduleRepository.save(tourSchedule);
-    		log.debug("Updated Information for tour Schedule {}", tourSchedule);
-    	}
-    	customerRepository.delete(id);
     }
 
 }
