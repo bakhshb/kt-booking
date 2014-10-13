@@ -27,8 +27,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.kiwianatours.ktbooking.Application;
+import com.kiwianatours.ktbooking.repository.BookingRepository;
 import com.kiwianatours.ktbooking.repository.CustomerRepository;
-import com.kiwianatours.ktbooking.service.CustomerService;
 
 
 /**
@@ -71,7 +71,7 @@ public class CustomerResourceTest {
     private CustomerRepository customerRepository;
     
     @Inject
-    private CustomerService customerService;
+    private BookingRepository bookingRepository;
 
     private MockMvc restCustomerMockMvc;
 
@@ -80,7 +80,7 @@ public class CustomerResourceTest {
         MockitoAnnotations.initMocks(this);
         CustomerResource customerResource = new CustomerResource();
         ReflectionTestUtils.setField(customerResource, "customerRepository", customerRepository);
-        ReflectionTestUtils.setField(customerResource, "customerService", customerService);
+        ReflectionTestUtils.setField(customerResource, "bookingRepository", bookingRepository);
 
         this.restCustomerMockMvc = MockMvcBuilders.standaloneSetup(customerResource).build();
         

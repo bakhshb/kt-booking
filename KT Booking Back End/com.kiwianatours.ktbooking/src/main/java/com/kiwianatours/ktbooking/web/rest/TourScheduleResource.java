@@ -2,6 +2,7 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.TourSchedule;
+import com.kiwianatours.ktbooking.repository.TourBookingRepository;
 import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.TourScheduleService;
@@ -34,6 +35,9 @@ public class TourScheduleResource {
 
 	@Inject
 	private TourScheduleService tourScheduleService;
+	
+	@Inject
+	private TourBookingRepository tourBookingRepository;
 	
 
 	/**
@@ -79,9 +83,13 @@ public class TourScheduleResource {
 	@RequestMapping(value = "/rest/tourschedules/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured(AuthoritiesConstants.ADMIN)
 	@Timed
-	public void delete(@PathVariable Long id) {
+	public ResponseEntity<TourSchedule> delete(@PathVariable Long id) {
 		log.debug("REST request to delete TourSchedule : {}", id);
-		tourScheduleRepository.delete(id);
+		if (tourBookingRepository.findAllBookingByTourSchedule(id).size() == 0) {
+			tourScheduleRepository.delete(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 		
 }

@@ -59,6 +59,10 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 							function () {
 						$scope.tourSchedules = TourSchedule.query();
 						processSuccess(tourScheduleDate +' has been deleted!');
+					}, function (data){
+						if (data.status == 501){
+							processError("This tour schedule has customer Booking and cannot be deleted for security reason.");
+						}
 					});
 				}
 			});

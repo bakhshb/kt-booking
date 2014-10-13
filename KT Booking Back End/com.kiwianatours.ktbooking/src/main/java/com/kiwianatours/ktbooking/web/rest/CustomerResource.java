@@ -2,10 +2,9 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Customer;
+import com.kiwianatours.ktbooking.repository.BookingRepository;
 import com.kiwianatours.ktbooking.repository.CustomerRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
-import com.kiwianatours.ktbooking.service.CustomerService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -30,9 +29,9 @@ public class CustomerResource {
 
 	@Inject
 	private CustomerRepository customerRepository;
-
+	
 	@Inject
-	private CustomerService customerService;
+	private BookingRepository bookingRepository;
 
 	/**
 	 * POST  /rest/customers -> Create a new customer.
@@ -84,9 +83,16 @@ public class CustomerResource {
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	@Secured(AuthoritiesConstants.ADMIN)
 	@Timed
-	public void delete(@PathVariable Long id) {
+	public ResponseEntity<Customer> delete(@PathVariable Long id) {
 		log.debug("REST request to delete Customer : {}", id);
-		customerService.deleteCustomer(id);
+		Customer customer = customerRepository.findOne(id);
+		
+		if(bookingRepository.findByCustomer(customer).size() == 0){
+			customerRepository.delete(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
 
 }

@@ -84,7 +84,9 @@ ktbookingApp
 					onRouteChangeOff(); 
 					$location.path('/customer');
 				}, function err(data){
-					processError;
+					if (data.status == 501){
+						processError("This customer has Booking and cannot be deleted for security reason.");
+					}
 				});
 			}
 		});

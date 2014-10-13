@@ -2,9 +2,8 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Tour;
-import com.kiwianatours.ktbooking.domain.TourAudit;
-import com.kiwianatours.ktbooking.repository.TourAuditRepository;
 import com.kiwianatours.ktbooking.repository.TourRepository;
+import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 
 import org.slf4j.Logger;
@@ -33,8 +32,7 @@ public class TourResource {
     private TourRepository tourRepository;
     
     @Inject
-    private TourAuditRepository tourAuditRepository;
-
+    private TourScheduleRepository tourScheduleRepository;
 
     /**
      * POST  /rest/tours -> Create a new tour.
@@ -58,9 +56,6 @@ public class TourResource {
     @Timed
     public List<Tour> getAll() {
         log.debug("REST request to get all Tours");
-        for (TourAudit tour: tourAuditRepository.findAll()){
-        	System.err.println(tour.getName() +" " + tour.isActivated());
-        }
         return tourRepository.findAll();
     }
 
@@ -88,8 +83,12 @@ public class TourResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Secured(AuthoritiesConstants.ADMIN)
     @Timed
-    public void delete(@PathVariable Long id) {
+    public  ResponseEntity<Tour> delete(@PathVariable Long id){
         log.debug("REST request to delete Tour : {}", id);
-        tourRepository.delete(id);
+		if (tourScheduleRepository.findAllTourScheduleByTourId(id).size() == 0){
+			tourRepository.delete(id);
+			return new ResponseEntity<>(HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

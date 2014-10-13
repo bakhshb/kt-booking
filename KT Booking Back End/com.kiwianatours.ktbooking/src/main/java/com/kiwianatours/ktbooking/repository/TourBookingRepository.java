@@ -19,4 +19,7 @@ public interface TourBookingRepository extends JpaRepository<TourBooking, Long> 
 
 	@Query("select t from TourBooking t join t.booking b where (b.status =1 OR b.status =2 ) AND t.tourSchedule.id = ?1")
 	List<TourBooking> findApprovedBookingByTourSchedule(Long tourScheduleId);
+	
+	@Query("select t from TourBooking t join t.booking b where t.tourSchedule.id = ?1")
+	List<TourBooking> findAllBookingByTourSchedule(Long tourScheduleId);
 }

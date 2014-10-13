@@ -28,6 +28,10 @@ ktbookingApp.controller('CustomerController', function ($scope, $location,$timeo
 					Customer.delete({id:id}, function (){
 						$scope.customers = Customer.query();
 						processSuccess(custName+' has been deleted!');
+					}, function (data){
+						if (data.status == 501){
+							processError("This customer has Booking and cannot be deleted for security reason.");
+						}
 					});
 				}
 			});
