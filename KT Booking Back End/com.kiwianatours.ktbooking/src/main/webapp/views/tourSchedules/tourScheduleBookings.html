@@ -6,7 +6,7 @@
 				<li><a href="#/tour/schedule">Tour Schedule</a></li>
 				<li class="active">Tour Booking</li>
 			</ol>
-			<h1>
+			<h1 class="animated fadeInUp">
 				Tour Booking Details <small>{{tourSchedule.tour.name }}</small>
 			</h1>
 			<h5>Departure: {{tourSchedule.departureDate}}&#xA0;&#xA0;
@@ -15,7 +15,7 @@
 			<h5>There are {{bookings.length}} bookings</h5>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
-					<div class="form-group">
+					<div class="form-group animated lightSpeedIn">
 						<label class="navbarText col-sm-2">Filter:</label>
 						<div class="col-sm-10">
 							<input type="text" data-ng-model="searchText"

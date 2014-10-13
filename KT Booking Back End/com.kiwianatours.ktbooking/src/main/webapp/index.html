@@ -13,15 +13,17 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/bootstrap.css">
         <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
+        <link rel="stylesheet" href="styles/documentation.css">
+		<link rel="stylesheet" href="styles/animate.css">
         <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
 		<link rel="stylesheet"	href="bower_components/ngprogress/ngProgress.css">
+		<!-- endbuild -->
     </head>
     <body ng-app="ktbookingApp" ng-controller="MainController">
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="development"></div>
+<!--         <div class="development"></div> -->
         <nav class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -53,7 +55,7 @@
 								<li ng-switch-when="true"><a href="#/tour">&#xA0; Tour</a></li>
 								<li ng-switch-when="true"><a href="#/tour/schedule">&#xA0;
 										Schedule</a></li>
-								<li ng-switch-when="true"><a href="#/tour/schedule/calendar">&#xA0;
+								<li ng-switch-when="true"><a href="javascript:;" onclick="window.location='#/tour/schedule/calendar'">&#xA0;
 										Calendar</a></li>
 							</ul>
 						</li>
@@ -181,7 +183,7 @@
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/collapse.js"></script>
         <script src="bower_components/bootstrap-sass/vendor/assets/javascripts/bootstrap/tab.js"></script>
-        <!-- endbuild -->
+       
 		<script	src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
         <script	src="bower_components/angular-countries/angular.country-select.js"></script>
         <script	src="bower_components/angular-file-upload/angular-file-upload.js"></script>
@@ -210,6 +212,6 @@
 		<script src="scripts/booking/router_booking.js"></script>
 		<script src="scripts/booking/controller_booking.js"></script>
 		<script src="scripts/booking/service_booking.js"></script>
-		
+		 <!-- endbuild -->
 </body>
 </html>
