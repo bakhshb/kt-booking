@@ -15,6 +15,6 @@ public interface TourPhotoRepository extends JpaRepository<TourPhoto, Long>{
 	List<TourPhoto> findByTour(Tour tour);
 	
 	@Query("select p from TourPhoto p where p.tour.id = ?1")
-	List<TourPhoto> getTourPhotos (Long id);
+	List<TourPhoto> findTourPhotosByTourId (Long tourId);
 
 }

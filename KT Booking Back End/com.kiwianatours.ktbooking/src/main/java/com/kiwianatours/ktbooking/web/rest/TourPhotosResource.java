@@ -78,7 +78,7 @@ public class TourPhotosResource {
 	public ResponseEntity<List<TourPhoto>> get(@PathVariable Long id,
 			HttpServletResponse response) {
 		log.debug("REST request to get TourPhotos : {}", id);
-		List<TourPhoto> tourPhoto = tourPhotoRepository.getTourPhotos(id);
+		List<TourPhoto> tourPhoto = tourPhotoRepository.findTourPhotosByTourId(id);
 		if (tourPhoto == null){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}	

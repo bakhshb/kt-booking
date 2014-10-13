@@ -2,9 +2,12 @@ package com.kiwianatours.ktbooking.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.Tour;
+import com.kiwianatours.ktbooking.domain.TourPhoto;
+import com.kiwianatours.ktbooking.repository.TourPhotoRepository;
 import com.kiwianatours.ktbooking.repository.TourRepository;
 import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
 import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
+import com.kiwianatours.ktbooking.service.TourPhotoService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +36,12 @@ public class TourResource {
     
     @Inject
     private TourScheduleRepository tourScheduleRepository;
+    
+    @Inject
+	private TourPhotoRepository tourPhotoRepository;
+	
+	@Inject
+	private TourPhotoService tourPhotoService;
 
     /**
      * POST  /rest/tours -> Create a new tour.
@@ -86,6 +95,14 @@ public class TourResource {
     public  ResponseEntity<Tour> delete(@PathVariable Long id){
         log.debug("REST request to delete Tour : {}", id);
 		if (tourScheduleRepository.findAllTourScheduleByTourId(id).size() == 0){
+			List<TourPhoto> tourPhotos = tourPhotoRepository.findTourPhotosByTourId(id);
+			if (tourPhotos.size() != 0){
+				for (TourPhoto tourPhoto: tourPhotos){
+					tourPhotoService.deletePhoto(tourPhoto.getId());
+				}
+				tourRepository.delete(id);
+				return new ResponseEntity<>(HttpStatus.OK);
+			}
 			tourRepository.delete(id);
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

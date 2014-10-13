@@ -28,8 +28,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.kiwianatours.ktbooking.Application;
 import com.kiwianatours.ktbooking.repository.TourBookingRepository;
+import com.kiwianatours.ktbooking.repository.TourPhotoRepository;
 import com.kiwianatours.ktbooking.repository.TourRepository;
 import com.kiwianatours.ktbooking.repository.TourScheduleRepository;
+import com.kiwianatours.ktbooking.service.TourPhotoService;
 
 
 /**
@@ -64,6 +66,12 @@ public class TourScheduleResourceTest {
     
     @Inject
     private TourRepository tourRepository;
+    
+    @Inject
+	private TourPhotoRepository tourPhotoRepository;
+	
+	@Inject
+	private TourPhotoService tourPhotoService;
 
     private MockMvc restTourScheduleMockMvc;
     
@@ -81,6 +89,8 @@ public class TourScheduleResourceTest {
         TourResource tourResource = new TourResource();
         ReflectionTestUtils.setField(tourResource, "tourRepository", tourRepository);
         ReflectionTestUtils.setField(tourResource, "tourScheduleRepository", tourScheduleRepository);
+        ReflectionTestUtils.setField(tourResource, "tourPhotoRepository", tourPhotoRepository);
+        ReflectionTestUtils.setField(tourResource, "tourPhotoService", tourPhotoService);
         this.restTourMockMvc = MockMvcBuilders.standaloneSetup(tourResource).build();
     }
 
