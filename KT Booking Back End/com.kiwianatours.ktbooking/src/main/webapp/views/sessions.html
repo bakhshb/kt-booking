@@ -1,6 +1,6 @@
 <div>
 
-    <h2 translate="sessions.title" translate-values="{username: '{{account.login}}'}" class="animated fadeInUp">Active sessions for [<b>{{account.login}}</b>]</h2>
+    <h2 translate="sessions.title" translate-values="{username: '{{account.login}}'}">Active sessions for [<b>{{account.login}}</b>]</h2>
 
     <div class="alert alert-success" ng-show="success" translate="sessions.messages.success">
         <strong>Session invalidated!</strong>
@@ -20,7 +20,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="session in sessions">
+                <tr class="animated fadeInUp" ng-repeat="session in sessions">
                     <td>{{session.ipAddress}}</td>
                     <td>{{session.userAgent}}</td>
                     <td>{{session.formattedTokenDate}}</td>

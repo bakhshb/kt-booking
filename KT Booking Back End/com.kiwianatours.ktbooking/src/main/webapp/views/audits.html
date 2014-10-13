@@ -1,5 +1,5 @@
 <div>
-    <h2 translate="audits.title" class="animated fadeInUp">Audits</h2>
+    <h2 translate="audits.title">Audits</h2>
 
     <div class="row">
         <div class="col-md-5">
@@ -24,7 +24,7 @@
         </tr>
         </thead>
 
-        <tr ng-repeat="audit in audits | filter:filter | orderBy:predicate:reverse" ng-hide="audit.filtered">
+        <tr class="animated fadeInUp" ng-repeat="audit in audits | filter:filter | orderBy:predicate:reverse" ng-hide="audit.filtered">
             <td><span>{{audit.timestamp| date:'medium'}}</span></td>
             <td><small>{{audit.principal}}</small></td>
             <td>{{audit.type}}</td>

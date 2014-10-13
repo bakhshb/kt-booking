@@ -7,7 +7,7 @@
 						customer.firstName + ' ' + customer.lastName }}</a></li>
 				<li class="active">View Booking</li>
 			</ol>
-			<h1 class="animated fadeInUp">
+			<h1>
 				Customer Booking Details <small>{{ customer.firstName + ' ' +
 					customer.lastName }}<a href="#/customer/edit/{{customer.id}}">
 									 <span
@@ -150,7 +150,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="animated fadeInUp">
 						<tr
 							dir-paginate="booking in bookings | filter: customer.email |filter:searchText | itemsPerPage: 25  | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.booking.customer.createdBy}}</td>

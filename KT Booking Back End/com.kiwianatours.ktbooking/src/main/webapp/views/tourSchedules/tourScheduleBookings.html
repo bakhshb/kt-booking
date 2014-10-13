@@ -6,7 +6,7 @@
 				<li><a href="#/tour/schedule">Tour Schedule</a></li>
 				<li class="active">Tour Booking</li>
 			</ol>
-			<h1 class="animated fadeInUp">
+			<h1>
 				Tour Booking Details <small>{{tourSchedule.tour.name }}</small>
 			</h1>
 			<h5>Departure: {{tourSchedule.departureDate}}&#xA0;&#xA0;
@@ -65,7 +65,7 @@
 							<th>Status</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="animated fadeInUp">
 						<tr
 							dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.id}}</td>

@@ -2,7 +2,7 @@
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
-			<h1 class="animated fadeInUp">All Bookings</h1>
+			<h1>All Bookings</h1>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
 					<div class="form-group animated lightSpeedIn">
@@ -66,9 +66,8 @@
 							<th>Status</th>
 						</tr>
 					</thead>
-					<tbody
-						dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
-						<tr>
+					<tbody class="animated fadeInUp">
+						<tr dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.id}}</td>
 							<td>{{booking.booking.customer.firstName +" "+
 								booking.booking.customer.lastName}} <a

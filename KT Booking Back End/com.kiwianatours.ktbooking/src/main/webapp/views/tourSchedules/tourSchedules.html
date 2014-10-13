@@ -5,7 +5,7 @@
 				<li><a href="#/tour/">Tour</a></li>
 				<li class="active">Tour Schedule</li>
 			</ol>
-			<h1 class="animated fadeInUp">Tour Schedules</h1>
+			<h1>Tour Schedules</h1>
 			<div class="navbar">
 				<ul class="nav navbar-nav">
 					<li><a href="" data-ng-click="clear()"
@@ -190,7 +190,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="animated fadeInUp">
 						<tr
 							dir-paginate="tourSchedule in  tourSchedules | filter: searchText | itemsPerPage: 25 | orderBy:'departureDate':true | orderBy:predicate:reverse">
 							<td>{{tourSchedule.id}}</td>

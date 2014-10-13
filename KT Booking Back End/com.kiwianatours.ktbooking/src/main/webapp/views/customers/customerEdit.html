@@ -8,7 +8,7 @@
 				<li class="active" data-ng-hide="customer.id == null">{{
 					customer.firstName + ' ' + customer.lastName }}</li>
 			</ol>
-			<h1 class="animated fadeInUp">
+			<h1>
 				<span class="glyphicon glyphicon-edit"></span> {{title}} Customer <small>{{
 					customer.firstName + ' ' + customer.lastName }} <span
 					data-ng-hide="customer.id == null"></span><a
@@ -35,6 +35,10 @@
 					<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Customer
 					has been Updated!
 				</div>
+			</div>
+			<div class="alert alert-warning"  ng-show="!success">
+					<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Please check if customer exist by email
+					
 			</div>
 			<form ng-show="!success" name="form"
 				class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
