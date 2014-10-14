@@ -81,7 +81,7 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 						$scope.clear();
 						$scope.bookings = Booking.get({id:customerId});
 						$('#saveBookingModal').modal('hide');
-						processSuccess('Booking has been made!');
+						processSuccess('Booking has been made and the details has been sent.');
 					});
 				};
 			};

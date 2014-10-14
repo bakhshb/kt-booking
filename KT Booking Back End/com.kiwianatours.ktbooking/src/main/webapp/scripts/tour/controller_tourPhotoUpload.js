@@ -52,9 +52,9 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 	};
 	uploader.onSuccessItem = function(fileItem, response, status, headers) {
 		console.info('onSuccessItem', fileItem, response, status, headers);
-		console.info('heelo', fileItem.file.name);
+		console.info('file Name: ', headers.filename);
 		var tourPhoto = {
-				fileName: fileItem.file.name,
+				fileName: headers.filename,
 				tourId: tourId,
 		};
 		TourPhoto.update(tourPhoto);
@@ -104,14 +104,6 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 		} else {
 
 		}
-	};
-
-	$scope.uploadFile = function(files) {
-		var fd = new FormData();
-		//Take the first selected file
-		fd.append("file", files[0]);
-		UploadPhoto.save(fd);
-
 	};
 
 });

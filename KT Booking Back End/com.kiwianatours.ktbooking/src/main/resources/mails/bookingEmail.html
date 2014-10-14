@@ -3,12 +3,19 @@
 <head>
 <title th:text="#{email.booking.title}">Kiwianatours Booking</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style type="text/css">
+body {
+   background: #fafafa;
+   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+   color: #333;
+}
+</style>
 </head>
-<body>
-	<p th:text="#{email.booking.greeting(${customer.firstName})}">Dear</p>
+<body background=" #fafafa">
+	<p th:text="#{email.booking.greeting(${customer.firstName})}">Dear ,</p>
 	<p th:text="#{email.booking.text1}">Thank you for booking with us.
 		Please find your booking details below:</p>
-	<table>
+	<table width="640px" border="1">
 		<tr>
 			<th>Booking Date</th>
 			<th>Tour</th>
@@ -18,9 +25,9 @@
 		</tr>
 		<tr>
 			<td th:text="${booking.createdDate}"></td>
-			<td th:text="${booking.tour.name}"></td>
-			<td th:text="${booking.departureDate}"></td>
-			<td th:text="${booking.returnDate}"></td>
+			<td th:text="${tourSchedule.tour.name}"></td>
+			<td th:text="${tourSchedule.departureDate}"></td>
+			<td th:text="${tourSchedule.returnDate}"></td>
 			<td th:text="${booking.amount}"></td>
 		</tr>
 	</table>

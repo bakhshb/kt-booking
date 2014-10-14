@@ -1,15 +1,25 @@
 package com.kiwianatours.ktbooking.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.context.IWebContext;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.context.SpringWebContext;
 
 import com.kiwianatours.ktbooking.domain.Booking;
 import com.kiwianatours.ktbooking.domain.Customer;
@@ -37,9 +47,23 @@ public class BookingService {
 
 	@Inject
 	private TourScheduleRepository tourScheduleRepository;
+	
+	@Inject
+    private ServletContext servletContext;
+
+    @Inject
+    private ApplicationContext applicationContext;
+
+    @Inject
+    private SpringTemplateEngine templateEngine;
+    
+    @Inject
+    private MailService mailService;
+    
 
 	public Customer createCustomerBooking (Long tourScheduleId, String paymentMethod, Long id, String firstName, String lastName, LocalDate birthday,
-			String permissionFrom, String gender,String nationality,String email,String contactNo,String additionalinfo){
+			String permissionFrom, String gender,String nationality,String email,String contactNo,String additionalinfo, HttpServletRequest request,
+			  HttpServletResponse response){
 
 		TourSchedule tourSchedule = tourScheduleRepository.findOne(tourScheduleId);
 		Customer customer = customerRepository.findByEmail(email);
@@ -66,6 +90,10 @@ public class BookingService {
 			tourBooking.setTourSchedule(tourSchedule);
 			tourBookingRepository.save(tourBooking);
 			log.debug("Created Information for tour booking {}", tourBooking);
+			// send email
+			final Locale locale = Locale.forLanguageTag("EN");
+			String content = createHtmlContentFromTemplate(customer,booking ,tourBooking,tourSchedule, locale, request, response);
+			mailService.sendBookingApprovalEmail(customer.getEmail(), content, locale);
 
 		}else{
 			customer = new Customer ();
@@ -92,6 +120,10 @@ public class BookingService {
 			tourBooking.setTourSchedule(tourSchedule);
 			tourBookingRepository.save(tourBooking);
 			log.debug("Created Information for tour booking {}", tourBooking);
+			// send email
+			final Locale locale = Locale.forLanguageTag("EN");
+			String content = createHtmlContentFromTemplate(customer,booking ,tourBooking,tourSchedule, locale, request, response);
+			mailService.sendBookingApprovalEmail(customer.getEmail(), content, locale);
 
 		}
 		return customer;
@@ -208,5 +240,22 @@ public class BookingService {
 		tourBookings = tourBookingRepository.findApprovedBookingByTourSchedule(id);
 		return tourBookings;
 	}
-
+	
+	/*
+	 * 
+	 * send an email
+	 */
+	
+	private String createHtmlContentFromTemplate(final Customer customer, final Booking booking, final TourBooking tourBooking, final TourSchedule tourSchedule,
+												final Locale locale, final HttpServletRequest request,	final HttpServletResponse response) {
+		Map<String, Object> variables = new HashMap<>();
+		variables.put("customer", customer);
+		variables.put("booking", booking);
+		variables.put("tourBooking", tourBooking);
+		variables.put("tourSchedule", tourSchedule);
+		
+		IWebContext context = new SpringWebContext(request, response,
+		servletContext, locale, variables, applicationContext);
+		return templateEngine.process("bookingEmail", context);
+	}
 }

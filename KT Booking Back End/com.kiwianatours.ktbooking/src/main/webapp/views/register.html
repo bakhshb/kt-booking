@@ -102,6 +102,16 @@
                         </p>
                     </div>
                 </div>
+                <div class="form-group">
+					<label>Role</label> 
+					<select
+						name="role" class="form-control" data-ng-model="registerAccount.role" required>
+						<option selected disabled value="">-- Select Role --</option>
+						<option value="ROLE_ADMIN">ADMIN</option>
+						<option value="ROLE_USER">USER</option>
+					</select>
+				</div>
+                
 
                 <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" translate="register.form.button">Register</button>
             </form>

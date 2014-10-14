@@ -70,17 +70,15 @@
 					</div>
 					<div class="modal-body">
 						<div class="form-group">
-							<label>Tour</label> <select name="tour_id" class="form-control"
-								ng-model="tour.id" required>
-								<option selected disabled value="">-- Select Tour Name
-									--</option>
+							<label>Tour</label> 
+								<select name="tour_id" class="form-control"	ng-model="tour.id" required>
+								<option selected disabled value="">-- Select Tour Name --</option>
 								<option ng-repeat="tour in tours" value="{{tour.id}}">{{tour.name}}</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Departure Date</label> <select name="tourSchedule_id"
-								class="form-control" data-ng-model="customer.tourSchedule.id"
-								required ng-disabled="form.tour_id.$invalid">
+							<label>Departure Date</label> 
+							<select name="tourSchedule_id"	class="form-control" data-ng-model="customer.tourSchedule.id" required ng-disabled="form.tour_id.$invalid">
 								<option selected disabled value="">-- Select Departure Date --</option>
 								<option
 									ng-repeat="tourSchedule in tourSchedules |filter: tour.id"
@@ -89,12 +87,9 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Payment Method</label> <select
-								name="tourSchedulePaymentMethod" class="form-control"
-								data-ng-model="customer.booking.paymentMethod" required
+							<label>Payment Method</label> <select name="tourSchedulePaymentMethod" class="form-control"	data-ng-model="customer.booking.paymentMethod" required
 								ng-disabled="form.tourSchedule_id.$invalid">
-								<option selected disabled value="">-- Select Payment
-									Method --</option>
+								<option selected disabled value="">-- Select Payment Method --</option>
 								<option value="Cash">Cash</option>
 								<option value="EFTPOS">EFTPOS</option>
 								<option value="Credit Card">Credit Card</option>

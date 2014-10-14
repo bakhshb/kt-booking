@@ -8,7 +8,9 @@
 			<h1>
 				Tour Photo For <small>{{tour.name}}</small>
 			</h1>
-			<div class="alert alert-warning"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;One Item can be primary at time!!</div>
+			<div class="alert alert-warning" ng-hide="tourphotos.length == 0">
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;One Item can be primary at time!!
+			</div>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
 					<div class="form-group animated lightSpeedIn">

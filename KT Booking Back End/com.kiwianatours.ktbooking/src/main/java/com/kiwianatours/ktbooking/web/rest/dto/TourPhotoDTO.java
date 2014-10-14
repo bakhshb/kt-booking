@@ -7,7 +7,7 @@ public class TourPhotoDTO {
 	private Long tourId;
 	
 	private Long tourPhotoId;
-
+	
 	public String getFileName() {
 		return fileName;
 	}
@@ -31,5 +31,5 @@ public class TourPhotoDTO {
 	public void setTourPhotoId(Long tourPhotoId) {
 		this.tourPhotoId = tourPhotoId;
 	}
-	
+
 }

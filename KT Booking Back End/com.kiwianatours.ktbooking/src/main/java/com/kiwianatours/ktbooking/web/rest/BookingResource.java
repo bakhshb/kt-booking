@@ -1,8 +1,8 @@
 package com.kiwianatours.ktbooking.web.rest;
 
 import java.util.List;
-
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
 import com.kiwianatours.ktbooking.domain.TourBooking;
 import com.kiwianatours.ktbooking.repository.TourBookingRepository;
@@ -38,7 +37,7 @@ public class BookingResource {
     
     @Inject
     private BookingService bookingService;
-        
+          
     
     /**
      * POST  /rest/bookings -> Create a new customer booking.
@@ -47,16 +46,12 @@ public class BookingResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public void create(@RequestBody BookingDTO bookingDTO) {
+    public void create(@RequestBody BookingDTO bookingDTO, HttpServletRequest request,
+			  HttpServletResponse response) {
         log.debug("REST request to save Customer booking: {}", bookingDTO);
-		bookingService.createCustomerBooking(bookingDTO.getTourSchedule().getId(),
-				bookingDTO.getBooking().getPaymentMethod(), bookingDTO.getId(),
-				bookingDTO.getFirstName(), bookingDTO.getLastName(),
-				bookingDTO.getBirthday(), bookingDTO.getPermissionFrom(),
-				bookingDTO.getGender(), bookingDTO.getNationality(),
-				bookingDTO.getEmail(), bookingDTO.getContactNo(),
-				bookingDTO.getAdditionalinfo());
-        
+		bookingService.createCustomerBooking(bookingDTO.getTourSchedule().getId(),bookingDTO.getBooking().getPaymentMethod(), bookingDTO.getId(),
+				bookingDTO.getFirstName(), bookingDTO.getLastName(),bookingDTO.getBirthday(), bookingDTO.getPermissionFrom(),bookingDTO.getGender(),
+				bookingDTO.getNationality(),bookingDTO.getEmail(), bookingDTO.getContactNo(),bookingDTO.getAdditionalinfo(), request, response);
     }
     
     /**

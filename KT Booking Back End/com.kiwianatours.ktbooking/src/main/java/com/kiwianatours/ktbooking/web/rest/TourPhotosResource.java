@@ -1,12 +1,18 @@
 package com.kiwianatours.ktbooking.web.rest;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -44,10 +50,30 @@ public class TourPhotosResource {
 	 */
 	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.POST)
 	@Timed
-	public void upload(@RequestBody MultipartFile file) {
+	public ResponseEntity<TourPhoto> upload(@RequestBody MultipartFile file) {
 		log.debug("REST request to save photo : {}", file);
-		tourPhotoService.uploadPhotos(file);
-		
+		HttpHeaders responseHeader = new HttpHeaders();
+		if (!file.isEmpty()) {
+			try {
+				LocalTime time = new LocalTime();
+				LocalDate  date = new LocalDate();
+				int parseTime = time.getHourOfDay() +time.getMillisOfSecond() ;
+				String parseDate =date.toString();
+				String parseDateNTime = parseTime +"_"+ parseDate;
+				byte[] bytes = file.getBytes();
+				File currentDirFile = new File("");
+				String helper = currentDirFile.getAbsolutePath();	
+				
+				BufferedOutputStream stream = new BufferedOutputStream(
+						new FileOutputStream(new File(helper +"\\src\\main\\webapp\\images\\upload\\" +parseDateNTime+file.getOriginalFilename())));
+				stream.write(bytes);
+				stream.close();
+				responseHeader.set("filename", parseDateNTime+file.getOriginalFilename());
+			} catch (Exception e) {
+
+			}
+		}
+		return new ResponseEntity<>(responseHeader,HttpStatus.OK);
 	}
 	
 	/**
