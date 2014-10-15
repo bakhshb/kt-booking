@@ -13,15 +13,7 @@ Languages codes are ISO_639-1 codes, see http://en.wikipedia.org/wiki/List_of_IS
 They are written in English to avoid character encoding issues (not a perfect solution)
 */
 ktbookingApp.constant('LANGUAGES', {
-        ca: 'Catalan',
-        da: 'Danish',
         en: 'English',
-        es: 'Spanish',
-        fr: 'French',
-        de: 'German',
-        kr: 'Korean',
-        pl: 'Polish',
-        pt: 'Portuguese',
-        ru: 'Russian',
-        tr: 'Turkish'
+        fr: 'French'
+  
     });

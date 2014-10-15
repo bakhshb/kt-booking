@@ -59,9 +59,8 @@
 		role="dialog" aria-labelledby="myBookingLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form name="form" role="form" novalidate
-					class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-					ng-submit="create()">
+				<form name="form" role="form" novalidate class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+						ng-submit="create()" show-validation>
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -98,12 +97,10 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-							ng-click="">
+						<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
 							<span class="glyphicon glyphicon-ban-circle"></span> Cancel
 						</button>
-						<button type="submit" ng-disabled="customerForm.$invalid"
-							class="btn btn-primary" ng-click="saveBooking()">
+						<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="saveBooking()">
 							<span class="glyphicon glyphicon-save"></span> Save
 						</button>
 					</div>

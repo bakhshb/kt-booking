@@ -57,6 +57,8 @@ ktbookingApp.controller('TourController', function ($scope, $location,$timeout, 
 
 	$scope.clear = function () {
 		$scope.tour = {};
+		$scope.tour.name=' ';
+		$scope.tour.activated ='true';
 	};
 
 	/*

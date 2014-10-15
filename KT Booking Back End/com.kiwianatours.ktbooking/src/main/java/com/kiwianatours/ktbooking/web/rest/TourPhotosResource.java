@@ -61,14 +61,21 @@ public class TourPhotosResource {
 				String parseDate =date.toString();
 				String parseDateNTime = parseTime +"_"+ parseDate;
 				byte[] bytes = file.getBytes();
+				// files
 				File currentDirFile = new File("");
-				String helper = currentDirFile.getAbsolutePath();	
-				
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(new File(helper +"\\src\\main\\webapp\\images\\upload\\" +parseDateNTime+file.getOriginalFilename())));
-				stream.write(bytes);
-				stream.close();
-				responseHeader.set("filename", parseDateNTime+file.getOriginalFilename());
+				String absolutePath = currentDirFile.getAbsolutePath();	
+				File newDirFile = new File(absolutePath);
+				String parentPath = newDirFile.getParent();
+				boolean success = new File(parentPath+ "\\upload").mkdir();
+				boolean exist = new File (parentPath +"\\upload").exists();
+				if (success || exist){
+					BufferedOutputStream stream = new BufferedOutputStream(
+							new FileOutputStream(new File(parentPath +"\\upload\\" +parseDateNTime+file.getOriginalFilename())));
+					System.err.println(parentPath);
+					stream.write(bytes);
+					stream.close();
+					responseHeader.set("filename", parseDateNTime+file.getOriginalFilename());
+				}
 			} catch (Exception e) {
 
 			}

@@ -44,9 +44,8 @@
 		role="dialog" aria-labelledby="myTourScheduleLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form name="form" role="form" novalidate
-					class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-					ng-submit="create()">
+				<form name="form" role="form" novalidate class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+					ng-submit="create()" show-validation>
 
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal"
@@ -62,26 +61,20 @@
 								name="id" ng-model="tourSchedule.id" readonly>
 						</div>
 						<div class="form-group">
-							<label>Tour</label> <select name="tourname" class="form-control"
-								ng-model="tourSchedule.tour.id" required>
-								<option selected disabled value="">-- Select Tour Name
-									--</option>
+							<label>Tour</label> 
+							<select name="tourname" class="form-control" ng-model="tourSchedule.tour.id" required>
+								<option selected disabled value="">-- Select Tour Name --</option>
 								<option ng-repeat="tour in tours" value="{{tour.id}}">{{tour.name}}</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>Departure Date</label>
 							<p class="input-group">
-								<input type="text" class="form-control" name="departureDate"
-									datepicker-popup="yyyy-MM-dd"
-									ng-model="tourSchedule.departureDate" is-open="departureopened"
-									min-date="minDate" max-date="'2015-06-22'"
-									datepicker-options="dateOptions"
-									date-disabled="disabled(date, mode)" ng-required="true"
-									close-text="Close" placeholder="yyyy-mm-dd" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="openDeparture($event)">
+								<input type="text" class="form-control" name="departureDate" datepicker-popup="yyyy-MM-dd"
+									ng-model="tourSchedule.departureDate" is-open="departureopened" min-date="minDate" max-date="'2015-06-22'"
+									datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-mm-dd" /> 
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" 	ng-click="openDeparture($event)">
 										<i class="glyphicon glyphicon-calendar"></i>
 									</button>
 								</span>
@@ -90,57 +83,48 @@
 						<div class="form-group">
 							<label>Return Date</label>
 							<p class="input-group">
-								<input type="text" class="form-control" name="returnDate"
-									datepicker-popup="yyyy-MM-dd"
-									ng-model="tourSchedule.returnDate" is-open="returnopened"
-									min-date="minDate" max-date="'2015-06-22'"
-									datepicker-options="dateOptions"
-									date-disabled="disabled(date, mode)" ng-required="true"
-									close-text="Close" placeholder="yyyy-mm-dd" /> <span
-									class="input-group-btn">
-									<button type="button" class="btn btn-default"
-										ng-click="openReturn($event)">
+								<input type="text" class="form-control" name="returnDate"	datepicker-popup="yyyy-MM-dd"
+									ng-model="tourSchedule.returnDate" is-open="returnopened" min-date="minDate" max-date="'2015-06-22'"
+									datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-mm-dd" /> 
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default" ng-click="openReturn($event)">
 										<i class="glyphicon glyphicon-calendar"></i>
 									</button>
 								</span>
 							</p>
-							<div class="error"
+							<div class ="alert alert-danger" 
 								ng-show="form.returnDate.$dirty && form.returnDate.$invalid || tourSchedule.returnDate < tourSchedule.departureDate">
-								<span class="error"
-									ng-show="tourSchedule.returnDate < tourSchedule.departureDate">
-									Return Date cannot be lower than Departure Date. </span>
+								<p ng-show="tourSchedule.returnDate < tourSchedule.departureDate">
+									<strong>Return Date cannot be lower than Departure Date.</strong>
+								</p>
 
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Price</label> <input type="number" class="form-control"
-								name="price" ng-model="tourSchedule.price" placeholder="Price"
-								required>
-							<div class="error"
-								ng-show="form.price.$dirty && form.price.$invalid">
-								<small class="error" ng-show="form.price.$error.required">
-									Price is required </small><small class="error"
-									ng-show="form.price.$error.number"> and has to be
-									number </small>
+							<label>Price</label> 
+							<input type="number" class="form-control" 	name="price" ng-model="tourSchedule.price" 
+								placeholder="Price" required>
+							<div ng-show="form.price.$dirty && form.price.$invalid">
+								<p class="help-block"  ng-show="form.price.$error.required">
+									Price is required 
+								</p>
+								<p class="help-block" 	ng-show="form.price.$error.number"> 
+									Price has to be number 
+								</p>
 							</div>
 						</div>
 						<div class="form-group">
-							<label>Repeat Tour</label>&nbsp;&nbsp; <input type="checkbox"
-								ng-model="checked" ng-disabled="disableCheck">
+							<label>Repeat Tour</label>&nbsp;&nbsp; 
+							<input type="checkbox"	ng-model="checked" ng-disabled="disableCheck">
 						</div>
 						<div class="form-group" ng-if="checked == true">
-							<label>Times</label> <input type="number" class="form-control"
-								ng-model="tourSchedule.time" placeholder="How many times"
-								required only-num>
+							<label>Times</label> 
+							<input type="number" class="form-control" ng-model="tourSchedule.time" placeholder="How many times"	required only-num>
 						</div>
 						<div class="form-group" ng-if="checked == true">
 							<label>Every</label>
-							<!--  <input type="number" class="form-control"
-										ng-model="tourSchedule.day" required only-num> -->
-							<select name="tourname" class="form-control"
-								ng-model="tourSchedule.day" required>
-								<option selected disabled value="">-- Select Repetition
-									--</option>
+							<select name="tourname" class="form-control"	ng-model="tourSchedule.day" required>
+								<option selected disabled value="">-- Select Repetition	--</option>
 								<option value="2">2 days</option>
 								<option value="3">3 days</option>
 								<option value="4">4 days</option>
@@ -152,12 +136,10 @@
 							</select>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal" ng-click="clear()">
+							<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
 								<span class="glyphicon glyphicon-ban-circle"></span> Cancel
 							</button>
-							<button type="submit" ng-disabled="form.$invalid"
-								class="btn btn-primary">
+							<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
 								<span class="glyphicon glyphicon-save"></span> Save
 							</button>
 						</div>

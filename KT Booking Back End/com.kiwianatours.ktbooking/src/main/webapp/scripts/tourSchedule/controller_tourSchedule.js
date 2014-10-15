@@ -72,6 +72,7 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 		
 	$scope.clear = function () {
 		$scope.tourSchedule = {};
+		$scope.tourSchedule.price= 0;
 	};
 
 	/*

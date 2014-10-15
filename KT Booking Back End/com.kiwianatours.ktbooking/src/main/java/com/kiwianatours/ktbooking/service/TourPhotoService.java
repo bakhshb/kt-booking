@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.kiwianatours.ktbooking.domain.Tour;
 import com.kiwianatours.ktbooking.domain.TourPhoto;
 import com.kiwianatours.ktbooking.repository.TourPhotoRepository;
@@ -47,11 +48,13 @@ public class TourPhotoService {
 					log.debug("Updated Information for TourPhoto: {}",tourPhotos);
 				}
 			} else {
-				TourPhoto tourPhoto = new TourPhoto();
-				tourPhoto.setTour(tour);
-				tourPhoto.setPhoto(fileName);
-				tourPhotoRepository.save(tourPhoto);
-				log.debug("Created Information for TourPhoto: {}", tourPhoto);
+				if (fileName != null){
+					TourPhoto tourPhoto = new TourPhoto();
+					tourPhoto.setTour(tour);
+					tourPhoto.setPhoto(fileName);
+					tourPhotoRepository.save(tourPhoto);
+					log.debug("Created Information for TourPhoto: {}", tourPhoto);
+				}
 			}
 		}
     }
@@ -61,8 +64,10 @@ public class TourPhotoService {
 		if (tourPhoto != null){
 			try{
 				File currentDirFile = new File("");
-				String helper = currentDirFile.getAbsolutePath();	
-				File location = new File(helper +"\\src\\main\\webapp\\images\\upload\\"+ tourPhoto.getPhoto());
+				String absolutePath = currentDirFile.getAbsolutePath();	
+				File newDirFile = new File(absolutePath);
+				String parentPath = newDirFile.getParent();
+				File location = new File(parentPath +"\\upload\\"+ tourPhoto.getPhoto());
 				location.delete();
 				tourPhotoRepository.delete(id);
 				log.debug("Deleted Information for TourPhoto: {}", tourPhoto);
