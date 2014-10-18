@@ -1,32 +1,35 @@
 'use strict';
 
-ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filter, TourSchedule, resolvedTourSchedule,  modalService,ngProgress) {
+ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filter, TourSchedule, resolvedTourSchedule,ngProgress) {
 	var tours = resolvedTourSchedule;
 	$scope.tourSchedules ={};
+	$scope.tourSchedules.color = 'navey';	
 	$scope.tourSchedules.events = [];
-
-	ngProgress.start();
-	$timeout(function (){
-		if( window.localStorage )
-		{
-			if( !localStorage.getItem( 'firstLoad' ) )
-			{
-				localStorage[ 'firstLoad' ] = true;
-				window.location.reload();
-
-			}  
-			else
-				localStorage.removeItem( 'firstLoad' );
-		}
-		ngProgress.complete();
-	}, 1000);
-
-	init();
 	$scope.eventSource = {
 			url: "https://www.google.com/calendar/feeds/en-gb.new_zealand%23holiday%40group.v.calendar.google.com/public/basic",
 			className: 'gcal-event',           // an option!
 	};
+	$scope.eventSource.color ='red';
 
+	if( window.localStorage )
+	{
+		if( !localStorage.getItem( 'firstLoad' ) )
+		{
+			localStorage[ 'firstLoad' ] = true;
+			window.location.reload();
+
+		}  
+		else
+			localStorage.removeItem( 'firstLoad' );
+		ngProgress.start();
+		$timeout(function (){
+			ngProgress.complete();
+		}, 100);
+
+	}
+
+
+	init();
 
 	function init() {
 		for (var i=0;i<tours.length;i++){
@@ -40,7 +43,6 @@ ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filte
 		}
 	};
 
-	$scope.tourSchedules.color = 'green';	
 	$scope.eventSources = [$scope.eventSource, $scope.tourSchedules ];
 
 

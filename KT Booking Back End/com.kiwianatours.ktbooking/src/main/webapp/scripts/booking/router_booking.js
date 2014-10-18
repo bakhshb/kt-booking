@@ -4,7 +4,7 @@ ktbookingApp
 .config(function ($routeProvider, $httpProvider, $translateProvider, USER_ROLES) {
 	$routeProvider
 	.when('/booking', {
-		templateUrl: 'views/bookings/bookings.html',
+		templateUrl: 'views/bookings.html',
 		controller: 'BookingController',
 		resolve:{
 			resolvedBooking: ['Booking', function (Customer) {

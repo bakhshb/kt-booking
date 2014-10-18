@@ -78,6 +78,8 @@ public class AccountResource {
             user = userService.createUserInformation(userDTO.getLogin(), userDTO.getPassword(), userDTO.getFirstName(),
                     userDTO.getLastName(), userDTO.getEmail().toLowerCase(), userDTO.getContactNo(), userDTO.getLangKey(), userDTO.getRole());
             final Locale locale = Locale.forLanguageTag(user.getLangKey());
+            String decryptedPassword = userDTO.getPassword();
+            user.setPassword(decryptedPassword);
             String content = createHtmlContentFromTemplate(user, locale, request, response);
             mailService.sendActivationEmail(user.getEmail(), content, locale);
             return new ResponseEntity<>(HttpStatus.CREATED);

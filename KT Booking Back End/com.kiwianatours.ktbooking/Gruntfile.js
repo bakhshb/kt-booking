@@ -343,7 +343,10 @@ module.exports = function (grunt) {
                         '<%= yeoman.dist %>/scripts/scripts.js'
                     ]
                 }
-            }
+            },
+            options: {
+                mangle: true
+              }
         },
         buildcontrol: {
             options: {

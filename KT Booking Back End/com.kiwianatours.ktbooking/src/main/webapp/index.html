@@ -15,8 +15,8 @@
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/documentation.css">
 		<link rel="stylesheet" href="styles/animate.css">
-        <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
-		<link rel="stylesheet"	href="bower_components/ngprogress/ngProgress.css">
+        <link rel="stylesheet" href="styles/fullcalendar.css">
+		<link rel="stylesheet"	href="styles/ngProgress.css">
 		<!-- endbuild -->
     </head>
     <body ng-app="ktbookingApp" ng-controller="MainController">
@@ -45,7 +45,7 @@
                         <li class="dropdown pointer">
 						<a ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
 							<span> 
-								<span class="hidden-tablet"> 
+								<span class="hidden-tablet" translate="global.menu.tour"> 
 									Tour 
 								</span> 
 								<b	class="caret"></b>
@@ -55,14 +55,15 @@
 								<li ng-switch-when="true"><a href="#/tour">&#xA0; Tour</a></li>
 								<li ng-switch-when="true"><a href="#/tour/schedule">&#xA0;
 										Schedule</a></li>
-								<li ng-switch-when="true"><a href="javascript:;" onclick="window.location='#/tour/schedule/calendar'">&#xA0;
+								<li ng-switch-when="true"><a href="#/tour/schedule/calendar">&#xA0;
 										Calendar</a></li>
 							</ul>
 						</li>
                         <li class="dropdown pointer">
 						<a ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
 							<span> 
-								<span class="hidden-tablet"> Customer 
+								<span class="hidden-tablet" translate="global.menu.customer">
+								 Customer 
 								</span> 
 								<b class="caret"></b>
 							</span>

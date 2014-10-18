@@ -4,7 +4,7 @@ ktbookingApp
     .config(function ($routeProvider, $httpProvider, $translateProvider, USER_ROLES) {
             $routeProvider
             .when('/tour', {
-            	templateUrl: 'views/tours/tours.html',
+            	templateUrl: 'views/tours.html',
             	controller: 'TourController',
             	resolve:{
             		resolvedTour: ['Tour', function (Tour) {
@@ -16,7 +16,7 @@ ktbookingApp
             	}
             })
             .when('/tourphoto/:tourId', {
-            	templateUrl: 'views/tours/tourPhotos.html',
+            	templateUrl: 'views/tourPhotos.html',
             	controller: 'TourPhotoController',
             	resolve:{
             		resolvedTourPhoto: ['TourPhoto', function (TourPhoto) {
@@ -28,7 +28,7 @@ ktbookingApp
             	}
             })
             .when('/tourphoto/upload/:tourId', {
-            	templateUrl: 'views/tours/tourPhotoUpload.html',
+            	templateUrl: 'views/tourPhotoUpload.html',
             	controller: 'TourPhotoUploadController',
             	access: {
             		authorizedRoles: [USER_ROLES.all]

@@ -1,11 +1,21 @@
-
 <div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
-			<h1>All Bookings</h1>
+			<ol class="breadcrumb">
+				<li><a href="#/tour">Tour</a></li>
+				<li><a href="#/tour/schedule">Tour Schedule</a></li>
+				<li class="active">Tour Booking</li>
+			</ol>
+			<h1>
+				Tour Booking Details <small>{{tourSchedule.tour.name }}</small>
+			</h1>
+			<h5>Departure: {{tourSchedule.departureDate}}&#xA0;&#xA0;
+				Return: {{tourSchedule.returnDate}}</h5>
+			<h5></h5>
+			<h5>There are {{bookings.length}} bookings</h5>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
-					<div class="form-group animated lightSpeedIn">
+					<div class="form-group">
 						<label class="navbarText col-sm-2">Filter:</label>
 						<div class="col-sm-10">
 							<input type="text" data-ng-model="searchText"
@@ -15,16 +25,17 @@
 					</div>
 				</form>
 			</div>
-			<div class="alert alert-success" data-ng-show="updateStatus">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{updateStatus}}
+			<div class="alert alert-success" data-ng-show="status">
+				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
 			</div>
-			<div class="alert alert-danger" data-ng-show="errorMessage">
+
+			<div class="alert alert-danger" data-ng-show="error">
 				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ errorMessage }}
+				{{ error }}
 			</div>
 			<div data-ng-show="bookings.length == 0">
 				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No bookings found</h4>
+					<h4>No Tour Bookings found</h4>
 				</div>
 			</div>
 		</div>
@@ -41,24 +52,12 @@
 								ng-click="predicate = 'booking.customer.firstName';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
-							<th>Nationality<a href=""
-								ng-click="predicate = 'booking.customer.nationality';  reverse=!reverse">
-									<span class="glyphicon glyphicon-sort"></span>
-							</a></th>
+							<th>Birthday</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Nationality</th>
 							<th>Booking Date<a href=""
 								ng-click="predicate = 'booking.createdDate';  reverse=!reverse">
-									<span class="glyphicon glyphicon-sort"></span>
-							</a></th>
-							<th>Tour<a href=""
-								ng-click="predicate = 'tourSchedule.tour.name';  reverse=!reverse">
-									<span class="glyphicon glyphicon-sort"></span>
-							</a></th>
-							<th>Departure<a href=""
-								ng-click="predicate = 'tourSchedule.departureDate';  reverse=!reverse">
-									<span class="glyphicon glyphicon-sort"></span>
-							</a></th>
-							<th>Return<a href=""
-								ng-click="predicate = 'tourSchedule.returnDate';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
 							<th>Payment</th>
@@ -67,22 +66,21 @@
 						</tr>
 					</thead>
 					<tbody class="animated fadeInUp">
-						<tr dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
+						<tr
+							dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.id}}</td>
 							<td>{{booking.booking.customer.firstName +" "+
 								booking.booking.customer.lastName}} <a
 								href="#/customer/booking/{{booking.booking.customer.id}}"><span
 									class="glyphicon glyphicon-eye-open"></span></a>
 							</td>
+							<td>{{booking.booking.customer.birthday}}</td>
+							<td>{{booking.booking.customer.email}}</td>
+							<td>{{booking.booking.customer.contactNo}}</td>
 							<td>{{booking.booking.customer.nationality}}</td>
 							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
-							<td>{{booking.tourSchedule.tour.name}} <a
-								href="#/tour/schedule/booking/{{booking.tourSchedule.id}}"><span
-									class="glyphicon glyphicon-eye-open"></span></a></td>
-							<td>{{booking.tourSchedule.departureDate}}</td>
-							<td>{{booking.tourSchedule.returnDate}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
-							<td>{{booking.booking.amount}}</td>
+							<td>{{booking.booking.amount}} $</td>
 							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
 							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
 							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
@@ -94,10 +92,9 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-sm-12 col-md-12">
 			<dir-pagination-controls boundary-links="true"
 				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
 		</div>
 	</div>
 </div>
-

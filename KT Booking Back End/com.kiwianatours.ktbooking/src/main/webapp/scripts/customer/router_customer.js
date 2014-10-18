@@ -4,7 +4,7 @@ ktbookingApp
     .config(function ($routeProvider, $httpProvider, $translateProvider, USER_ROLES) {
             $routeProvider
             .when('/customer', {
-            	templateUrl: 'views/customers/customers.html',
+            	templateUrl: 'views/customers.html',
             	controller: 'CustomerController',
             	resolve:{
             		resolvedCustomer: ['Customer', function (Customer) {
@@ -16,7 +16,7 @@ ktbookingApp
             	}
             })
             .when('/customer/edit/:customerId', {
-            	templateUrl: 'views/customers/customerEdit.html',
+            	templateUrl: 'views/customerEdit.html',
             	controller: 'CustomerEditController',
             	resolve:{
             		resolvedCustomer: ['Customer', function (Customer) {
@@ -34,7 +34,7 @@ ktbookingApp
             	}
             })
             .when('/customer/booking/:customerId', {
-            	templateUrl: 'views/customers/customerBookings.html',
+            	templateUrl: 'views/customerBookings.html',
             	controller: 'CustomerBookingController',
             	resolve:{
             		resolvedBooking: ['Booking', function (Customer) {

@@ -5,3 +5,32 @@
 {
     overflow-x: auto;
 }
+
+.rotorua {
+  display: inline-block;
+  width: 463px;
+  height: 640px;
+  background-image: url("../images/rotorua.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.male{
+	display: inline-block;
+  width: 90px;
+  height: 90px;
+  background: url("../images/male.png");
+  background-size: 90px 90px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.female{
+	display: inline-block;
+ width: 90px;
+  height: 90px;
+  background: url("../images/female.png");
+  background-size: 90px 90px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}

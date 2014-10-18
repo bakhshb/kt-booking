@@ -4,7 +4,7 @@ ktbookingApp
 .config(function ($routeProvider, $httpProvider, $translateProvider, USER_ROLES) {
 	$routeProvider
 	.when('/tour/schedule', {
-		templateUrl: 'views/tourSchedules/tourSchedules.html',
+		templateUrl: 'views/tourSchedules.html',
 		controller: 'TourScheduleController',
 		resolve:{
 			resolvedTour: ['Tour', function (Tour) {
@@ -19,7 +19,7 @@ ktbookingApp
 		}
 	})
 	.when('/tour/schedule/booking/:Id', {
-		templateUrl: 'views/tourSchedules/tourScheduleBookings.html',
+		templateUrl: 'views/tourScheduleBookings.html',
 		controller: 'TourScheduleBookingController',
 		resolve:{
 			resolvedTourSchedule: ['TourSchedule', function (TourSchedule) {
@@ -31,7 +31,7 @@ ktbookingApp
 		}
 	})
 	.when('/tour/schedule/calendar', {
-		templateUrl: 'views/tourSchedules/calendar.html',
+		templateUrl: 'views/calendar.html',
 		controller: 'CalendarController',
 		resolve:{
 			resolvedTourSchedule: ['TourSchedule', function (TourSchedule) {

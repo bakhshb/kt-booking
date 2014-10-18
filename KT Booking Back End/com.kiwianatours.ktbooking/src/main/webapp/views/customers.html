@@ -21,7 +21,7 @@
 					</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
-					<div class="form-group animated lightSpeedIn">
+					<div class="form-group">
 						<label class="navbarText col-sm-2">Filter:</label>
 						<div class="col-sm-10">
 							<input type="text" data-ng-model="searchText"
@@ -67,9 +67,9 @@
 					</div>
 					<div class="panel-body">
 						<div class="pull-left">
-							<a href="#/customer/booking/{{customer.id}}"><img
-								data-ng-src="images/{{customer.gender | lowercase}}.png"
-								style="height: 90px;" class="img-rounded" /></a>
+							<a href="#/customer/booking/{{customer.id}}">
+							<span class="{{customer.gender | lowercase}} img-responsive img-rounded "></span>
+							</a>
 						</div>
 						<div class="pull-right">
 							<p>E: {{customer.email}}</p>
@@ -116,9 +116,9 @@
 							<td>{{customer.id}}</td>
 							<td>{{customer.firstName +" "+ customer.lastName}}</td>
 							<td>{{customer.birthday}}</td>
-							<td><img
-								data-ng-src="images/{{customer.gender | lowercase}}.png"
-								style="height: 40px; width: 40px;" class="img-rounded" /></td>
+							<td>
+							<span class="{{customer.gender | lowercase}} img-responsive img-rounded " style="height: 40px; width: 40px;  background-size: 40px 40px;"></span>
+							</td>
 							<td>{{customer.nationality}}</td>
 							<td>{{customer.email}}</td>
 							<td>{{customer.contactNo}}</td>

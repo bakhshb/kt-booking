@@ -6,7 +6,7 @@
     </head>
     <body>
         <p th:text="#{email.activation.greeting(${user.login})}">
-            Dear Test,
+            Dear ,
         </p>
         <p th:text="#{email.activation.text1}">
             Your Kiwianatours account has been created, please click on the URL below to activate it:
@@ -15,10 +15,23 @@
             <a th:href="@{|${baseUrl}/#/activate?key=${user.activationKey}|}"
                th:text="|${user.login}|">Activation Link</a>
         </p>
+         <p th:text="#{email.activation.text2}">
+            Please enter your details and change your password
+        </p>
+         <p th:text="#{email.activation.text3 (${user.login})}">
+            username: {0} 
+        </p>
+         <p th:text="#{email.activation.text4(${user.password})}">
+            password:{0}
+        </p>
         <p>
-            <span th:text="#{email.activation.text2}">Regards, </span>
+            <span th:text="#{email.activation.text5}">Regards, </span>
             <br/>
             <em th:text="#{email.signature}">Kiwianatours.</em>
         </p>
+        <p>
+	    <img src="http://www.rowanovenden.co.nz/development/ktbooking/img/logo.jpg" style="display: inline-block;
+				width: 200px; height: 100px;"/>
+	    </p>
     </body>
 </html>
