@@ -12,7 +12,7 @@ ktbookingApp.factory('LanguageService', function ($http, $translate, LANGUAGES) 
                     language = 'en';
                 }
 
-                var promise =  $http.get('/i18n/' + language + '.json').then(function(response) {
+                var promise =  $http.get('i18n/' + language + '.json').then(function(response) {
                     return LANGUAGES;
                 });
                 return promise;
@@ -203,7 +203,7 @@ ktbookingApp.service('modalService', ['$modal',
 			backdrop: true,
 			keyboard: true,
 			modalFade: true,
-			templateUrl: '/views/modal.html'
+			templateUrl: 'views/modal.html'
 	};
 
 	var modalOptions = {

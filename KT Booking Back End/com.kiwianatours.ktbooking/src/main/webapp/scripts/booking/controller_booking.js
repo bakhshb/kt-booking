@@ -5,7 +5,7 @@ ktbookingApp.controller('BookingController', function ($scope, $location,$timeou
 	var timer;
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
-	
+	$scope.error = null;
 	ngProgress.start();
 	$timeout(function (){
 		$scope.bookings = resolvedBooking;
@@ -44,14 +44,14 @@ ktbookingApp.controller('BookingController', function ($scope, $location,$timeou
 	};
 
 	function processError(error) {
-		$scope.errorMessage = error;
+		$scope.error = error;
 		startTimer();
 	};
 	
 	function startTimer() {
 		timer = $timeout(function() {
 			$timeout.cancel(timer);
-			$scope.errorMessage = '';
+			$scope.error = '';
 			$scope.updateStatus = '';
 		}, 3000);
 	};
