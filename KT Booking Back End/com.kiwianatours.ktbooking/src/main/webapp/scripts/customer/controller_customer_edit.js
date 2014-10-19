@@ -28,7 +28,7 @@ ktbookingApp
 			if (customers[i].email == $scope.customer.email && customerId == 0){
 				$scope.id = customers[i].id;
 				onRouteChangeOff();
-				$scope.errorEmailExists ='OK';
+				$scope.errorEmailExists ='has-error';
 			}
 		}
 

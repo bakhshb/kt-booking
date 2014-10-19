@@ -15,7 +15,7 @@ ktbookingApp
 			}]
 		},
 		access: {
-			authorizedRoles: [USER_ROLES.all]
+			authorizedRoles: [USER_ROLES.admin]
 		}
 	})
 	.when('/tour/schedule/booking/:Id', {

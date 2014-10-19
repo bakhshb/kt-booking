@@ -20,7 +20,7 @@
                 "login": "Authenticate",
                 "logout": "Log out",
                 "apidocs": "API",
-                "register": "Register"
+                "register": "Register New User"
             },
             "admin": "Administration",
             "language": "Language"

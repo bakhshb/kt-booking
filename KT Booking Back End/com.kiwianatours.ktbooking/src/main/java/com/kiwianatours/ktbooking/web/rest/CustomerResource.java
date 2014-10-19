@@ -51,7 +51,6 @@ public class CustomerResource {
 	@RequestMapping(value = "/rest/customers",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.USER})
 	@Timed
 	public List<Customer> getAll() {
 		log.debug("REST request to get all Customers");
@@ -64,7 +63,6 @@ public class CustomerResource {
 	@RequestMapping(value = "/rest/customers/{id}",
 			method = RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	@Secured({AuthoritiesConstants.ADMIN,AuthoritiesConstants.USER})
 	@Timed
 	public ResponseEntity<Customer> get(@PathVariable Long id, HttpServletResponse response) {
 		log.debug("REST request to get Customer : {}", id);

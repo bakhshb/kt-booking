@@ -75,16 +75,17 @@
 							</div>
 						</div>
 						<div class="form-group">
+						<label>Front-End Menu</label>
 							<div class="radio">
 								<label> 
 								<input type="radio" name="optionsRadios" ng-model="tour.activated" required value="true"
-										checked> Active Label
+										checked> Show
 								</label>
 							</div>
 							<div class="radio">
 								<label> 
 								<input type="radio" name="optionsRadios" ng-model="tour.activated" required value="false">
-									Not Active Label
+									Hide
 								</label>
 							</div>
 						</div>
@@ -124,7 +125,7 @@
 							<th>Name <a href=""
 								ng-click="predicate = 'name';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Active statue <a href=""
+							<th>Menu <a href=""
 								ng-click="predicate = 'activated';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th></th>
@@ -137,13 +138,13 @@
 							dir-paginate="tour in tours | filter: searchText | itemsPerPage: 25 | orderBy:predicate:reverse">
 							<td>{{tour.id}}</td>
 							<td>{{tour.name}}</td>
-							<td ng-if="tour.activated == 1" class="success">Enabled</td>
-							<td ng-if="tour.activated == 0" class="danger">Disabled</td>
+							<td ng-if="tour.activated == 1" class="success">Show</td>
+							<td ng-if="tour.activated == 0" class="danger">Hide</td>
 							<td></td>
-							<td><a href="#/tourphoto/{{tour.id}}"
+							<td><a href="#/tour/photo/{{tour.id}}"
 								class="btn btn-default"><span
 									class="glyphicon glyphicon-eye-open"></span> View</a> <a
-								href="#/tourphoto/upload/{{tour.id}}" class="btn btn-success"><span
+								href="#/tour/photo/upload/{{tour.id}}" class="btn btn-success"><span
 									class="glyphicon glyphicon-open"></span> Upload</a></td>
 							<td>
 								<button type="submit" ng-click="update(tour.id)" class="btn">

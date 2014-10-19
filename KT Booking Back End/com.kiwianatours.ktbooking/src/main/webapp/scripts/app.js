@@ -12,7 +12,7 @@ ktbookingApp
                     templateUrl: 'views/register.html',
                     controller: 'RegisterController',
                     access: {
-                        authorizedRoles: [USER_ROLES.all]
+                        authorizedRoles: [USER_ROLES.admin]
                     }
                 })
                 .when('/activate', {
@@ -127,6 +127,12 @@ ktbookingApp
                     $rootScope.isAuthorized = AuthenticationSharedService.isAuthorized;
                     $rootScope.userRoles = USER_ROLES;
                     AuthenticationSharedService.valid(next.access.authorizedRoles);
+                    if (next.access !== 'undefined'){
+	                    if(!AuthenticationSharedService.isAuthorized(next.access.authorizedRoles)){
+	                    	$rootScope.errorMessage = 'errors.403';
+	                        $location.path('/error').replace();
+	                    }
+                    }
                 });
 
                 // Call when the the client is confirmed

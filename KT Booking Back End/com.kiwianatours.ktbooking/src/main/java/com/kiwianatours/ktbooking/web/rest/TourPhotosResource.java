@@ -71,7 +71,6 @@ public class TourPhotosResource {
 				if (success || exist){
 					BufferedOutputStream stream = new BufferedOutputStream(
 							new FileOutputStream(new File(parentPath +"\\upload\\" +parseDateNTime+file.getOriginalFilename())));
-					System.err.println(parentPath);
 					stream.write(bytes);
 					stream.close();
 					responseHeader.set("filename", parseDateNTime+file.getOriginalFilename());

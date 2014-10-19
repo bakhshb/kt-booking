@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<ol class="breadcrumb">
-				<li><a href="#/customer">Customer</a></li>
+				<li ng-if="isAuthorized(userRoles.admin)"><a href="#/customer">Customer</a></li>
 				<li><a href="#/customer/edit/{{customer.id}}">{{
 						customer.firstName + ' ' + customer.lastName }}</a></li>
 				<li class="active">View Booking</li>
@@ -158,20 +158,23 @@
 							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
 							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
 							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
-							<td><select name="status" data-ng-model="status"
-								ng-change="change(booking.booking.id,status)"
-								ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
+							<td>
+								<select name="status" data-ng-model="status"
+									ng-change="change(booking.booking.id,status)"
+									ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
 									<option selected disabled value="">Change Status</option>
 									<option value="1">Approve</option>
 									<option value="2">Pending</option>
 									<option value="3">Refund</option>
 									<option value="4">Cancel</option>
-							</select></td>
+								</select>
+							</td>
 							<td><button type="submit"
 									ng-click="delete(booking.booking.id)" class="btn btn-danger"
-									ng-disabled="booking.tourSchedule.departureDate < {{yesterday}}">
+									  ng-if="isAuthorized(userRoles.admin)">
 									<span class="glyphicon glyphicon-remove-circle"></span> Delete
-								</button></td>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>

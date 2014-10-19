@@ -15,6 +15,16 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 		ngProgress.complete();
 	}, 100);
 	/*
+	 * return date is not less than departure date
+	 */
+	$scope.tourSchedule ={};
+	$scope.$watch('tourSchedule.returnDate', function (){
+		$scope.returnDateError =null;
+		if ($scope.tourSchedule.returnDate < $scope.tourSchedule.departureDate){
+			$scope.returnDateError ='has-error';
+		}
+	});
+	/*
 	 * yesterday date
 	 */
 	var parse = new Date();

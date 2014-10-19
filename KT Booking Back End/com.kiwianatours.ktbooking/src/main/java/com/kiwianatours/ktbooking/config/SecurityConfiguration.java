@@ -98,7 +98,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .headers()
                 .frameOptions().disable()
             .authorizeRequests()
-            	.antMatchers("/app/rest/customers").permitAll()
+            	.antMatchers("/app/rest/customers").authenticated()
             	.antMatchers("/app/rest/bookings").permitAll()
             	.antMatchers("/app/rest/tours").permitAll()
             	.antMatchers("/app/rest/tourphotos").hasAuthority(AuthoritiesConstants.ADMIN)
