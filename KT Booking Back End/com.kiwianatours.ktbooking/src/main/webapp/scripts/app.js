@@ -127,7 +127,7 @@ ktbookingApp
                     $rootScope.isAuthorized = AuthenticationSharedService.isAuthorized;
                     $rootScope.userRoles = USER_ROLES;
                     AuthenticationSharedService.valid(next.access.authorizedRoles);
-                    if (next.access !== 'undefined'){
+                    if (next.access !== undefined){
 	                    if(!AuthenticationSharedService.isAuthorized(next.access.authorizedRoles)){
 	                    	$rootScope.errorMessage = 'errors.403';
 	                        $location.path('/error').replace();
