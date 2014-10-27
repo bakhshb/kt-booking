@@ -17,10 +17,10 @@
                 "metrics": "Metrics",
                 "logs": "Logs",
                 "audits": "Audits",
-                "login": "Authenticate",
+                "login": "Login",
                 "logout": "Log out",
                 "apidocs": "API",
-                "register": "Register New User"
+                "register": "Create New Account"
             },
             "admin": "Administration",
             "language": "Language"
@@ -39,8 +39,7 @@
         },
         "messages": {
             "info": {
-                "authenticated": "If you want to <a href=\"#/login\">authenticate</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",
-                "register": "You don't have an account yet? <a href=\"#/register\">Register a new account</a>"
+                "authenticated": "Please login to start making changes <a href=\"#/login\">Login</a>"
             },
             "error": {
                 "dontmatch" : "The password and its confirmation do not match!"
@@ -73,20 +72,11 @@
         }
     },
     "main": {
-        "title": "Welcome, Java KT Booking!",
-        "subtitle": "This is your homepage",
+        "title": "Welcome,",
+        "subtitle": "You are logged in and can begin making changes",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
-        },
-        "question": "If you have any question on KT Booking:",
-        "link": {
-            "homepage": "KT Booking Hauptseite",
-            "stackoverflow": "KT Booking auf Stack Overflow",
-            "bugtracker": "KT Booking Fehlereinträge",
-            "contact": "Contact @bakhshb on Twitter"
-        },
-        "like": "If you like KT Booking, don't forget to give us a star on",
-        "bitbucket": "Bitbucket"
+        }
     },
     "activate": {
         "title": "Activation",
@@ -116,7 +106,7 @@
         }
     },
     "login": {
-        "title": "Authentication",
+        "title": "Login",
         "form": {
             "password": "Password",
             "password.placeholder": "Your password",
@@ -312,5 +302,5 @@
         "title": "Error page!",
         "403": "You are not authorized to access the page."
     },
-    "footer": "This is your footer"
+    "footer": "&copy; copyright 2014  KiwianaTours LTD"
 }

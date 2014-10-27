@@ -32,12 +32,11 @@
 				</form>
 			</div>
 			<div class="alert alert-success" data-ng-show="status">
-				<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;{{status}}
+				&nbsp;&nbsp;{{status}}
 			</div>
 
 			<div class="alert alert-danger" data-ng-show="error">
-				<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
-				{{ error }}
+				&nbsp;&nbsp;Error:{{ error }}
 			</div>
 			<div data-ng-show="customers.length == 0">
 				<div class="col-md-12 text-center animated bounceIn">
@@ -81,7 +80,7 @@
 				</div>
 			</div>
 			<div class="table-responsive" data-ng-show="listDisplayModeEnabled">
-				<table class="table table-striped"
+				<table class="table table-hover"
 					data-ng-hide="customers.length == 0">
 					<thead>
 						<tr>
@@ -99,14 +98,14 @@
 							<th>Email<a href=""
 								ng-click="predicate = 'email';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Contact No</th>
-							<th>Created<a href=""
-								ng-click="predicate = 'createdDate';  reverse=!reverse"> <span
+							<th>Contact No</th>							
+							<th>Modified<a href=""
+								ng-click="predicate = 'lastModifiedDate';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
 							<th>By<a href=""
-								ng-click="predicate = 'createdBy';  reverse=!reverse"> <span
+								ng-click="predicate = 'lastModifiedBy';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th>Booking</th>
+							<th></th>
 							<th></th>
 						</tr>
 					</thead>
@@ -122,16 +121,18 @@
 							<td>{{customer.nationality}}</td>
 							<td>{{customer.email}}</td>
 							<td>{{customer.contactNo}}</td>
-							<td>{{customer.createdDate | date:'yyyy-MM-dd'}}</td>
-							<td>{{customer.createdBy}}</td>
-							<td><a href="#/customer/booking/{{customer.id}}"
-								class="btn btn-default"><span
-									class="glyphicon glyphicon-eye-open"></span> View</a></td>
+							<td>{{customer.lastModifiedDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{customer.lastModifiedBy}}</td>
 							<td>
-								<button type="submit"
-									ng-click="navigate('/customer/edit/', customer.id)" class="btn">
-									<span class="glyphicon glyphicon-pencil"></span> Edit
-								</button>
+								<div class="btn-group">
+									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+										Action <span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu" role="menu">
+										<li><a href="#/customer/edit/{{customer.id}}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>	
+										<li><a href="#/customer/booking/{{customer.id}}"><span class="glyphicon glyphicon-eye-open"></span> Booking</a></li>
+									  </ul>
+								</div>
 							</td>
 							<td>
 								<button type="submit" ng-click="delete(customer.id)"

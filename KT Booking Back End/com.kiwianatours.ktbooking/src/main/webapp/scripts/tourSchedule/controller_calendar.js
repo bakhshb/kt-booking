@@ -9,7 +9,7 @@ ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filte
 			url: "https://www.google.com/calendar/feeds/en-gb.new_zealand%23holiday%40group.v.calendar.google.com/public/basic",
 			className: 'gcal-event',           // an option!
 	};
-	$scope.eventSource.color ='red';
+	$scope.eventSource.color ='darkred';
 
 	if( window.localStorage )
 	{

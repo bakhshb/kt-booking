@@ -2,7 +2,7 @@
 
 ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routeParams, $timeout, $location,Tour, TourPhoto, FileUploader, ngProgress){
 
-	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0;
+	var tourId = ($routeParams.tourId) ? parseInt($routeParams.tourId): 0, timer;
 
 	if (tourId > 0) {
 		ngProgress.start();
@@ -53,6 +53,12 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 	uploader.onSuccessItem = function(fileItem, response, status, headers) {
 		console.info('onSuccessItem', fileItem, response, status, headers);
 		console.info('file Name: ', headers.filename);
+		if (headers.filename == null){
+			processError('failed to upload');
+		}
+		else{
+		$scope.status = 'ok';
+		}
 		var tourPhoto = {
 				fileName: headers.filename,
 				tourId: tourId,
@@ -104,6 +110,19 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 		} else {
 
 		}
+	};
+	
+	function processError(error) {
+		$scope.error = error;
+		startTimer();
+	};
+
+	function startTimer() {
+		timer = $timeout(function() {
+			$timeout.cancel(timer);
+			$scope.error = null;
+			$scope.status = null;
+		}, 3000);
 	};
 
 });

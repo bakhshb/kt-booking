@@ -296,44 +296,46 @@
                 <div class="voffset2">&nbsp;</div>
                 <div class="row" ng-repeat="(k, v) in threadDump | filter:threadDumpFilter">
                     <h5><span class="label" ng-class="getLabelClass(v.threadState)">&nbsp;</span>&nbsp;{{v.threadName}} ({{'metrics.jvm.threads.dump.id' | translate}} {{v.threadId}})</h5>
-                    <table class="table table-condensed">
-                        <thead>
-                        <tr>
-                            <th translate="metrics.jvm.threads.dump.blockedtime">Blocked Time</th>
-                            <th translate="metrics.jvm.threads.dump.blockedcount">Blocked Count</th>
-                            <th translate="metrics.jvm.threads.dump.waitedtime">Waited Time</th>
-                            <th translate="metrics.jvm.threads.dump.waitedcount">Waited Count</th>
-                            <th translate="metrics.jvm.threads.dump.lockname">Lock Name</th>
-                            <th translate="metrics.jvm.threads.dump.stacktrace">StackTrace</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{v.blockedTime}}</td>
-                            <td>{{v.blockedCount}}</td>
-                            <td>{{v.waitedTime}}</td>
-                            <td>{{v.waitedCount}}</td>
-                            <td>{{v.lockName}}</td>
-                            <td>
-                                <a ng-click="show = !show" data-placement="left" >
-                                    <span ng-show="!show" translate="metrics.jvm.threads.dump.show">show</span>
-                                    <span ng-show="show" translate="metrics.jvm.threads.dump.hide">hide</span>
-                                </a>
-                                <div class="popover left" ng-show="show">
-                                    <div class="popover-title">
-                                        <h4>{{'metrics.jvm.threads.dump.stacktrace' | translate}}<button type="button" class="close" ng-click="show = !show">x</button></h4>
-                                    </div>
-                                    <div class="popover-content">
-                                        <div ng-repeat="(stK, stV) in v.stackTrace">
-                                            {{stV.className}}.{{stV.methodName}}({{stV.fileName}}:{{stV.lineNumber}})
-                                            <span class="voffset1"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+					<div class="table-responsive">
+						<table class="table table-condensed">
+							<thead>
+							<tr>
+								<th translate="metrics.jvm.threads.dump.blockedtime">Blocked Time</th>
+								<th translate="metrics.jvm.threads.dump.blockedcount">Blocked Count</th>
+								<th translate="metrics.jvm.threads.dump.waitedtime">Waited Time</th>
+								<th translate="metrics.jvm.threads.dump.waitedcount">Waited Count</th>
+								<th translate="metrics.jvm.threads.dump.lockname">Lock Name</th>
+								<th translate="metrics.jvm.threads.dump.stacktrace">StackTrace</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>{{v.blockedTime}}</td>
+								<td>{{v.blockedCount}}</td>
+								<td>{{v.waitedTime}}</td>
+								<td>{{v.waitedCount}}</td>
+								<td>{{v.lockName}}</td>
+								<td>
+									<a ng-click="show = !show" data-placement="left" >
+										<span ng-show="!show" translate="metrics.jvm.threads.dump.show">show</span>
+										<span ng-show="show" translate="metrics.jvm.threads.dump.hide">hide</span>
+									</a>
+									<div class="popover left" ng-show="show">
+										<div class="popover-title">
+											<h4>{{'metrics.jvm.threads.dump.stacktrace' | translate}}<button type="button" class="close" ng-click="show = !show">x</button></h4>
+										</div>
+										<div class="popover-content">
+											<div ng-repeat="(stK, stV) in v.stackTrace">
+												{{stV.className}}.{{stV.methodName}}({{stV.fileName}}:{{stV.lineNumber}})
+												<span class="voffset1"></span>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
                 </div>
             </div>
             <div class="modal-footer">

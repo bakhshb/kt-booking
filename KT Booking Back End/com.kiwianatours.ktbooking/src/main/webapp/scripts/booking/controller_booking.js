@@ -11,49 +11,5 @@ ktbookingApp.controller('BookingController', function ($scope, $location,$timeou
 		$scope.bookings = resolvedBooking;
 		ngProgress.complete();
 	}, 100);
-	/*
-	 * yesterday date
-	 */
-	var parse = new Date();
-	parse.setDate(parse.getDate()-1);
-	$scope.yesterday = parse;
-	
-	$scope.delete = function (id) {
-		
-			var modalOptions = {
-					closeButtonText : 'Cancel',
-					actionButtonText : 'Delete Customer Booking',
-					headerText : 'Delete booking For id = '+ id +'?',
-					bodyText : 'Are you sure you want to delete this customer booking?'
-			};
-			modalService.showModal({}, modalOptions).then(function (result) {
-				if (!result) {
-					Booking.delete({id: id},
-							function () {
-						$scope.bookings = Booking.query();
-						processSuccess('Booking Id: '+id+' has been deleted!');
-						
-					});
-				}
-			});
-	};
-
-	function processSuccess(success) {
-		$scope.updateStatus = success;
-		startTimer();
-	};
-
-	function processError(error) {
-		$scope.error = error;
-		startTimer();
-	};
-	
-	function startTimer() {
-		timer = $timeout(function() {
-			$timeout.cancel(timer);
-			$scope.error = '';
-			$scope.updateStatus = '';
-		}, 3000);
-	};
 
 });
