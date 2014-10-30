@@ -63,11 +63,7 @@ public class TourPhotoService {
     	TourPhoto tourPhoto = tourPhotoRepository.findOne(id);
 		if (tourPhoto != null){
 			try{
-				File currentDirFile = new File("");
-				String absolutePath = currentDirFile.getAbsolutePath();	
-				File newDirFile = new File(absolutePath);
-				String parentPath = newDirFile.getParent();
-				File location = new File(parentPath +"\\upload\\"+ tourPhoto.getPhoto());
+				File location = new File(tourPhoto.getPhoto());
 				location.delete();
 				tourPhotoRepository.delete(id);
 				log.debug("Deleted Information for TourPhoto: {}", tourPhoto);

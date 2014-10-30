@@ -71,7 +71,7 @@
 							<p class="input-group">
 								<input type="text" class="form-control" name="departureDate" datepicker-popup="yyyy-MM-dd"
 									ng-model="tourSchedule.departureDate" is-open="departureopened" min-date="minDate" max-date="'2015-06-22'"
-									datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-mm-dd" /> 
+									datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-MM-dd" /> 
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-default" 	ng-click="openDeparture($event)">
 										<i class="glyphicon glyphicon-calendar"></i>
@@ -85,7 +85,7 @@
 								<p class="input-group">
 									<input type="text" class="form-control" name="returnDate"	datepicker-popup="yyyy-MM-dd"
 										ng-model="tourSchedule.returnDate" is-open="returnopened" min-date="minDate" max-date="'2015-06-22'"
-										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-mm-dd" /> 
+										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="yyyy-MM-dd" /> 
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" ng-click="openReturn($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
@@ -176,7 +176,7 @@
 							<td>{{tourSchedule.tour.name}}</td>
 							<td>{{tourSchedule.departureDate}}</td>
 							<td>{{tourSchedule.returnDate}}</td>
-							<td>{{tourSchedule.price}} $</td>
+							<td>$ {{tourSchedule.price}}</td>
 							<td>{{tourSchedule.attending}}</td>
 							<td><a href="#/tour/schedule/booking/{{tourSchedule.id}}"
 								class="btn btn-default"><span

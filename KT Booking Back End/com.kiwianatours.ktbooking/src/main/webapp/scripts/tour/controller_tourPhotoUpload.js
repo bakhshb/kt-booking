@@ -54,7 +54,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 		console.info('onSuccessItem', fileItem, response, status, headers);
 		console.info('file Name: ', headers.filename);
 		if (headers.filename == null){
-			processError('failed to upload');
+			alert('failed to upload');
 		}
 		else{
 		$scope.status = 'ok';

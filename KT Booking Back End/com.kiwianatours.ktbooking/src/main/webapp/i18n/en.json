@@ -20,7 +20,7 @@
                 "login": "Login",
                 "logout": "Log out",
                 "apidocs": "API",
-                "register": "Create New Account"
+                "register": "Create Account"
             },
             "admin": "Administration",
             "language": "Language"
@@ -75,13 +75,13 @@
         "title": "Welcome,",
         "subtitle": "You are logged in and can begin making changes",
         "logged": {
-            "message": "You are logged in as user \"{{username}}\"."
+            "message": "You are logged in as user \"{{username}}\" <a href=\"#/logout\">Log out</a>"
         }
     },
     "activate": {
         "title": "Activation",
         "messages": {
-            "success": "<strong>Your user has been activated.</strong> Please <a href=\"#/login\">authenticate</a>.",
+            "success": "<strong>Your user has been activated.</strong> Please <a href=\"#/login\">Login</a>.",
             "error": "<strong>Your user could not be activated.</strong> Please use the registration form to sign up."
         }
     },

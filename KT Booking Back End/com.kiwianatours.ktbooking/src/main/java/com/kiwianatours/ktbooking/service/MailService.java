@@ -1,18 +1,18 @@
 package com.kiwianatours.ktbooking.service;
 
-import org.apache.commons.lang.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import com.sendgrid.SendGrid;
+import com.sendgrid.SendGridException;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
+
 import java.util.Locale;
 
 /**
@@ -31,7 +31,8 @@ public class MailService {
     private Environment env;
 
     @Inject
-    private JavaMailSenderImpl javaMailSender;
+    private SendGrid sendGridSender;
+
 
     @Inject
     private MessageSource messageSource;
@@ -40,31 +41,36 @@ public class MailService {
      * System default email address that sends the e-mails.
      */
     private String from;
+    private String fromName;
 
     @PostConstruct
     public void init() {
         this.from = env.getProperty("spring.mail.from");
+        this.fromName = env.getProperty("spring.mail.fromName");
     }
 
     @Async
-    public void sendEmail(String to, String subject, String content, boolean isMultipart, boolean isHtml) {
-        log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
-                isMultipart, isHtml, to, subject, content);
+	public void sendEmail(String to, String subject, String content,
+			boolean isMultipart, boolean isHtml) {
+		log.debug("Send e-mail[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",	isMultipart, isHtml, to, subject, content);
 
-        // Prepare message using a Spring helper
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        try {
-            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, isMultipart, CharEncoding.UTF_8);
-            message.setTo(to);
-            message.setFrom(from);
-            message.setSubject(subject);
-            message.setText(content, isHtml);
-            javaMailSender.send(mimeMessage);
-            log.debug("Sent e-mail to User '{}'!", to);
-        } catch (Exception e) {
-            log.warn("E-mail could not be sent to user '{}', exception is: {}", to, e.getMessage());
-        }
-    }
+		// Prepare message using a Spring helper
+		SendGrid.Email email = new SendGrid.Email();
+		email.addTo(to);
+		email.setFrom(this.from);
+		email.setFromName(this.fromName);
+		email.setSubject(subject);
+		email.setHtml(content);
+
+		try {
+			SendGrid.Response response = sendGridSender.send(email);
+			log.debug("Sent e-mail to User '{}'!", to);
+			log.debug("Sent e-mail Response '{}'!", response.getMessage());
+		} catch (SendGridException e) {
+			log.warn("E-mail could not be sent to user '{}', exception is: {}",
+					to, e.getMessage());
+		}
+	}
 
     @Async
     public void sendActivationEmail(final String email, String content, Locale locale) {

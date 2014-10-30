@@ -75,7 +75,7 @@
 							<td>{{booking.tourSchedule.departureDate}}</td>
 							<td>{{booking.tourSchedule.returnDate}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
-							<td>{{booking.booking.amount}}</td>
+							<td>$ {{booking.booking.amount}}</td>
 							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
 							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
 							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>

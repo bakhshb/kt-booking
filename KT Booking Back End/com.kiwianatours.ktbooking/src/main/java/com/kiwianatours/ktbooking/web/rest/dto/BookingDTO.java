@@ -2,6 +2,7 @@ package com.kiwianatours.ktbooking.web.rest.dto;
 
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+
 import com.kiwianatours.ktbooking.domain.Booking;
 import com.kiwianatours.ktbooking.domain.TourSchedule;
 

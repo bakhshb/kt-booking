@@ -3,16 +3,16 @@ package com.kiwianatours.ktbooking.config.metrics;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import com.sendgrid.SendGrid;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @Configuration
 public class JHipsterHealthIndicatorConfiguration {
-
+    
     @Inject
-    private JavaMailSenderImpl javaMailSender;
+    private SendGrid sendGridSender;
 
     @Inject
     private DataSource dataSource;
@@ -24,6 +24,6 @@ public class JHipsterHealthIndicatorConfiguration {
 
     @Bean
     public HealthIndicator mailHealthIndicator() {
-        return new JavaMailHealthIndicator(javaMailSender);
+    	return new JavaMailHealthIndicator(sendGridSender);
     }
 }

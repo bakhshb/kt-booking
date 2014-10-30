@@ -67,7 +67,7 @@
         "title": "Bienvenue,",
         "subtitle": "Vous êtes connecté et pouvez commencer à faire des changements",
         "logged": {
-            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+            "message": "Vous êtes connecté en tant que \"{{username}}\" <a href=\"#/logout\">Déconnexion</a>"
         }
     },
     "activate": {

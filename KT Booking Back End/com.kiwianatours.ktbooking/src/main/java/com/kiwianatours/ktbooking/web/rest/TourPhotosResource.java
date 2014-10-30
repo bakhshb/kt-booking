@@ -12,6 +12,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.codahale.metrics.annotation.Timed;
+import com.kiwianatours.ktbooking.config.Constants;
 import com.kiwianatours.ktbooking.domain.TourPhoto;
 import com.kiwianatours.ktbooking.repository.TourPhotoRepository;
 import com.kiwianatours.ktbooking.service.TourPhotoService;
@@ -45,6 +47,9 @@ public class TourPhotosResource {
 	@Inject
 	private TourPhotoService tourPhotoService;
 	
+	@Inject
+    private Environment env;
+	
 	/**
 	 * POST /rest/tourphotos -> Upload a new upload photos.
 	 */
@@ -61,22 +66,29 @@ public class TourPhotosResource {
 				String parseDate =date.toString();
 				String parseDateNTime = parseTime +"_"+ parseDate;
 				byte[] bytes = file.getBytes();
-				// files
-				File currentDirFile = new File("");
-				String absolutePath = currentDirFile.getAbsolutePath();	
-				File newDirFile = new File(absolutePath);
-				String parentPath = newDirFile.getParent();
-				boolean success = new File(parentPath+ "\\upload").mkdir();
-				boolean exist = new File (parentPath +"\\upload").exists();
+				
+				
+				String finalPath = null;
+				if (env.getActiveProfiles().equals(Constants.SPRING_PROFILE_PRODUCTION)){
+					finalPath = System.getenv("OPENSHIFT_DATA_DIR");
+				}else{
+					// files
+					File currentDirFile = new File("");
+					String absolutePath = currentDirFile.getAbsolutePath();	
+					File newDirFile = new File(absolutePath);
+					finalPath = newDirFile.getParent();
+				}
+				boolean success = new File(finalPath+ "/upload").mkdir();
+				boolean exist = new File (finalPath +"/upload").exists();
 				if (success || exist){
 					BufferedOutputStream stream = new BufferedOutputStream(
-							new FileOutputStream(new File(parentPath +"\\upload\\" +parseDateNTime+file.getOriginalFilename())));
+							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename())));
 					stream.write(bytes);
 					stream.close();
-					responseHeader.set("filename", parseDateNTime+file.getOriginalFilename());
+					responseHeader.set("filename",finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename());
 				}
 			} catch (Exception e) {
-
+				log.error("Upload exception", e);
 			}
 		}
 		return new ResponseEntity<>(responseHeader,HttpStatus.OK);

@@ -21,11 +21,11 @@
 			<th>Amount</th>
 		</tr>
 		<tr style="border: 1px solid #999;  padding: 0.5rem;  text-align: left;">
-			<td th:text="${booking.createdDate}"></td>
+			<td th:text="${#dates.format(booking.createdDate, 'MMM dd,yyyy')}"></td>
 			<td th:text="${tourSchedule.tour.name}"></td>
-			<td th:text="${tourSchedule.departureDate}"></td>
-			<td th:text="${tourSchedule.returnDate}"></td>
-			<td th:text="${booking.amount}"></td>
+			<td th:text="${#dates.format(tourSchedule.departureDate, 'dd MMM')}"></td>
+			<td th:text="${#dates.format(tourSchedule.returnDate, 'dd MMM')}"></td>
+			<td th:text="#{email.booking.dollerSign(${booking.amount})}"></td>
 		</tr>
 	</table>
 	<p>

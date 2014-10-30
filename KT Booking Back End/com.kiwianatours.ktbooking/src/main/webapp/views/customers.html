@@ -105,7 +105,7 @@
 							<th>By<a href=""
 								ng-click="predicate = 'lastModifiedBy';  reverse=!reverse"> <span
 									class="glyphicon glyphicon-sort"></span></a></th>
-							<th></th>
+							<th>Booking</th>
 							<th></th>
 						</tr>
 					</thead>
@@ -123,16 +123,14 @@
 							<td>{{customer.contactNo}}</td>
 							<td>{{customer.lastModifiedDate | date:'yyyy-MM-dd'}}</td>
 							<td>{{customer.lastModifiedBy}}</td>
+							<td><a href="#/customer/booking/{{customer.id}}"
+								class="btn btn-default"><span
+									class="glyphicon glyphicon-eye-open"></span> View</a></td>
 							<td>
-								<div class="btn-group">
-									  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-										Action <span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" role="menu">
-										<li><a href="#/customer/edit/{{customer.id}}"><span class="glyphicon glyphicon-pencil"></span> Edit</a></li>	
-										<li><a href="#/customer/booking/{{customer.id}}"><span class="glyphicon glyphicon-eye-open"></span> Booking</a></li>
-									  </ul>
-								</div>
+								<button type="submit"
+									ng-click="navigate('/customer/edit/', customer.id)" class="btn">
+									<span class="glyphicon glyphicon-pencil"></span> Edit
+								</button>
 							</td>
 							<td>
 								<button type="submit" ng-click="delete(customer.id)"

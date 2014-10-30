@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import com.sendgrid.SendGrid;
+
 import java.util.Properties;
 
 @Configuration
@@ -66,5 +68,15 @@ public class MailConfiguration implements EnvironmentAware {
         sendProperties.setProperty(PROP_TRANSPORT_PROTO, protocol);
         sender.setJavaMailProperties(sendProperties);
         return sender;
+    }
+    
+    @Bean 
+    public SendGrid sendGridSender(){
+    	 log.debug("Configuring mail server SendGrid");
+    	String user = propertyResolver.getProperty(PROP_USER);
+        String password = propertyResolver.getProperty(PROP_PASSWORD);
+    	SendGrid  sendGrid = new SendGrid (user, password);
+		return sendGrid;
+    	
     }
 }
