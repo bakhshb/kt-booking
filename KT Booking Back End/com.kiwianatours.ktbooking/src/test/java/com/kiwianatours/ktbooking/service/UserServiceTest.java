@@ -5,6 +5,7 @@ import com.kiwianatours.ktbooking.domain.PersistentToken;
 import com.kiwianatours.ktbooking.domain.User;
 import com.kiwianatours.ktbooking.repository.PersistentTokenRepository;
 import com.kiwianatours.ktbooking.repository.UserRepository;
+
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.junit.Test;

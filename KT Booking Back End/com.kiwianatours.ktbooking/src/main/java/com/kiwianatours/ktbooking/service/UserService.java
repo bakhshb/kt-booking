@@ -8,6 +8,8 @@ import com.kiwianatours.ktbooking.repository.PersistentTokenRepository;
 import com.kiwianatours.ktbooking.repository.UserRepository;
 import com.kiwianatours.ktbooking.security.SecurityUtils;
 import com.kiwianatours.ktbooking.service.util.RandomUtil;
+
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -135,7 +138,7 @@ public class UserService {
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
-    	LocalDate now = new LocalDate();
+    	DateTime now = new DateTime();
         List<User> users = userRepository.findNotActivatedUsersByCreationDateBefore(now.minusDays(3));
         for (User user : users) {
             log.debug("Deleting not activated user {}", user.getLogin());
