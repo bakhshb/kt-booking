@@ -47,7 +47,6 @@ ktbookingApp
 					onRouteChangeOff(); 
 					$scope.success ='OK';
 					$scope.insertStatus ='OK';
-					customers = Customer.query();
 				}, function err (data){
 					processError(data.statusText);
 				});

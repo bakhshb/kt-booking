@@ -144,7 +144,7 @@ public class WebConfigurer implements ServletContextInitializer {
     	uploadsFilter.addMappingForUrlPatterns (disps, true, "/*");
     	uploadsFilter.setAsyncSupported(true);
 
-    	log.debug("Registering File Uploads Servlet");
+    	log.debug("Registering FileUploads Servlet");
     	ServletRegistration.Dynamic uploadsAdminServlet =
     			servletContext.addServlet("fileUploadsServlet", new FileUploadServlet());
 

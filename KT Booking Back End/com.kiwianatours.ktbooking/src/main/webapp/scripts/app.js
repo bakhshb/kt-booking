@@ -39,14 +39,14 @@ ktbookingApp
                     templateUrl: 'views/settings.html',
                     controller: 'SettingsController',
                     access: {
-                        authorizedRoles: [USER_ROLES.user]
+                        authorizedRoles: [USER_ROLES.all]
                     }
                 })
                 .when('/password', {
                     templateUrl: 'views/password.html',
                     controller: 'PasswordController',
                     access: {
-                        authorizedRoles: [USER_ROLES.user]
+                        authorizedRoles: [USER_ROLES.all]
                     }
                 })
                 .when('/sessions', {
@@ -58,7 +58,7 @@ ktbookingApp
                         }]
                     },
                     access: {
-                        authorizedRoles: [USER_ROLES.user]
+                        authorizedRoles: [USER_ROLES.all]
                     }
                 })
                 .when('/metrics', {
@@ -135,10 +135,12 @@ ktbookingApp
                     $rootScope.userRoles = USER_ROLES;
                     AuthenticationSharedService.valid(next.access.authorizedRoles);
                     if (next.access !== undefined){
-	                    if(!AuthenticationSharedService.isAuthorized(next.access.authorizedRoles)){
-	                    	$rootScope.errorMessage = 'errors.403';
-	                        $location.path('/error').replace();
-	                    }
+                    	if($rootScope.authenticated){
+		                    if(!AuthenticationSharedService.isAuthorized(next.access.authorizedRoles)){
+		                    	$rootScope.errorMessage = 'errors.403';
+		                        $location.path('/error').replace();
+		                    }
+                    	}
                     }
                 });
 
