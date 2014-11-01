@@ -44,15 +44,15 @@
                                 <span translate="global.menu.home">Home</span>
                             </a>
                         </li>
-                        <li class="dropdown pointer">
-						<a data-ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-							<span> 
-								<span class="hidden-tablet" translate="global.menu.tour"> 
-									Tour 
-								</span> 
-								<b	class="caret"></b>
-							</span>
-						</a>
+                        <li class="dropdown pointer" data-ng-switch-when="true" >
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								<span> 
+									<span class="hidden-tablet" translate="global.menu.tour"> 
+										Tour 
+									</span> 
+									<b	class="caret"></b>
+								</span>
+							</a>
 							<ul class="dropdown-menu">
 								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/tour">&#xA0; Tour</a></li>
 								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/tour/schedule">&#xA0;
@@ -61,15 +61,15 @@
 										Calendar</a></li>
 							</ul>
 						</li>
-                        <li class="dropdown pointer">
-						<a data-ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-							<span> 
-								<span class="hidden-tablet" translate="global.menu.customer">
-								 Customer 
-								</span> 
-								<b class="caret"></b>
-							</span>
-						</a>
+                        <li class="dropdown pointer" data-ng-switch-when="true">
+							<a  class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								<span> 
+									<span class="hidden-tablet" translate="global.menu.customer">
+									 Customer 
+									</span> 
+									<b class="caret"></b>
+								</span>
+							</a>
 							<ul class="dropdown-menu">
 								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/customer">&#xA0;Customer</a></li>
 								<li data-ng-switch-when="true"><a href="#/customer/edit/0">&#xA0;Add Customer</a></li>
@@ -224,6 +224,8 @@
 		<script src="bower_components/fullcalendar/dist/gcal.js"></script>
 		<script src="bower_components/jquery-ui/ui/jquery-ui.custom.js"></script>
 		<script src="bower_components/ngprogress/build/ngProgress.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
         <script src="scripts/customer/router_customer.js"></script>
 		<script src="scripts/customer/controller_customer.js"></script>
 		<script src="scripts/customer/service_customer.js"></script>

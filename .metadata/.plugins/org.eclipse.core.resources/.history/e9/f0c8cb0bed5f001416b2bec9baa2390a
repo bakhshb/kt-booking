@@ -1,0 +1,23 @@
+# Error page
+error.title=Your request cannot be processed
+error.subtitle=Sorry, an error has occurred.
+error.status=Status:
+error.message=Message:
+
+# Activation e-mail
+email.activation.title=Kiwianatours activation
+email.activation.greeting=Dear {0}
+email.activation.text1=Your Kiwianatours account has been created, please click on the URL below to activate it:
+email.activation.text2= Please enter your details and change your password
+email.activation.text3= username: {0} 
+email.activation.text4= password:{0}
+email.activation.text5=Regards,
+email.signature=Kiwianatours.
+
+# Booking e-mail
+email.booking.title=Kiwianatours Booking
+email.booking.greeting=Dear {0}
+email.booking.text1=Thank you for booking with us. Please find your booking details below:
+email.booking.dollerSign =$
+email.booking.text2=Regards,
+

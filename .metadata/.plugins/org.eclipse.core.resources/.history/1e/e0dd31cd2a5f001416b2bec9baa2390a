@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+	<property name="now" value="now()" dbms="mysql,h2" />
+	<property name="now" value="current_timestamp" dbms="postgresql" />
+
+	<!-- Kiwianatours database -->
+
+	<changeSet id="2" author="baraa">
+
+		<createTable tableName="T_CUSTOMER">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="first_name" type="varchar(50)" />
+			<column name="last_name" type="varchar(50)" />
+			<column name="birthday" type="date" />
+			<column name="permission_from" type="varchar(100)" />
+			<column name="gender" type="varchar(10)" />
+			<column name="nationality" type="varchar(100)" />
+			<column name="email" type="varchar(100)">
+				<constraints unique="true">
+			</column>
+			<column name="contact_no" type="varchar(11)" />
+			<column name="additional_info" type="text" />
+			<column name="created_by" type="varchar(50)" defaultValue="system">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="varchar(50)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
+
+		<createTable tableName="T_BOOKING">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="customer_id" type="bigint" />
+			<column name="payment_method" type="varchar(50)" />
+			<column name="amount" type="double" />
+			<column name="status" type="int" defaultValue="1" />
+			<column name="created_by" type="varchar(50)" defaultValue="system">
+				<constraints nullable="false" />
+			</column>
+			<column name="created_date" type="timestamp" defaultValueDate="${now}">
+				<constraints nullable="false" />
+			</column>
+			<column name="last_modified_by" type="varchar(50)" />
+			<column name="last_modified_date" type="timestamp" />
+		</createTable>
+
+		<createTable tableName="T_TOUR_BOOKING">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="booking_id" type="bigint" />
+			<column name="tour_schedule_id" type="bigint" />
+			<column name="booking_date" type="timestamp" defaultValueDate="${now}" />
+		</createTable>
+
+		<createTable tableName="T_TOUR">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(100)" />
+			<column name="activated" type="boolean" defaultValueBoolean="false"	valueBoolean="false">
+				<constraints nullable="false" />
+			</column>
+			<column name="short_description" type="text" />
+			<column name="description" type="text" />
+		</createTable>
+
+		<createTable tableName="T_TOUR_SCHEDULE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tour_id" type="bigint" />
+			<column name="depature_date" type="date" />
+			<column name="return_date" type="date" />
+			<column name="price" type="double" />
+			<column name="attending" type="int" defaultValue="0" />
+		</createTable>
+
+		<createTable tableName="T_TOUR_PHOTO">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tour_id" type="bigint" />
+			<column name="photo" type="varchar(100)" />
+			<column name="activated" type="boolean" defaultValueBoolean="false"	valueBoolean="false" />
+		</createTable>			
+
+		<addForeignKeyConstraint baseColumnNames="customer_id"
+			baseTableName="T_BOOKING" constraintName="fk_customer_booking"
+			referencedColumnNames="id" referencedTableName="T_CUSTOMER" />
+
+		<addForeignKeyConstraint baseColumnNames="booking_id"
+			baseTableName="T_TOUR_BOOKING" constraintName="fk_booking_tour_booking"
+			referencedColumnNames="id" referencedTableName="T_BOOKING" />
+
+		<addForeignKeyConstraint baseColumnNames="tour_schedule_id"
+			baseTableName="T_TOUR_BOOKING" constraintName="fk_tour_schedule_tour_booking"
+			referencedColumnNames="id" referencedTableName="T_TOUR_SCHEDULE" />
+
+		<addForeignKeyConstraint baseColumnNames="tour_id"
+			baseTableName="T_TOUR_SCHEDULE" constraintName="fk_tour_tour_schedule"
+			referencedColumnNames="id" referencedTableName="T_TOUR" />
+
+		<addForeignKeyConstraint baseColumnNames="tour_id"
+			baseTableName="T_TOUR_PHOTO" constraintName="fk_tour_tour_photo"
+			referencedColumnNames="id" referencedTableName="T_TOUR" />
+
+		<loadData encoding="UTF-8"
+                  file="config/liquibase/customers.csv"
+                  separator=";"
+                  tableName="T_CUSTOMER"/>
+                  
+		<loadData encoding="UTF-8" 
+				file="config/liquibase/tours.csv"
+				separator=";" 
+				tableName="T_TOUR">
+			<column name="activated" type="boolean" />
+		</loadData>
+		<loadData encoding="UTF-8"
+                  file="config/liquibase/tourSchedules.csv"
+                  separator=";"
+                  tableName="T_TOUR_SCHEDULE"/>
+
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,13 @@
+package com.kiwianatours.ktbooking.web.rest;
+
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet(name = "uploads",urlPatterns = {"/uploads/*"})
+@MultipartConfig
+public class Uploads extends HttpServlet {
+	private static final long serialVersionUID = 2857847752169838915L;
+	int BUFFER_LENGTH = 4096;
+
+}

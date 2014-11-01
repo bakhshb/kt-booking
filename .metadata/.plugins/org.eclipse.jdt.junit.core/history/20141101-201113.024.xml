@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="UserServiceTest" project="ktbooking" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.kiwianatours.ktbooking.service.UserServiceTest" time="17.902">
+    <testcase name="testFindNotActivatedUsersByCreationDateBefore" classname="com.kiwianatours.ktbooking.service.UserServiceTest" time="17.694"/>
+    <testcase name="testRemoveOldPersistentTokens" classname="com.kiwianatours.ktbooking.service.UserServiceTest" time="0.208"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,90 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li><a href="#/tour">Tour</a></li>
+				<li class="active">View Photo</li>
+			</ol>
+			<h1>
+				Tour Photo For <small>{{tour.name}}</small>
+			</h1>
+			<div class="alert alert-warning" ng-hide="tourphotos.length == 0">
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;One Item can be primary at time!!
+			</div>
+			<div class="navbar">
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="alert alert-success" data-ng-show="status">
+				&nbsp;&nbsp;{{status}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="error">
+				&nbsp;&nbsp;Error:
+				{{ error }}
+			</div>
+			<br />
+			<div data-ng-show="tourphotos.length == 0">
+				<div class="col-md-12 text-center animated bounceIn">
+					<h4>No Photos found</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+
+				<table class="table table-hover"
+					data-ng-hide="tourphotos.length == 0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Photo Name</th>
+							<th>Primary</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody class="animated fadeInUp">
+						<tr
+							ng-repeat="tourphoto in tourphotos | filter: searchText">
+							<td>{{tourphoto.id}}</td>
+							<td ng-if="extStr(tourphoto.photo) == 'jpg' ">{{tourphoto.photo}}
+							<a href="/uploads/{{tourphoto.photo}}" target="_blank">
+								<span class="glyphicon glyphicon-eye-open"></span></a>
+							</td>
+							<td ng-if="extStr(tourphoto.photo) == 'gif' ">{{tourphoto.photo}}
+							<a href="/uploads/{{tourphoto.photo}}" target="_blank">
+								<span class="glyphicon glyphicon-eye-open"></span></a>
+							</td>
+							<td ng-if="tourphoto.activated == 1" class="success">Enabled</td>
+							<td ng-if="tourphoto.activated == 0" class="danger">Disabled</td>
+							<td>
+								<button type="submit" ng-click="primary(tour.id,tourphoto.id)"
+									class="btn btn-primary">
+									<span class="glyphicon glyphicon-ok"></span> Primary
+								</button>
+							</td>
+							<td>
+								<button type="submit" ng-click="delete(tourphoto.id)"
+									class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

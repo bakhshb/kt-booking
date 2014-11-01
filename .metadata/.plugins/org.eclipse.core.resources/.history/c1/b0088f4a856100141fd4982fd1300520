@@ -1,0 +1,215 @@
+<div>
+	<div class="row">
+		<div class="col-md-12">
+			<ol class="breadcrumb">
+				<li data-ng-if="isAuthorized(userRoles.admin)"><a href="#/customer">Customer</a></li>
+				<li class="active" data-ng-hide="customer.id != null">Add
+					Customer</li>
+				<li class="active" data-ng-hide="customer.id == null">{{
+					customer.firstName + ' ' + customer.lastName }}</li>
+			</ol>
+			<h1>
+				<span class="glyphicon glyphicon-edit"></span> {{title}} Customer <small>{{
+					customer.firstName + ' ' + customer.lastName }} <span
+					data-ng-hide="customer.id == null"></span><a
+					href="#/customer/booking/{{customer.id}}"
+					data-ng-hide="customer.id == null">View Booking</a>
+				</small>
+			</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div data-ng-show="success">
+				<div class="alert alert-success" data-ng-show="insertStatus">
+					&nbsp;&nbsp;<Strong>Customer
+					has been inserted!</Strong>&nbsp; the booking details has been sent to the customer email.
+				</div>
+				<div class="alert alert-warning" data-ng-show="insertStatus">
+					<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;click
+					<a href="javascript:history.go(0)">here</a> to enter new customer
+				</div>
+			
+				<div class="alert alert-success" data-ng-show="updateStatus">
+					&nbsp;&nbsp;<Strong>Customer
+					has been Updated!</Strong>
+				</div>
+			</div>
+			<div class="alert alert-warning"  data-ng-show="!success && customer.id == null">
+					<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Please check if customer exist by email
+					
+			</div>
+			<form data-ng-show="!success" name="form" role="form" novalidate data-ng-submit="saveCustomer()" data-show-validation>
+			
+				<div class="form-group">
+					<label>First Name</label> 
+					<input type="text" name="firstName"	class="form-control" data-ng-model="customer.firstName"	placeholder="First Name"
+							 data-ng-minlength=1 data-ng-maxlength=50 required >
+					<div data-ng-show="form.firstName.$dirty && form.firstName.$invalid">
+						<p class="help-block" data-ng-show="form.firstName.$error.required">
+							First Name is required 
+						</p> 
+						<p class="help-block" data-ng-show="form.firstName.$error.minlength"> 
+						First Name is required to be at least 1 character
+						</p> 
+						<p class="help-block" data-ng-show="form.firstName.$error.maxlength"> 
+						First Name cannot be longer than 50 characters 
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Last Name:</label> 
+					<input type="text" name="lastName" class="form-control" data-ng-model="customer.lastName"
+							placeholder="Last Name" data-ng-minlength=1 data-ng-maxlength=50 required />
+					<div data-ng-show="form.lastName.$dirty && form.lastName.$invalid">
+						<p class="help-block" data-ng-show="form.lastName.$error.required">
+							Last Name is required 
+						</p> 
+						<p class="help-block" data-ng-show="form.lastName.$error.minlength">
+						 Last Name is	required to be at least 1 character 
+					 	</p> 
+					 	<p class="help-block" data-ng-show="form.lastName.$error.maxlength"> 
+					 	Last Name cannot be longer than 50 characters 
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Birthday:</label>
+					<p class="input-group">
+						<input type="text" name="birthday" class="form-control"	data-ng-model="customer.birthday" datepicker-popup="yyyy-MM-dd"	is-open="opened" 
+							min-date="minDate" max-date="'2015-06-22'"	datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
+							close-text="Close" placeholder="yyyy-MM-dd" /> 
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" data-ng-click="open($event)">
+								<i class="glyphicon glyphicon-calendar"></i>
+							</button>
+						</span>
+					</p>
+				</div>
+
+				<div class="form-group"
+					data-ng-if="form.birthday.$dirty && calculateAge(customer.birthday) < 18 || customer.permissionFrom != null">
+
+					<label>Permission:</label> 
+					<input type="text" name="permission" class="form-control" data-ng-model="customer.permissionFrom"
+							placeholder="Permission" data-ng-minlength=1 data-ng-maxlength=100 required />
+				</div>
+				<div class="form-group">
+					<label>Gender:</label>
+					<div class="radio">
+						<label class="radio"> 
+						<input type="radio" name="gender"	value="Male" data-ng-checked="customer.gender == 'Male'"
+								data-ng-model="customer.gender" /> Male
+						</label>
+					</div>
+					<div class="radio">
+						<label class="radio"> 
+						<input type="radio" name="gender" value="Female" data-ng-checked="customer.gender == 'Female'"
+								data-ng-model="customer.gender" /> Female <br />
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Nationality:</label>
+					<country-select name="nationality" class="form-control"	data-ng-model="customer.nationality" required>
+					</country-select>
+				</div>
+				<div class="form-group">
+					<div class="{{errorEmailExists}}">
+						<label>Email:</label>
+						<!-- type="email" causing a problem with Breeze so using regex -->
+						<input type="email" name="email" class="form-control" data-ng-model="customer.email" placeholder="Email" data-ng-minlength=1
+								data-ng-maxlength=100 required data-ng-change="change()" />
+						<div data-ng-show="form.email.$dirty && form.email.$invalid">
+							<p class="help-block" data-ng-show="form.email.$error.required">
+								Email is required 
+							</p> 
+							<p class="help-block" data-ng-show="form.email.$error.minlength"> 
+								Email is required to be at least 1 character 
+							</p> 
+							<p class="help-block" data-ng-show="form.email.$error.maxlength">
+							 Email cannot be longer than 100 characters 
+						 	</p>
+						</div>
+						<div data-ng-show="errorEmailExists">
+							<p class="help-block"><strong>Email is exists</strong></p>
+							<br />
+							<div class="alert alert-warning">
+								<span class="glyphicon glyphicon-info-sign"></span> Click <a
+									href="#/customer/booking/{{id}}">here</a> to book right now,
+								unless you want to update the customer details.
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Phone:</label> 
+					<input type="text" name="contactNo"	class="form-control" data-ng-model="customer.contactNo"
+							placeholder="Contact No" only-num data-ng-maxlength=11 required />
+					<div data-ng-show="form.contactNo.$dirty && form.contactNo.$invalid">
+						<p class="help-block" data-ng-show="form.contactNo.$error.required">
+							Phone No is required 
+						</p>
+						<p class="help-block" data-ng-show="form.contactNo.$error.maxlength">
+							Phone cannot be	longer than 11 characters 
+						</p>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Additional Info:</label>
+					<textarea class="form-control" name="additionalinfo"
+						ng-model="customer.additionalinfo" placeholder="Info" rows="3"></textarea>
+				</div>
+				<hr class="divider">
+				<div class="form-group" data-ng-if="customer.id == null">
+					<label>Tour Name:</label> <select name="tourId"
+						class="form-control" data-ng-model="tour.id" required>
+						<option selected disabled value="">-- Select Tour Name --</option>
+						<option data-ng-repeat="tour in tours" value="{{tour.id}}">{{tour.name}}</option>
+					</select>
+				</div>
+				<div class="form-group" data-ng-if="customer.id == null">
+					<label>Departure Date:</label> 
+					<select name="tourScheduleId"	class="form-control" data-ng-model="customer.tourSchedule.id"
+							data-ng-disabled="form.tourId.$invalid" required>
+						<option selected disabled value="">-- Select Departure Date --</option>
+						<option data-ng-repeat="tourSchedule in tourSchedules |filter: tour.id"	value="{{tourSchedule.id}}"
+							data-ng-hide="tourSchedule.departureDate < {{yesterday}}">{{tourSchedule.departureDate}}</option>
+					</select>
+				</div>
+				<div class="form-group" ng-if="customer.id == null">
+					<label>payment Method:</label> 
+					<select	name="tourSchedulePaymentMethod" class="form-control" ng-model="customer.booking.paymentMethod"
+						ng-disabled="form.tourScheduleId.$invalid" required>
+						<option selected disabled value="">-- Select Payment Method --</option>
+						<option value="Cash">Cash</option>
+						<option value="EFTPOS">EFTPOS</option>
+						<option value="Credit Card">Credit Card</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+						<span class="glyphicon glyphicon-save"></span> {{buttonText}}
+					</button>
+					&nbsp;&nbsp;
+					<button type="button" class="btn " ng-click="clear()">
+						<span class="glyphicon glyphicon-refresh"></span> Clear
+					</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-danger" data-ng-if="customer.id > 0"
+						data-ng-click="deleteCustomer()">
+						<span class="glyphicon glyphicon-remove-circle"></span> Delete
+					</button>
+				</div>
+				<div class="form-group">
+					<div class="alert alert-danger" data-ng-show="error">
+						&nbsp;&nbsp;Error:
+						{{ error }}
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+</div>

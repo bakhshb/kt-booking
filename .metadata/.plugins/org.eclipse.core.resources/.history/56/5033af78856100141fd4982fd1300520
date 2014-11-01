@@ -1,0 +1,171 @@
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<ol class="breadcrumb">
+				<li class="active">Tour</li>
+			</ol>
+			<h1>Tour</h1>
+			<div class="navbar">
+				<ul class="nav navbar-nav">
+					<li><a href="" data-ng-click="clear()"
+						data-target="#saveTourModal" data-toggle="modal">&#xA0;<span
+							class="glyphicon glyphicon-plus"></span> Add Tour
+					</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="alert alert-success" data-ng-show="status">
+				&nbsp;&nbsp;{{status}}
+			</div>
+
+			<div class="alert alert-danger" data-ng-show="error">
+				&nbsp;&nbsp;Error:
+				{{ error }}
+			</div>
+			<div data-ng-show="tours.length == 0">
+				<div class="col-md-12 text-center animated bounceIn">
+					<h4>No Tours found</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="saveTourModal" tabindex="-1" role="dialog"
+		data-aria-labelledby="myTourLabel" data-aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form name="form" role="form" novalidate class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+					data-ng-submit="create()" data-show-validation>
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							data-aria-hidden="true" data-ng-click="clear()">&times;</button>
+						<h4 class="modal-title" id="myTourLabel">
+							<span class="glyphicon glyphicon-edit"></span> Create or edit a
+							Tour
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>ID</label> <input type="text" class="form-control"
+								name="id" data-ng-model="tour.id" readonly>
+						</div>
+
+						<div class="form-group">
+							<label>Name</label>
+							<input type="text" class="form-control"	name="tour" data-ng-model="tour.name" placeholder="Tour Name"
+								data-ng-minlength=1 data-ng-maxlength=50 required>
+							<div data-ng-show="form.tour.$dirty && form.tour.$invalid">
+								<p class="help-block" data-ng-show="form.tour.$error.required">
+									Tour Name is required 
+								</p> 
+								<p class="help-block" data-ng-show="form.tour.$error.minlength"> 
+									Tour Name is required to be at least 1 character </p> 
+								<p class="help-block" data-ng-show="form.tour.$error.maxlength"> 
+									Tour Name cannot be longer than 50 characters </p>
+							</div>
+						</div>
+						<div class="form-group">
+						<label>Front-End Menu</label>
+							<div class="radio">
+								<label> 
+								<input type="radio" name="optionsRadios" ng-model="tour.activated" required value="true"
+										checked> Show
+								</label>
+							</div>
+							<div class="radio">
+								<label> 
+								<input type="radio" name="optionsRadios" ng-model="tour.activated" required value="false">
+									Hide
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>Short Description</label>
+							<textarea name="shortDescription" class="form-control"
+								ng-model="tour.shortDescription"
+								placeholder="Short Description 200 Words" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Long Description</label>
+							<textarea name="description" class="form-control"
+								ng-model="tour.description" placeholder="Long Description"
+								rows="8"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal"	ng-click="clear()">
+							<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+						</button>
+						<button type="submit" ng-disabled="form.$invalid"	class="btn btn-primary">
+							<span class="glyphicon glyphicon-save"></span> Save
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+
+				<table class="table table-hover " data-ng-hide="tours.length == 0" >
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name <a href=""
+								ng-click="predicate = 'name';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th>Menu <a href=""
+								ng-click="predicate = 'activated';  reverse=!reverse"> <span
+									class="glyphicon glyphicon-sort"></span></a></th>
+							<th></th>
+							<th>Photo</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody class="animated fadeInUp">
+						<tr
+							dir-paginate="tour in tours | filter: searchText | itemsPerPage: 25 | orderBy:predicate:reverse">
+							<td>{{tour.id}}</td>
+							<td>{{tour.name}}</td>
+							<td ng-if="tour.activated == 1" class="success">Show</td>
+							<td ng-if="tour.activated == 0" class="danger">Hide</td>
+							<td></td>
+							<td><a href="#/tour/photo/{{tour.id}}"
+								class="btn btn-default"><span
+									class="glyphicon glyphicon-eye-open"></span> View</a> <a
+								href="#/tour/photo/upload/{{tour.id}}" class="btn btn-success"><span
+									class="glyphicon glyphicon-open"></span> Upload</a></td>
+							<td>
+								<button type="submit" ng-click="update(tour.id)" class="btn">
+									<span class="glyphicon glyphicon-pencil"></span> Edit
+								</button>
+								<button type="submit" ng-click="delete(tour.id)"
+									class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove-circle"></span> Delete
+								</button>
+							</td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<dir-pagination-controls boundary-links="true"
+				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		</div>
+	</div>
+</div>

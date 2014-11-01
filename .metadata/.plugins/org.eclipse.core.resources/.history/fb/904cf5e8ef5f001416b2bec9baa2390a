@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{email.booking.title}">Kiwianatours Booking</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>
+      <img src="http://www.rowanovenden.co.nz/development/ktbooking/img/banner.jpg" style="display: inline-block;
+		width: 100%; height: 100px;"/>
+    </p>
+	<p th:text="#{email.booking.greeting(${customer.firstName})}">Dear ,</p>
+	<p th:text="#{email.booking.text1}">Thank you for booking with us.
+		Please find your booking details below:</p>
+	<table style="width: 100%;  border-collapse: collapse;">
+		<tr style="border: 1px solid #999;  padding: 0.5rem;  text-align: left;">
+			<th>Booking Date</th>
+			<th>Tour</th>
+			<th>Departure Date</th>
+			<th>Retrun Date</th>
+			<th>Amount</th>
+		</tr>
+		<tr style="border: 1px solid #999;  padding: 0.5rem;  text-align: left;">
+			<td th:text="${#dates.format(booking.createdDate, 'dd/MMM/yyyy')}"></td>
+			<td th:text="${tourSchedule.tour.name}"></td>
+			<td th:text="${tourSchedule.departureDate}"></td>
+			<td th:text="${#dates.format(tourSchedule.returnDate, 'dd/MM/yyyy')}"></td>
+			<td th:text="#{email.booking.dollerSign(${booking.amount})}"></td>
+		</tr>
+	</table>
+	<p>
+		<span th:text="#{email.booking.text2}">Regards, </span> <br /> 
+		<em	th:text="#{email.signature}">Kiwianatours.</em>
+	</p>
+	<p>
+    <img src="http://www.rowanovenden.co.nz/development/ktbooking/img/logo.jpg" style="display: inline-block;
+		width: 200px; height: 100px;"/>
+    </p>
+</body>
+</html>

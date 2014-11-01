@@ -1,0 +1,96 @@
+
+<div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<h1>All Bookings</h1>
+			<div class="navbar">
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<label class="navbarText col-sm-2">Filter:</label>
+						<div class="col-sm-10">
+							<input type="text" data-ng-model="searchText"
+								data-ng-change="searchTextChanged();"
+								class="novalidate form-control" />
+						</div>
+					</div>
+				</form>
+			</div>
+			<div data-ng-show="bookings.length == 0">
+				<div class="col-md-12 text-center animated bounceIn">
+					<h4>No bookings found</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-12">
+			<div class="table-responsive">
+				<table class="table table-hover"
+					data-ng-hide="bookings.length == 0">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Full Name<a href=""
+								ng-click="predicate = 'booking.customer.firstName';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Nationality<a href=""
+								ng-click="predicate = 'booking.customer.nationality';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Booking Date<a href=""
+								ng-click="predicate = 'booking.createdDate';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Tour<a href=""
+								ng-click="predicate = 'tourSchedule.tour.name';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Departure<a href=""
+								ng-click="predicate = 'tourSchedule.departureDate';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Return<a href=""
+								ng-click="predicate = 'tourSchedule.returnDate';  reverse=!reverse">
+									<span class="glyphicon glyphicon-sort"></span>
+							</a></th>
+							<th>Payment</th>
+							<th>Amount</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody class="animated fadeInUp">
+						<tr dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
+							<td>{{booking.id}}</td>
+							<td>{{booking.booking.customer.firstName +" "+
+								booking.booking.customer.lastName}} <a
+								href="#/customer/booking/{{booking.booking.customer.id}}"><span
+									class="glyphicon glyphicon-eye-open"></span></a>
+							</td>
+							<td>{{booking.booking.customer.nationality}}</td>
+							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{booking.tourSchedule.tour.name}} <a
+								href="#/tour/schedule/booking/{{booking.tourSchedule.id}}"><span
+									class="glyphicon glyphicon-eye-open"></span></a></td>
+							<td>{{booking.tourSchedule.departureDate}}</td>
+							<td>{{booking.tourSchedule.returnDate}}</td>
+							<td>{{booking.booking.paymentMethod}}</td>
+							<td>{{booking.booking.amount}}</td>
+							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
+							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
+							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
+							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<dir-pagination-controls boundary-links="true"
+				on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,5 @@
+package com.kiwianatours.ktbooking.web.rest;
+
+public class Uploads {
+
+}
