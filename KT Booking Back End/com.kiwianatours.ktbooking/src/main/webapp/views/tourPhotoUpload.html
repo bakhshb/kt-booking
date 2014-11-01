@@ -28,7 +28,7 @@
 
 				<!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
 				<div nv-file-drop="" uploader="uploader"
-					options="{ url: 'app/rest/uploadphotos' }">
+					options="{ url: '/uploads' }">
 					<div nv-file-over="" uploader="uploader"
 						over-class="another-file-over-class"
 						class="well well-lg text-center">
@@ -39,9 +39,9 @@
 			</div>
 
 			<!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
-			Multiple <input type="file" nv-file-select="" uploader="uploader"
-				multiple /><br /> Single <input type="file" nv-file-select=""
-				uploader="uploader" />
+			Multiple <input type="file" nv-file-select="" uploader="uploader" multiple />
+			<br /> 
+			Single <input type="file" nv-file-select=""	uploader="uploader" />
 		</div>
 		<div class="col-md-9" style="margin-bottom: 40px">
 			<h3>Upload queue</h3>

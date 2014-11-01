@@ -89,7 +89,7 @@
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="tour_id" type="bigint" />
-			<column name="photo" type="varchar(100)" />
+			<column name="photo" type="varchar(500)" />
 			<column name="activated" type="boolean" defaultValueBoolean="false"	valueBoolean="false" />
 		</createTable>			
 

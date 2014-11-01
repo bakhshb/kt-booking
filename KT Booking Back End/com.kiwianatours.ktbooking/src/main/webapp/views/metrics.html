@@ -5,54 +5,6 @@
     <button type="button" class="btn btn-primary" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span>&nbsp;{{'metrics.refresh.button' | translate}}</button>
 </p>
 
-<h3 translate="metrics.health.title">Health Checks</h3>
-<div id="healthCheck" class="row" ng-hide="updatingHealth">
-    <div class="col-md-3" ng-show="healthCheck.db.status == 'UP'">
-        <div class="alert alert-success"><strong translate="metrics.health.database">Database: </strong>OK</div>
-    </div>
-    <div class="col-md-4" ng-show="healthCheck.db.status != 'UP'">
-        <div class="alert alert-danger">
-            <strong translate="metrics.health.database">Database: </strong>ERROR
-            <span ng-show="healthCheck.db.error">
-                <a class="hand" ng-click="showDatabaseException = !showDatabaseException">
-                    <i class="glyphicon glyphicon-eye-open"></i>
-                </a>
-                <div class="popover" ng-show="showDatabaseException">
-                    <div class="popover-title">
-                        <h4>{{'metrics.health.stacktrace' | translate}}<button type="button" class="close" ng-click="showDatabaseException = !showDatabaseException">x</button></h4>
-                    </div>
-                    <div class="popover-content">
-                        <pre>{{healthCheck.db.error}}</pre>
-                    </div>
-                </div>
-            </span>
-
-        </div>
-    </div>
-    <div class="col-md-3" ng-show="healthCheck.mail.status == 'UP'" >
-        <div class="alert alert-success"><strong translate="metrics.health.email">Email: </strong>OK</div>
-    </div>
-    <div class="col-md-4" ng-show="healthCheck.mail.status != 'UP'">
-        <div class="alert alert-danger">
-            <strong translate="metrics.health.email">Email: </strong>ERROR
-            <span ng-show="healthCheck.mail.error">
-                <a class="hand" ng-click="showEmailException = !showEmailException">
-                    <i class="glyphicon glyphicon-eye-open"></i>
-                </a>
-                <div class="popover" ng-show="showEmailException">
-                    <div class="popover-title">
-                        <h4>{{'metrics.health.stacktrace' | translate}}<button type="button" class="close" ng-click="showEmailException = !showEmailException">x</button></h4>
-                    </div>
-                    <div class="popover-content">
-                        <pre>{{healthCheck.mail.error}}</pre>
-                    </div>
-                </div>
-            </span>
-        </div>
-    </div>
-</div>
-<div class="well well-lg" ng-show="updatingHealth" translate="metrics.updating">Updating...</div>
-
 <h3 translate="metrics.jvm.title">JVM Metrics</h3>
 <div class="row" ng-hide="updatingMetrics">
     <div class="col-md-4">
@@ -296,46 +248,44 @@
                 <div class="voffset2">&nbsp;</div>
                 <div class="row" ng-repeat="(k, v) in threadDump | filter:threadDumpFilter">
                     <h5><span class="label" ng-class="getLabelClass(v.threadState)">&nbsp;</span>&nbsp;{{v.threadName}} ({{'metrics.jvm.threads.dump.id' | translate}} {{v.threadId}})</h5>
-					<div class="table-responsive">
-						<table class="table table-condensed">
-							<thead>
-							<tr>
-								<th translate="metrics.jvm.threads.dump.blockedtime">Blocked Time</th>
-								<th translate="metrics.jvm.threads.dump.blockedcount">Blocked Count</th>
-								<th translate="metrics.jvm.threads.dump.waitedtime">Waited Time</th>
-								<th translate="metrics.jvm.threads.dump.waitedcount">Waited Count</th>
-								<th translate="metrics.jvm.threads.dump.lockname">Lock Name</th>
-								<th translate="metrics.jvm.threads.dump.stacktrace">StackTrace</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td>{{v.blockedTime}}</td>
-								<td>{{v.blockedCount}}</td>
-								<td>{{v.waitedTime}}</td>
-								<td>{{v.waitedCount}}</td>
-								<td>{{v.lockName}}</td>
-								<td>
-									<a ng-click="show = !show" data-placement="left" >
-										<span ng-show="!show" translate="metrics.jvm.threads.dump.show">show</span>
-										<span ng-show="show" translate="metrics.jvm.threads.dump.hide">hide</span>
-									</a>
-									<div class="popover left" ng-show="show">
-										<div class="popover-title">
-											<h4>{{'metrics.jvm.threads.dump.stacktrace' | translate}}<button type="button" class="close" ng-click="show = !show">x</button></h4>
-										</div>
-										<div class="popover-content">
-											<div ng-repeat="(stK, stV) in v.stackTrace">
-												{{stV.className}}.{{stV.methodName}}({{stV.fileName}}:{{stV.lineNumber}})
-												<span class="voffset1"></span>
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th translate="metrics.jvm.threads.dump.blockedtime">Blocked Time</th>
+                            <th translate="metrics.jvm.threads.dump.blockedcount">Blocked Count</th>
+                            <th translate="metrics.jvm.threads.dump.waitedtime">Waited Time</th>
+                            <th translate="metrics.jvm.threads.dump.waitedcount">Waited Count</th>
+                            <th translate="metrics.jvm.threads.dump.lockname">Lock Name</th>
+                            <th translate="metrics.jvm.threads.dump.stacktrace">StackTrace</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{v.blockedTime}}</td>
+                            <td>{{v.blockedCount}}</td>
+                            <td>{{v.waitedTime}}</td>
+                            <td>{{v.waitedCount}}</td>
+                            <td>{{v.lockName}}</td>
+                            <td>
+                                <a ng-click="show = !show" data-placement="left" >
+                                    <span ng-show="!show" translate="metrics.jvm.threads.dump.show">show</span>
+                                    <span ng-show="show" translate="metrics.jvm.threads.dump.hide">hide</span>
+                                </a>
+                                <div class="popover left" ng-show="show">
+                                    <div class="popover-title">
+                                        <h4>{{'metrics.jvm.threads.dump.stacktrace' | translate}}<button type="button" class="close" ng-click="show = !show">x</button></h4>
+                                    </div>
+                                    <div class="popover-content">
+                                        <div ng-repeat="(stK, stV) in v.stackTrace">
+                                            {{stV.className}}.{{stV.methodName}}({{stV.fileName}}:{{stV.lineNumber}})
+                                            <span class="voffset1"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">

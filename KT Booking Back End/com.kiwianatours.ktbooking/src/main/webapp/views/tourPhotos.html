@@ -8,9 +8,6 @@
 			<h1>
 				Tour Photo For <small>{{tour.name}}</small>
 			</h1>
-			<div class="alert alert-warning" ng-hide="tourphotos.length == 0">
-				<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;One Item can be primary at time!!
-			</div>
 			<div class="navbar">
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
@@ -22,6 +19,9 @@
 						</div>
 					</div>
 				</form>
+			</div>
+			<div class="alert alert-warning" ng-hide="tourphotos.length == 0">
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;One Item can be primary at time!!
 			</div>
 			<div class="alert alert-success" data-ng-show="status">
 				&nbsp;&nbsp;{{status}}
@@ -58,8 +58,8 @@
 						<tr
 							ng-repeat="tourphoto in tourphotos | filter: searchText">
 							<td>{{tourphoto.id}}</td>
-							<td>{{tourphoto.photo}}<a href="#/{{tourphoto.photo}}">
-								<span class="glyphicon glyphicon-eye-open"></span></a>
+							<td>{{tourphoto.photo}} <a href="/uploads/{{tourphoto.photo}}" target="_blank">
+								<span class="glyphicon glyphicon-floppy-save"></span></a>
 							</td>
 							<td ng-if="tourphoto.activated == 1" class="success">Enabled</td>
 							<td ng-if="tourphoto.activated == 0" class="danger">Disabled</td>

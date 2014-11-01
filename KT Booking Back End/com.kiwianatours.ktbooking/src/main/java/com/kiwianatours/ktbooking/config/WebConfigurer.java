@@ -6,6 +6,7 @@ import com.codahale.metrics.servlets.MetricsServlet;
 import com.kiwianatours.ktbooking.web.filter.CachingHttpHeadersFilter;
 import com.kiwianatours.ktbooking.web.filter.StaticResourcesProductionFilter;
 import com.kiwianatours.ktbooking.web.filter.gzip.GZipServletFilter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -15,6 +16,8 @@ import org.springframework.core.env.Environment;
 
 import javax.inject.Inject;
 import javax.servlet.*;
+
+import java.io.File;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -45,6 +48,7 @@ public class WebConfigurer implements ServletContextInitializer {
             initStaticResourcesProductionFilter(servletContext, disps);
         }
         initGzipFilter(servletContext, disps);
+        initFileUploads(servletContext, disps);
         log.info("Web application fully configured");
     }
 
@@ -127,5 +131,42 @@ public class WebConfigurer implements ServletContextInitializer {
         metricsAdminServlet.addMapping("/metrics/metrics/*");
         metricsAdminServlet.setAsyncSupported(true);
         metricsAdminServlet.setLoadOnStartup(2);
+    }
+    
+    /**
+     * Initializes FileUploads.
+     */
+    private void initFileUploads(ServletContext servletContext, EnumSet<DispatcherType> disps) {
+    	log.debug("Registering FileUploads Filter");
+    	FilterRegistration.Dynamic uploadsFilter = servletContext.addFilter("webappFileUploadsFilter",
+    			new InstrumentedFilter());
+
+    	uploadsFilter.addMappingForUrlPatterns (disps, true, "/*");
+    	uploadsFilter.setAsyncSupported(true);
+
+    	log.debug("Registering File Uploads Servlet");
+    	ServletRegistration.Dynamic uploadsAdminServlet =
+    			servletContext.addServlet("fileUploadsServlet", new FileUploadServlet());
+
+    	uploadsAdminServlet.addMapping("/uploads/*");
+    	uploadsAdminServlet.setAsyncSupported(true);
+    	uploadsAdminServlet.setLoadOnStartup(3);
+    	// check which evn is running
+    	String finalPath = null;
+    	if (env.getActiveProfiles().equals(Constants.SPRING_PROFILE_PRODUCTION)){
+    		finalPath = System.getenv("OPENSHIFT_DATA_DIR");
+    	}else{
+    		// files
+    		File currentDirFile = new File("");
+    		String absolutePath = currentDirFile.getAbsolutePath();	
+    		File newDirFile = new File(absolutePath);
+    		finalPath = newDirFile.getParent();
+    	}
+    	// create the file called upload
+    	boolean success = new File(finalPath+ "/upload").mkdir();
+    	boolean exist = new File (finalPath +"/upload").exists();
+    	if (success || exist){
+    		uploadsAdminServlet.setMultipartConfig(new MultipartConfigElement(finalPath +"/upload/", 1024*1024*5, 1024*1024*5*5, 1024*1024));
+    	}
     }
 }

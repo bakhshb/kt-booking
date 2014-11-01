@@ -48,7 +48,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Full Name<a href=""
-								ng-click="predicate = 'booking.customer.firstName';  reverse=!reverse">
+								data-ng-click="predicate = 'booking.customer.firstName';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
 							<th>Birthday</th>
@@ -56,7 +56,7 @@
 							<th>Phone</th>
 							<th>Nationality</th>
 							<th>Booking Date<a href=""
-								ng-click="predicate = 'booking.createdDate';  reverse=!reverse">
+								data-ng-click="predicate = 'booking.createdDate';  reverse=!reverse">
 									<span class="glyphicon glyphicon-sort"></span>
 							</a></th>
 							<th>Payment</th>
@@ -66,7 +66,7 @@
 					</thead>
 					<tbody class="animated fadeInUp">
 						<tr
-							dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
+							data-dir-paginate="booking in bookings | filter: searchText | itemsPerPage: 25 | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.id}}</td>
 							<td>{{booking.booking.customer.firstName +" "+
 								booking.booking.customer.lastName}} <a
@@ -80,10 +80,10 @@
 							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
 							<td>{{booking.booking.amount}} $</td>
-							<td ng-if="booking.booking.status == 1" class="success">Approved</td>
-							<td ng-if="booking.booking.status == 2" class="warning">Pending</td>
-							<td ng-if="booking.booking.status == 3" class="danger">Refund</td>
-							<td ng-if="booking.booking.status == 4" class="danger">Cancel</td>
+							<td data-ng-if="booking.booking.status == 1" class="success">Approved</td>
+							<td data-ng-if="booking.booking.status == 2" class="warning">Pending</td>
+							<td data-ng-if="booking.booking.status == 3" class="danger">Refund</td>
+							<td data-ng-if="booking.booking.status == 4" class="danger">Cancel</td>
 						</tr>
 					</tbody>
 				</table>

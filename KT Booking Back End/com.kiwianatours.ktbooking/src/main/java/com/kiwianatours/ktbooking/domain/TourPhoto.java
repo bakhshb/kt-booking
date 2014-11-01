@@ -34,8 +34,8 @@ public class TourPhoto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 
-	@Size(min = 1, max = 100)
-	@Column(length = 100)
+	@Size(min = 1, max = 500)
+	@Column(length = 500)
 	private String photo;
 	
 	private boolean activated = false;

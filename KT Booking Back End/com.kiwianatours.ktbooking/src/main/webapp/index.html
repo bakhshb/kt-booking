@@ -21,7 +21,7 @@
 		<link rel="stylesheet"	href="styles/ngProgress.css">
 		<!-- endbuild -->
     </head>
-    <body ng-app="ktbookingApp" ng-controller="MainController">
+    <body data-ng-app="ktbookingApp" data-ng-controller="MainController">
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -45,7 +45,7 @@
                             </a>
                         </li>
                         <li class="dropdown pointer">
-						<a ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						<a data-ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
 							<span> 
 								<span class="hidden-tablet" translate="global.menu.tour"> 
 									Tour 
@@ -54,15 +54,15 @@
 							</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li ng-switch-when="true"  ng-show="isAuthorized(userRoles.admin)"><a href="#/tour">&#xA0; Tour</a></li>
-								<li ng-switch-when="true"  ng-show="isAuthorized(userRoles.admin)"><a href="#/tour/schedule">&#xA0;
+								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/tour">&#xA0; Tour</a></li>
+								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/tour/schedule">&#xA0;
 										Schedule</a></li>
-								<li ng-switch-when="true"><a href="#/tour/schedule/calendar">&#xA0;
+								<li data-ng-switch-when="true"><a href="#/tour/schedule/calendar">&#xA0;
 										Calendar</a></li>
 							</ul>
 						</li>
                         <li class="dropdown pointer">
-						<a ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+						<a data-ng-switch-when="true" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
 							<span> 
 								<span class="hidden-tablet" translate="global.menu.customer">
 								 Customer 
@@ -71,9 +71,9 @@
 							</span>
 						</a>
 							<ul class="dropdown-menu">
-								<li ng-switch-when="true"  ng-show="isAuthorized(userRoles.admin)"><a href="#/customer">&#xA0;Customer</a></li>
-								<li ng-switch-when="true"><a href="#/customer/edit/0">&#xA0;Add Customer</a></li>
-								<li ng-switch-when="true"  ng-show="isAuthorized(userRoles.admin)"><a href="#/booking">&#xA0;Booking</a></li>
+								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/customer">&#xA0;Customer</a></li>
+								<li data-ng-switch-when="true"><a href="#/customer/edit/0">&#xA0;Add Customer</a></li>
+								<li data-ng-switch-when="true"  data-ng-show="isAuthorized(userRoles.admin)"><a href="#/booking">&#xA0;Booking</a></li>
 							</ul>
 						</li>
                         <li class="dropdown pointer">
@@ -85,22 +85,22 @@
                                     <b class="caret"></b>
                                 </span>
                             </a>
-                            <ul class="dropdown-menu" ng-controller="MenuController">
-                                <li ng-switch-when="true"><a href="#/settings">
+                            <ul class="dropdown-menu" data-ng-controller="MenuController">
+                                <li data-ng-switch-when="true"><a href="#/settings">
                                     &#xA0;<span translate="global.menu.account.settings">Settings</span></a></li>
-                                <li ng-switch-when="true"><a href="#/password">
+                                <li data-ng-switch-when="true"><a href="#/password">
                                     &#xA0;<span translate="global.menu.account.password">Password</span></a></li>
-                                <li ng-switch-when="true"><a href="#/sessions">
+                                <li data-ng-switch-when="true"><a href="#/sessions">
                                     &#xA0;<span translate="global.menu.account.sessions">Sessions</span></a></li>
-                                <li ng-switch-when="true" ng-show="isAuthorized(userRoles.admin)"><a href="#/register">
+                                <li data-ng-switch-when="true" ng-show="isAuthorized(userRoles.admin)"><a href="#/register">
                                     &#xA0;<span translate="global.menu.account.register">Create Account</span></a></li>
-                                <li ng-switch-when="true"><a href="#/logout">
+                                <li data-ng-switch-when="true"><a href="#/logout">
                                     &#xA0;<span translate="global.menu.account.logout">Log out</span></a></li>
-                                <li ng-switch-when="false"><a href="#/login">
+                                <li data-ng-switch-when="false"><a href="#/login">
                                     &#xA0;<span translate="global.menu.account.login">Authenticate</span></a></li>
                             </ul>
                         </li>
-                        <li ng-switch-when="true" ng-show="isAuthorized(userRoles.admin)" class="dropdown pointer" ng-controller="AdminController">
+                        <li data-ng-switch-when="true" data-ng-show="isAuthorized(userRoles.admin)" class="dropdown pointer" ng-controller="AdminController">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
                                 <span>                                   
                                     <span class="hidden-tablet" translate="global.menu.admin">Admin</span>
@@ -110,6 +110,8 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#/metrics">
                                     &#xA0;<span translate="global.menu.account.metrics">Metrics</span></a></li>
+                                <li><a href="#/health">
+                                    &#xA0;<span translate="global.menu.account.health">Health</span></a></li>
                                 <li><a href="#/audits">
                                     &#xA0;<span translate="global.menu.account.audits">Audits</span></a></li>
                                 <li><a href="#/logs">
@@ -118,7 +120,7 @@
                                     &#xA0;<span translate="global.menu.account.apidocs">API Docs</span></a></li>
                             </ul>
                         </li>
-                        <li class="dropdown pointer" ng-controller="LanguageController">
+                        <li class="dropdown pointer" data-ng-controller="LanguageController">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
                                 <span>                                    
                                     <span class="hidden-tablet" translate="global.menu.language">Language</span>
@@ -126,8 +128,8 @@
                                 </span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li active-menu="{{key}}" ng-repeat="(key, language) in languages">
-                                    <a href="javascript:;" ng-click="changeLanguage(key)">{{language}}</a>
+                                <li active-menu="{{key}}" data-ng-repeat="(key, language) in languages">
+                                    <a href="javascript:;" data-ng-click="changeLanguage(key)">{{language}}</a>
                                 </li>
                             </ul>
                         </li>
@@ -136,7 +138,7 @@
             </div>
         </nav>
         <div class="container">
-            <div class="well" ng-view=""></div>
+            <div class="well" data-ng-view=""></div>
         </div>
 		 <div class="footer">
 			<div class="container">

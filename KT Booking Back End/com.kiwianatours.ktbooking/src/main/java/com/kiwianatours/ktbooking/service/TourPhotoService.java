@@ -7,9 +7,11 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kiwianatours.ktbooking.config.Constants;
 import com.kiwianatours.ktbooking.domain.Tour;
 import com.kiwianatours.ktbooking.domain.TourPhoto;
 import com.kiwianatours.ktbooking.repository.TourPhotoRepository;
@@ -26,6 +28,9 @@ public class TourPhotoService {
 
 	@Inject
 	private TourRepository tourRepository;
+	
+	@Inject
+    private Environment env;
     
     /*
      * primary photo
@@ -63,7 +68,18 @@ public class TourPhotoService {
     	TourPhoto tourPhoto = tourPhotoRepository.findOne(id);
 		if (tourPhoto != null){
 			try{
-				File location = new File(tourPhoto.getPhoto());
+				String finalPath = null;
+				if (env.getActiveProfiles().equals(Constants.SPRING_PROFILE_PRODUCTION)){
+					finalPath = System.getenv("OPENSHIFT_DATA_DIR");
+				}else{
+					// files
+					File currentDirFile = new File("");
+					String absolutePath = currentDirFile.getAbsolutePath();	
+					File newDirFile = new File(absolutePath);
+					finalPath = newDirFile.getParent();
+				}
+				
+				File location = new File(finalPath +"/upload/" +tourPhoto.getPhoto());
 				location.delete();
 				tourPhotoRepository.delete(id);
 				log.debug("Deleted Information for TourPhoto: {}", tourPhoto);

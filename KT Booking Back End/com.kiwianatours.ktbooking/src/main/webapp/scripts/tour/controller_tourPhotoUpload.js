@@ -18,7 +18,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 
 
 	var uploader = $scope.uploader = new FileUploader({
-		url: 'app/rest/tourphotos'
+		url: '/uploads'
 	});
 
 	// FILTERS

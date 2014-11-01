@@ -1,7 +1,6 @@
 package com.kiwianatours.ktbooking;
 
 import com.kiwianatours.ktbooking.config.Constants;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -44,14 +43,6 @@ public class Application {
             log.info("Running with Spring profile(s) : {}", Arrays.toString(env.getActiveProfiles()));
         }
     }
-    
-    @Bean
-    public MultipartConfigElement multipartConfigElement() {
-		MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize("5MB");
-        factory.setMaxRequestSize("5MB");
-        return factory.createMultipartConfig();
-    }
 
     /**
      * Main method, used to run the application.
@@ -80,5 +71,13 @@ public class Application {
             app.setAdditionalProfiles(Constants.SPRING_PROFILE_DEVELOPMENT);
         }
     }
+    
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+		MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize("5MB");
+        factory.setMaxRequestSize("5MB");
+        return factory.createMultipartConfig();
+    } 
     
 }

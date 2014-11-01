@@ -25,13 +25,13 @@ public class DatabaseHealthIndicator extends AbstractHealthIndicator {
     private static Map<String, String> queries = new HashMap<>();
 
     static {
-        queries.put("HSQL Database Engine",
+       /* queries.put("HSQL Database Engine",
             "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SYSTEM_USERS");
         queries.put("Oracle", "SELECT 'Hello' from DUAL");
-        queries.put("Apache Derby", "SELECT 1 FROM SYSIBM.SYSDUMMY1");
+        queries.put("Apache Derby", "SELECT 1 FROM SYSIBM.SYSDUMMY1");*/
         queries.put("MySQL", "SELECT 1");
-        queries.put("PostgreSQL", "SELECT 1");
-        queries.put("Microsoft SQL Server", "SELECT 1");
+        /*queries.put("PostgreSQL", "SELECT 1");
+        queries.put("Microsoft SQL Server", "SELECT 1");*/
     }
 
     private static String DEFAULT_QUERY = "SELECT 1";

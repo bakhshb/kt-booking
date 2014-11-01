@@ -87,6 +87,9 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 			$scope.status = null;
 		}, 3000);
 	};
-
+	
+	$scope.extStr = function (filename) {
+		return (/[.]/.exec(filename)) ? /[^.]+$/.exec(filename) : undefined;
+	};
 
 });
