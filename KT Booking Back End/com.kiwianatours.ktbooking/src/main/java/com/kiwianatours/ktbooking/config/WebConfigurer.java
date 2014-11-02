@@ -3,6 +3,7 @@ package com.kiwianatours.ktbooking.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.kiwianatours.ktbooking.web.filter.CORSFilter;
 import com.kiwianatours.ktbooking.web.filter.CachingHttpHeadersFilter;
 import com.kiwianatours.ktbooking.web.filter.StaticResourcesProductionFilter;
 import com.kiwianatours.ktbooking.web.filter.gzip.GZipServletFilter;
@@ -49,6 +50,7 @@ public class WebConfigurer implements ServletContextInitializer {
         }
         initGzipFilter(servletContext, disps);
         initFileUploads(servletContext, disps);
+        initCorsFilter(servletContext, disps);
         log.info("Web application fully configured");
     }
 
@@ -161,5 +163,23 @@ public class WebConfigurer implements ServletContextInitializer {
     	if (success || exist){
     		uploadsAdminServlet.setMultipartConfig(new MultipartConfigElement(finalPath +"/upload/", 1024*1024*5, 1024*1024*5*5, 1024*1024));
     	}
+    }
+    
+    /**
+     * Initializes HTTP access control (CORS).
+     */
+    private void initCorsFilter (ServletContext servletContext, EnumSet<DispatcherType> disps) {
+    	log.debug("Registering HTTP access control (CORS)");
+        FilterRegistration.Dynamic corsFilter =
+                servletContext.addFilter("corsFilter", new CORSFilter());
+        
+        Map<String, String> parameters = new HashMap<>();
+        corsFilter.setInitParameters(parameters);
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tours/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourschedules/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourphotos/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/bookings/*");
+
+        corsFilter.setAsyncSupported(true);
     }
 }
