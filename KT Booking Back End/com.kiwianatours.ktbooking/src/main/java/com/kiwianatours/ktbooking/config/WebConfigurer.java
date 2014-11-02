@@ -178,6 +178,7 @@ public class WebConfigurer implements ServletContextInitializer {
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tours/*");
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourschedules/*");
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourphotos/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/uploads/*");
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/bookings/*");
 
         corsFilter.setAsyncSupported(true);
