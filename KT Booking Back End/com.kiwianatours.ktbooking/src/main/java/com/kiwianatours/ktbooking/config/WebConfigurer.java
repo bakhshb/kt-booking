@@ -137,13 +137,6 @@ public class WebConfigurer implements ServletContextInitializer {
      * Initializes FileUploads.
      */
     private void initFileUploads(ServletContext servletContext, EnumSet<DispatcherType> disps) {
-    	log.debug("Registering FileUploads Filter");
-    	FilterRegistration.Dynamic uploadsFilter = servletContext.addFilter("webappFileUploadsFilter",
-    			new InstrumentedFilter());
-
-    	uploadsFilter.addMappingForUrlPatterns (disps, true, "/*");
-    	uploadsFilter.setAsyncSupported(true);
-
     	log.debug("Registering FileUploads Servlet");
     	ServletRegistration.Dynamic uploadsAdminServlet =
     			servletContext.addServlet("fileUploadsServlet", new FileUploadServlet());

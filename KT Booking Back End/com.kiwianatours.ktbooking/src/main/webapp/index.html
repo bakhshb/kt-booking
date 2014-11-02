@@ -44,8 +44,8 @@
                                 <span translate="global.menu.home">Home</span>
                             </a>
                         </li>
-                        <li class="dropdown pointer" data-ng-switch-when="true" >
-							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                        <li class="dropdown pointer" data-ng-switch-when="true">
+							<a class="dropdown-toggle" data-ng-toggle="dropdown" href="javascript:;" >
 								<span> 
 									<span class="hidden-tablet" translate="global.menu.tour"> 
 										Tour 
@@ -62,7 +62,7 @@
 							</ul>
 						</li>
                         <li class="dropdown pointer" data-ng-switch-when="true">
-							<a  class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+							<a  class="dropdown-toggle" data-ng-toggle="dropdown" href="javascript:;">
 								<span> 
 									<span class="hidden-tablet" translate="global.menu.customer">
 									 Customer 
@@ -77,7 +77,7 @@
 							</ul>
 						</li>
                         <li class="dropdown pointer">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            <a class="dropdown-toggle" data-ng-toggle="dropdown" href="javascript:;">
                                 <span>
                                     <span class="hidden-tablet" translate="global.menu.account.main">
                                         Account
@@ -101,7 +101,7 @@
                             </ul>
                         </li>
                         <li data-ng-switch-when="true" data-ng-show="isAuthorized(userRoles.admin)" class="dropdown pointer" ng-controller="AdminController">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            <a class="dropdown-toggle" data-ng-toggle="dropdown" href="javascript:;">
                                 <span>                                   
                                     <span class="hidden-tablet" translate="global.menu.admin">Admin</span>
                                     <b class="caret"></b>
@@ -121,7 +121,7 @@
                             </ul>
                         </li>
                         <li class="dropdown pointer" data-ng-controller="LanguageController">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                            <a class="dropdown-toggle" data-ng-toggle="dropdown" href="javascript:;">
                                 <span>                                    
                                     <span class="hidden-tablet" translate="global.menu.language">Language</span>
                                     <b class="caret"></b>
@@ -224,8 +224,6 @@
 		<script src="bower_components/fullcalendar/dist/gcal.js"></script>
 		<script src="bower_components/jquery-ui/ui/jquery-ui.custom.js"></script>
 		<script src="bower_components/ngprogress/build/ngProgress.min.js"></script>
-		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-		<script src="bower_components/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
         <script src="scripts/customer/router_customer.js"></script>
 		<script src="scripts/customer/controller_customer.js"></script>
 		<script src="scripts/customer/service_customer.js"></script>
@@ -245,5 +243,6 @@
 		<script src="scripts/booking/controller_booking.js"></script>
 		<script src="scripts/booking/service_booking.js"></script>
 		 <!-- endbuild -->
+		
 </body>
 </html>

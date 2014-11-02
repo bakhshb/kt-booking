@@ -85,7 +85,7 @@ public class TourPhotosResource {
 							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename())));
 					stream.write(bytes);
 					stream.close();
-					responseHeader.set("filename",finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename());
+					responseHeader.set("filename",parseDateNTime+file.getOriginalFilename());
 				}
 			} catch (Exception e) {
 				log.error("Upload exception", e);
