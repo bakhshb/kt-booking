@@ -37,7 +37,11 @@
 				</div>
 			</div>
 			<div class="alert alert-warning"  data-ng-show="!success && customer.id == null">
-					<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Please check if customer exist by email
+				<button type="button" class="close" data-dismiss="alert" onclick="#/">
+					  <span aria-hidden="true">&times;</span>
+					  <span class="sr-only">Close</span>
+				</button>
+				<span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;Please check if customer exist by email
 					
 			</div>
 			<form data-ng-show="!success" name="form" role="form" novalidate data-ng-submit="saveCustomer()" data-show-validation>
