@@ -3,7 +3,7 @@ package com.kiwianatours.ktbooking.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
-import com.kiwianatours.ktbooking.web.filter.CORSFilter;
+import com.kiwianatours.ktbooking.web.filter.CorsFilter;
 import com.kiwianatours.ktbooking.web.filter.CachingHttpHeadersFilter;
 import com.kiwianatours.ktbooking.web.filter.StaticResourcesProductionFilter;
 import com.kiwianatours.ktbooking.web.filter.gzip.GZipServletFilter;
@@ -68,6 +68,7 @@ public class WebConfigurer implements ServletContextInitializer {
         compressingFilter.addMappingForUrlPatterns(disps, true, "*.js");
         compressingFilter.addMappingForUrlPatterns(disps, true, "/app/rest/*");
         compressingFilter.addMappingForUrlPatterns(disps, true, "/metrics/*");
+        compressingFilter.addMappingForUrlPatterns(disps, true, "/uploads/*");
         compressingFilter.setAsyncSupported(true);
     }
 
@@ -171,7 +172,7 @@ public class WebConfigurer implements ServletContextInitializer {
     private void initCorsFilter (ServletContext servletContext, EnumSet<DispatcherType> disps) {
     	log.debug("Registering HTTP access control (CORS)");
         FilterRegistration.Dynamic corsFilter =
-                servletContext.addFilter("corsFilter", new CORSFilter());
+                servletContext.addFilter("corsFilter", new CorsFilter());
         
         Map<String, String> parameters = new HashMap<>();
         corsFilter.setInitParameters(parameters);

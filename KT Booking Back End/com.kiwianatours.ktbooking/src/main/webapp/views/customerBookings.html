@@ -47,12 +47,6 @@
 				&nbsp;&nbsp;Error:
 				{{ error }}
 			</div>
-			<div data-ng-show="bookings.length == 0">
-				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No Customer Bookings found</h4>
-				</div>
-			</div>
-
 		</div>
 	</div>
 	<div class="modal fade" id="saveBookingModal" tabindex="-1"
@@ -111,8 +105,7 @@
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<div class="table-responsive">
-				<table class="table table-hover"
-					data-ng-hide="bookings.length == 0" style="font-size: 13px;">
+				<table class="table table-hover" style="font-size: 13px;">
 					<thead>
 						<tr>
 							<th>Created By<a href=""
@@ -178,6 +171,11 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div data-ng-show="bookings.length == 0">
+			<div class="col-md-12 text-center">
+				<h4>No Customer Bookings Found</h4>
 			</div>
 		</div>
 	</div>

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.sendgrid.SendGrid;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
+//import javax.sql.DataSource;
 
 @Configuration
 public class JHipsterHealthIndicatorConfiguration {
@@ -14,13 +14,13 @@ public class JHipsterHealthIndicatorConfiguration {
     @Inject
     private SendGrid sendGridSender;
 
-    @Inject
+    /*@Inject
     private DataSource dataSource;
 
     @Bean
     public HealthIndicator dbHealthIndicator() {
         return new DatabaseHealthIndicator(dataSource);
-    }
+    }*/
 
     @Bean
     public HealthIndicator mailHealthIndicator() {

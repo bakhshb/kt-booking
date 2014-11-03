@@ -189,7 +189,7 @@ ktbookingApp.factory('AuthenticationSharedService', function ($rootScope, $http,
                 $rootScope.authenticated = false;
                 $rootScope.account = null;
 
-                $http.get('app/logout');
+                $http.post('app/logout');
                 Session.invalidate();
                 authService.loginCancelled();
             }

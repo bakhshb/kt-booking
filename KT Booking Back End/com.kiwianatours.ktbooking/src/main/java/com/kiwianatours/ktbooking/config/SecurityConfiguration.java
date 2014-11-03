@@ -4,7 +4,6 @@ import com.kiwianatours.ktbooking.security.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
@@ -16,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
-
 import javax.inject.Inject;
 
 @Configuration
@@ -101,10 +99,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             	.antMatchers("/app/rest/customers/**").authenticated()
             	.antMatchers("/app/rest/bookings/**").permitAll()
             	.antMatchers("/app/rest/tours/**").permitAll()
+            	.antMatchers("/app/rest/tourschedules/**").permitAll()
             	.antMatchers("/app/rest/tourphotos").hasAuthority(AuthoritiesConstants.ADMIN)
             	.antMatchers("/uploads").hasAuthority(AuthoritiesConstants.ADMIN)
             	.antMatchers("/uploads/**").permitAll()
-            	.antMatchers("/app/rest/tourschedules/**").permitAll()
                 .antMatchers("/app/rest/register").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/app/rest/activate").permitAll()
                 .antMatchers("/app/rest/authenticate").permitAll()

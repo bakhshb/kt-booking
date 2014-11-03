@@ -87,7 +87,7 @@ public class FileUploadServlet extends HttpServlet {
 
 		OutputStream output = response.getOutputStream();
 		byte[] bytes = new byte[BUFFER_LENGTH];
-		int read = 0;
+		int read = -1;
 		while ((read = input.read(bytes, 0, BUFFER_LENGTH)) != -1) {
 			output.write(bytes, 0, read);
 			output.flush();

@@ -31,11 +31,6 @@
 				&nbsp;&nbsp;Error:
 				{{ error }}
 			</div>
-			<div data-ng-show="tours.length == 0">
-				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No Tours found</h4>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -159,6 +154,11 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div data-ng-show="tours.length == 0">
+			<div class="col-md-12 text-center">
+				<h4>No Tours Found</h4>
 			</div>
 		</div>
 	</div>

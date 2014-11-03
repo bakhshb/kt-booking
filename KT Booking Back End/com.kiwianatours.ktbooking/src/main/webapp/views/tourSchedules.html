@@ -32,11 +32,6 @@
 			<div class="alert alert-danger" data-ng-show="error">
 				&nbsp;&nbsp;Error:{{ error }}
 			</div>
-			<div data-ng-show="tourSchedules.length == 0">
-				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No Tour Schedules found</h4>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="modal fade" id="saveTourScheduleModal" tabindex="-1"
@@ -199,6 +194,11 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div data-ng-show="tourSchedules.length == 0">
+			<div class="col-md-12 text-center">
+				<h4>No Tour Schedules Found</h4>
 			</div>
 		</div>
 	</div>
