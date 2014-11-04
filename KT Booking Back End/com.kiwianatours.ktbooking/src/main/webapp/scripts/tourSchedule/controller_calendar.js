@@ -1,6 +1,6 @@
 'use strict';
 
-ktbookingApp.controller('CalendarController', function ($scope, $timeout, $http, $filter, TourSchedule, resolvedTourSchedule,ngProgress) {
+ktbookingApp.controller('CalendarController', function ($scope, $timeout, $filter,resolvedTourSchedule,ngProgress) {
 	var tours = resolvedTourSchedule;
 	$scope.events = [];
 	$scope.eventSource = {

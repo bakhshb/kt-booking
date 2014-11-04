@@ -19,7 +19,7 @@ public class CorsFilter implements Filter {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		
 		// As a part of the response to a request, which HTTP methods can be used during the actual request.
-		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+		response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT");
 		
 		// How long the results of a request can be cached in a result cache.
 		response.setHeader("Access-Control-Max-Age", "3600");

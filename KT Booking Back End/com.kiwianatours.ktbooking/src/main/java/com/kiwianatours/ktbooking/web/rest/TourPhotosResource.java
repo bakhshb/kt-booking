@@ -51,9 +51,9 @@ public class TourPhotosResource {
     private Environment env;
 	
 	/**
-	 * POST /rest/tourphotos -> Upload a new upload photos.
+	 * PUT /rest/tourphotos -> Upload a new upload photos.
 	 */
-	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.POST)
+	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.PUT)
 	@Timed
 	public ResponseEntity<TourPhoto> upload(@RequestBody MultipartFile file) {
 		log.debug("REST request to save photo : {}", file);
@@ -95,9 +95,10 @@ public class TourPhotosResource {
 	}
 	
 	/**
-	 * PUT /rest/tourphotos -> Create a new tourphoto.
+	 * POST /rest/tourphotos -> Create a new tourphoto.
+	 * get the name of image and insert it in the database
 	 */
-	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
 	public void create(@RequestBody TourPhotoDTO tourPhotoDTO) {
 		log.debug("REST request to save TourPhotos : {}", tourPhotoDTO);

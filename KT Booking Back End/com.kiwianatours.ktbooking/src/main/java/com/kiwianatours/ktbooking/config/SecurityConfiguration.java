@@ -1,6 +1,8 @@
 package com.kiwianatours.ktbooking.config;
 
 import com.kiwianatours.ktbooking.security.*;
+import com.kiwianatours.ktbooking.web.filter.StatelessCSRFFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -15,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.csrf.CsrfFilter;
+
 import javax.inject.Inject;
 
 @Configuration
@@ -93,6 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .csrf()
                 .disable()
+                .addFilterBefore(new StatelessCSRFFilter(), CsrfFilter.class)
             .headers()
                 .frameOptions().disable()
             .authorizeRequests()

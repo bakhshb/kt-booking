@@ -2,9 +2,13 @@
 
 /* Controllers */
 
-ktbookingApp.controller('MainController', function ($scope, $timeout, ngProgress) {
+ktbookingApp.controller('MainController', function ($scope, $timeout, $http, ngProgress) {
 	ngProgress.start();
 	$timeout(function (){ngProgress.complete();},100); 
+	$scope.init = function () {
+		$http.defaults.xsrfHeaderName = 'X-CSRF-TOKEN';
+		$http.defaults.xsrfCookieName = 'CSRF-TOKEN';
+	};
     });
 
 ktbookingApp.controller('AdminController', function ($scope) {

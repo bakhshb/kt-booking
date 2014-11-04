@@ -21,7 +21,7 @@
 		<link rel="stylesheet"	href="styles/ngProgress.css">
 		<!-- endbuild -->
     </head>
-    <body data-ng-app="ktbookingApp" data-ng-controller="MainController">
+    <body data-ng-app="ktbookingApp" data-ng-controller="MainController" data-ng-init="init()">
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -223,9 +223,7 @@
 		<script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
 		<script src="bower_components/fullcalendar/dist/gcal.js"></script>
 		<script src="bower_components/jquery-ui/ui/jquery-ui.custom.js"></script>
-		<script src="bower_components/ngprogress/build/ngProgress.min.js"></script>
-		<script src="bower_components/spring-security-csrf-token-interceptor/src/spring-security-csrf-token-interceptor.js"></script>
-		
+		<script src="bower_components/ngprogress/build/ngProgress.min.js"></script>		
         <script src="scripts/customer/router_customer.js"></script>
 		<script src="scripts/customer/controller_customer.js"></script>
 		<script src="scripts/customer/service_customer.js"></script>

@@ -4,7 +4,7 @@
 
 var ktbookingApp = angular.module('ktbookingApp', ['http-auth-interceptor', 'tmh.dynamicLocale',
     'ngResource', 'ngRoute', 'ngCookies', 'ktbookingAppUtils', 'pascalprecht.translate', 'truncate',
-    'ui.bootstrap', 'countrySelect','angularFileUpload','angularUtils.directives.dirPagination','ui.calendar','ngProgress','spring-security-csrf-token-interceptor']);
+    'ui.bootstrap', 'countrySelect','angularFileUpload','angularUtils.directives.dirPagination','ui.calendar','ngProgress']);
 
 ktbookingApp
     .config(function ($routeProvider, $httpProvider, $translateProvider, tmhDynamicLocaleProvider, USER_ROLES) {
@@ -180,3 +180,18 @@ ktbookingApp
                     $location.path('');
                 });
         });
+
+ktbookingApp.config(['$httpProvider', function($httpProvider) {
+	//fancy random token
+	function b(a){return a?(a^Math.random()*16>>a/4).toString(16):([1e16]+1e16).replace(/[01]/g,b)}; 
+	
+	$httpProvider.interceptors.push(function() {
+		return {
+			'request': function(config) {
+				// put a new random secret into our CSRF-TOKEN Cookie after each response
+				document.cookie = 'CSRF-TOKEN=' + b();
+				return config;
+			}
+		};
+	});	
+}]);

@@ -25,7 +25,7 @@ public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 2857847752169838915L;
 	int BUFFER_LENGTH = 4096;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("Start uploading Files to {}", request.getServerName());
 		
 		LocalTime time = new LocalTime();
