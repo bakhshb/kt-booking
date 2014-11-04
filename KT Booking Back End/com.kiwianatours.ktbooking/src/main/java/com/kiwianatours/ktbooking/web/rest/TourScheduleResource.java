@@ -91,5 +91,20 @@ public class TourScheduleResource {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 	}
+	
+	/**
+	 * GET /rest/tourschedules/tour/:id -> get all the tourSchedules for a specific tour id
+	 */
+	@RequestMapping(value = "/rest/tourschedules/tour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@Timed
+	public ResponseEntity<List<TourSchedule>> getAllById(@PathVariable Long id) {
+		log.debug("REST request to get all TourSchedules for a tour id");
+		List<TourSchedule> list = tourScheduleRepository.findAllTourScheduleByTourId(id);
+		if (list.size() > 0) {
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 		
 }
