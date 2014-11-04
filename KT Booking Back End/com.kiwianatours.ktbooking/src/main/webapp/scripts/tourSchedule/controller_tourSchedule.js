@@ -43,7 +43,7 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 				$('#saveTourScheduleModal').modal('hide');
 				$scope.clear();
 				$scope.checked = false;
-				processSuccess('TourSchedule was updated!');
+				processSuccess('Tour Schedule was updated!');
 			});
 		};
 	};
