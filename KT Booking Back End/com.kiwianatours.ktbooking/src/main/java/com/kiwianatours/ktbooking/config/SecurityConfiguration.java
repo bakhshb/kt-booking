@@ -97,7 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .csrf()
                 .disable()
-                .addFilterBefore(new StatelessCSRFFilter(), CsrfFilter.class)
+                .addFilterAfter(new StatelessCSRFFilter(), CsrfFilter.class)
             .headers()
                 .frameOptions().disable()
             .authorizeRequests()

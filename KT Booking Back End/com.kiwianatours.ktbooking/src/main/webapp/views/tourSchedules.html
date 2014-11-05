@@ -64,9 +64,9 @@
 						<div class="form-group">
 							<label>Departure Date</label>
 							<p class="input-group">
-								<input type="text" class="form-control" name="departureDate" datepicker-popup="yyyy-MM-dd"
+								<input type="text" class="form-control" name="departureDate" datepicker-popup="yyyy-MMMM-dd"
 									data-ng-model="tourSchedule.departureDate" is-open="departureopened" min-date="minDate" max-date="'2015-06-22'"
-									data-datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" placeholder="yyyy-MM-dd" /> 
+									data-datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" readonly placeholder="Pick Date"/> 
 								<span class="input-group-btn">
 									<button type="button" class="btn btn-default" 	data-ng-click="openDeparture($event)">
 										<i class="glyphicon glyphicon-calendar"></i>
@@ -78,9 +78,9 @@
 							<div class="{{returnDateError}}">
 								<label>Return Date</label>
 								<p class="input-group">
-									<input type="text" class="form-control" name="returnDate"	datepicker-popup="yyyy-MM-dd"
+									<input type="text" class="form-control" name="returnDate"	datepicker-popup="yyyy-MMMM-dd"
 										data-ng-model="tourSchedule.returnDate" is-open="returnopened" min-date="minDate" max-date="'2015-06-22'"
-										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" placeholder="yyyy-MM-dd" /> 
+										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" readonly placeholder="Pick Date"/> 
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" data-ng-click="openReturn($event)">
 											<i class="glyphicon glyphicon-calendar"></i>

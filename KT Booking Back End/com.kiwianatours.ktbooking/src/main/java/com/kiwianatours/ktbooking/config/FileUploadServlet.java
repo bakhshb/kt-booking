@@ -25,7 +25,7 @@ public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 2857847752169838915L;
 	int BUFFER_LENGTH = 4096;
 	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.info("Start uploading Files to {}", request.getServerName());
 		
 		LocalTime time = new LocalTime();
@@ -47,6 +47,7 @@ public class FileUploadServlet extends HttpServlet {
 		}
 		boolean success = new File(finalPath+ "/upload").mkdir();
     	boolean exist = new File (finalPath +"/upload").exists();
+    	log.debug("File Location File Upload Servlet" ,finalPath );
     	if (success || exist){
 			for (Part part : request.getParts()) {
 				InputStream is = request.getPart(part.getName()).getInputStream();

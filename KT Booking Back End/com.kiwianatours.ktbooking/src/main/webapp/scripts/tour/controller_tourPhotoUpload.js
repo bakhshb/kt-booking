@@ -18,8 +18,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 
 
 	var uploader = $scope.uploader = new FileUploader({
-		url: '/uploads',
-		method:'PUT'
+		url: 'app/rest/tourphotos',
 	});
 
 	// FILTERS
@@ -65,7 +64,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 				fileName: headers.filename,
 				tourId: tourId,
 		};
-		TourPhoto.save(tourPhoto);
+		TourPhoto.put(tourPhoto);
 	};
 	uploader.onErrorItem = function(fileItem, response, status, headers) {
 		console.info('onErrorItem', fileItem, response, status, headers);

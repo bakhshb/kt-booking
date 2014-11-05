@@ -68,7 +68,6 @@ public class WebConfigurer implements ServletContextInitializer {
         compressingFilter.addMappingForUrlPatterns(disps, true, "*.js");
         compressingFilter.addMappingForUrlPatterns(disps, true, "/app/rest/*");
         compressingFilter.addMappingForUrlPatterns(disps, true, "/metrics/*");
-        compressingFilter.addMappingForUrlPatterns(disps, true, "/uploads/*");
         compressingFilter.setAsyncSupported(true);
     }
 
@@ -161,6 +160,7 @@ public class WebConfigurer implements ServletContextInitializer {
     	// create the file called upload
     	boolean success = new File(finalPath+ "/upload").mkdir();
     	boolean exist = new File (finalPath +"/upload").exists();
+    	log.debug("File Location Web Config" ,finalPath );
     	if (success || exist){
     		uploadsAdminServlet.setMultipartConfig(new MultipartConfigElement(finalPath +"/upload/", 1024*1024*5, 1024*1024*5*5, 1024*1024));
     	}

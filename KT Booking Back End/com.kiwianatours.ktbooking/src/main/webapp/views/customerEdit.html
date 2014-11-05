@@ -81,9 +81,9 @@
 				<div class="form-group">
 					<label>Birthday:</label>
 					<p class="input-group">
-						<input type="text" name="birthday" class="form-control"	data-ng-model="customer.birthday" datepicker-popup="yyyy-MM-dd"	is-open="opened" 
+						<input type="text" name="birthday" class="form-control"	data-ng-model="customer.birthday" datepicker-popup="yyyy-MMMM-dd"	is-open="opened" 
 							min-date="minDate" max-date="'2015-06-22'"	datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
-							close-text="Close" placeholder="yyyy-MM-dd" /> 
+							close-text="Close" readonly placeholder="Pick Date"/> 
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" data-ng-click="open($event)">
 								<i class="glyphicon glyphicon-calendar"></i>
