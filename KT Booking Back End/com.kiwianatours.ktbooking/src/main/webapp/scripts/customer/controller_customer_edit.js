@@ -9,6 +9,7 @@ ktbookingApp
 	$scope.customer = {};
 	$scope.title = (customerId > 0) ? 'Edit' : 'Add';
 	$scope.buttonText = (customerId > 0) ? 'Update' : 'Add';
+	$scope.customer.birthday= '1990';
 
 	$scope.tours= resolvedTour;
 	var customers = resolvedCustomer;
