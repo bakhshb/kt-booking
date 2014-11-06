@@ -15,7 +15,7 @@
 								</a></small>
 			</h1>
 			<address>
-				Birthday:&#xA0;{{customer.birthday}}<br>
+				Birthday:&#xA0;{{customer.birthday | date:'dd-MMMM-yyyy'}}<br>
 				Gender:&#xA0;{{customer.gender}}<br>
 				Nationality:&#xA0;{{customer.nationality}}<br>
 				Email:&#xA0;{{customer.email}}<br>
@@ -74,9 +74,11 @@
 							<select name="tourSchedule_id"	class="form-control" data-ng-model="customer.tourSchedule.id" required data-ng-disabled="form.tour_id.$invalid">
 								<option selected disabled value="">-- Select Departure Date --</option>
 								<option
-									data-ng-repeat="tourSchedule in tourSchedules |filter: tour.id"
+									data-ng-repeat="tourSchedule in tourSchedules"
 									value="{{tourSchedule.id}}"
-									data-ng-hide="tourSchedule.departureDate < {{yesterday}}">{{tourSchedule.departureDate}}</option>
+									data-ng-hide="tourSchedule.departureDate < {{yesterday}}" data-ng-disabled="tourSchedule.departureDate < {{yesterday}}">
+									{{tourSchedule.departureDate | date:'dd-MMMM-yyyy'}}
+								</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -139,12 +141,12 @@
 						<tr
 							data-dir-paginate="booking in bookings | filter: customer.email |filter:searchText | itemsPerPage: 25  | orderBy:'booking.createdDate':true | orderBy:predicate:reverse">
 							<td>{{booking.booking.customer.createdBy}}</td>
-							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{booking.booking.createdDate | date:'dd-MMM-yyyy'}}</td>
 							<td>{{booking.tourSchedule.tour.name}} <a
 								href="#/tour/schedule/booking/{{booking.tourSchedule.id}}"><span
 									class="glyphicon glyphicon-eye-open"></span></a></td>
-							<td>{{booking.tourSchedule.departureDate}}</td>
-							<td>{{booking.tourSchedule.returnDate}}</td>
+							<td>{{booking.tourSchedule.departureDate | date:'dd-MMM-yyyy'}}</td>
+							<td>{{booking.tourSchedule.returnDate | date:'dd-MMM-yyyy'}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
 							<td>$ {{booking.booking.amount}}</td>
 							<td data-ng-if="booking.booking.status == 1" class="success">Approved</td>

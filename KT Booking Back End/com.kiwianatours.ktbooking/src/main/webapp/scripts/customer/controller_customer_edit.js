@@ -1,7 +1,7 @@
 'use strict';
 
 ktbookingApp
-.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, resolvedTourSchedule, modalService,  ngProgress) {
+.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, TourScheduleTour, modalService,  ngProgress) {
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId)
 			: 0, timer, onRouteChangeOff;
@@ -10,7 +10,6 @@ ktbookingApp
 	$scope.title = (customerId > 0) ? 'Edit' : 'Add';
 	$scope.buttonText = (customerId > 0) ? 'Update' : 'Add';
 
-	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
 	var customers = resolvedCustomer;
 	/*
@@ -34,6 +33,14 @@ ktbookingApp
 
 	});
 
+	$scope.tour={};
+	$scope.tour.id='';
+	$scope.$watch('tour.id', function (newValue, oldValue){
+		if ($scope.tour.id != '') {
+			$scope.tourSchedules = TourScheduleTour.get({id:newValue});
+		}
+
+	});
 
 	/*
 	 * save customer

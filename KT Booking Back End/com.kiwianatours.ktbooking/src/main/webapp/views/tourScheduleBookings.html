@@ -9,8 +9,8 @@
 			<h1>
 				Tour Booking Details <small>{{tourSchedule.tour.name }}</small>
 			</h1>
-			<h5>Departure: {{tourSchedule.departureDate}}&#xA0;&#xA0;
-				Return: {{tourSchedule.returnDate}}</h5>
+			<h5>Departure: {{tourSchedule.departureDate | date:'dd-MMMM-yyyy'}}&#xA0;&#xA0;
+				Return: {{tourSchedule.returnDate | date:'dd-MMMM-yyyy'}}</h5>
 			<h5></h5>
 			<h5>There are {{bookings.length}} bookings</h5>
 			<div class="navbar">
@@ -68,11 +68,11 @@
 								href="#/customer/booking/{{booking.booking.customer.id}}"><span
 									class="glyphicon glyphicon-eye-open"></span></a>
 							</td>
-							<td>{{booking.booking.customer.birthday}}</td>
+							<td>{{booking.booking.customer.birthday | date:'dd-MMM-yyyy'}}</td>
 							<td>{{booking.booking.customer.email}}</td>
 							<td>{{booking.booking.customer.contactNo}}</td>
 							<td>{{booking.booking.customer.nationality}}</td>
-							<td>{{booking.booking.createdDate | date:'yyyy-MM-dd'}}</td>
+							<td>{{booking.booking.createdDate | date:'dd-MMM-yyyy'}}</td>
 							<td>{{booking.booking.paymentMethod}}</td>
 							<td>{{booking.booking.amount}} $</td>
 							<td data-ng-if="booking.booking.status == 1" class="success">Approved</td>
