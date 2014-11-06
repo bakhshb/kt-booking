@@ -32,6 +32,7 @@ ktbookingApp
 	})
 	.when('/tour/schedule/calendar', {
 		templateUrl: 'views/calendar.html',
+		controller: 'CalendarController',
 		access: {
 			authorizedRoles: [USER_ROLES.all]
 		}

@@ -8,6 +8,7 @@ import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.TourScheduleService;
 import com.kiwianatours.ktbooking.web.rest.dto.TourScheduleDTO;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -99,7 +100,8 @@ public class TourScheduleResource {
 	@Timed
 	public ResponseEntity<List<TourSchedule>> getAllById(@PathVariable Long id) {
 		log.debug("REST request to get all TourSchedules for a tour id");
-		List<TourSchedule> list = tourScheduleRepository.findAllTourScheduleByTourId(id);
+		LocalDate localDate = new LocalDate();
+		List<TourSchedule> list = tourScheduleRepository.findAllComingDepartureDate(id, localDate);
 		if (list.size() > 0) {
 			return new ResponseEntity<>(list, HttpStatus.OK);
 		}
