@@ -125,10 +125,10 @@ public class TourPhotosResource {
 			HttpServletResponse response) {
 		log.debug("REST request to get TourPhotos : {}", id);
 		List<TourPhoto> tourPhoto = tourPhotoRepository.findTourPhotosByTourId(id);
-		if (tourPhoto == null){
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if (tourPhoto.size() > 0){
+			return new ResponseEntity<>(tourPhoto, HttpStatus.OK);
 		}	
-		return new ResponseEntity<>(tourPhoto, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**

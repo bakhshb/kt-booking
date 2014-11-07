@@ -1,4 +1,4 @@
-package com.kiwianatours.ktbooking.config;
+package com.kiwianatours.ktbooking.web.rest.upload;
 
 import java.io.File;
 import java.io.FileInputStream;

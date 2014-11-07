@@ -7,10 +7,14 @@ import com.kiwianatours.ktbooking.web.filter.CorsFilter;
 import com.kiwianatours.ktbooking.web.filter.CachingHttpHeadersFilter;
 import com.kiwianatours.ktbooking.web.filter.StaticResourcesProductionFilter;
 import com.kiwianatours.ktbooking.web.filter.gzip.GZipServletFilter;
+import com.kiwianatours.ktbooking.web.rest.upload.FileUploadServlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -29,7 +33,7 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureAfter(CacheConfiguration.class)
-public class WebConfigurer implements ServletContextInitializer {
+public class WebConfigurer implements ServletContextInitializer , EmbeddedServletContainerCustomizer {
 
     private final Logger log = LoggerFactory.getLogger(WebConfigurer.class);
 
@@ -53,7 +57,20 @@ public class WebConfigurer implements ServletContextInitializer {
         initCorsFilter(servletContext, disps);
         log.info("Web application fully configured");
     }
-
+    
+    /**
+     * Set up Mime types.
+     */
+    @Override
+    public void customize(ConfigurableEmbeddedServletContainer container) {
+        MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
+        // IE issue, 
+        mappings.add("html", "text/html;charset=utf-8");
+        // CloudFoundry issue
+        mappings.add("json", "text/html;charset=utf-8");
+        container.setMimeMappings(mappings);
+    }
+    
     /**
      * Initializes the GZip filter.
      */

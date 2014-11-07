@@ -101,9 +101,9 @@ public class TourScheduleResource {
 	public ResponseEntity<List<TourSchedule>> getAllById(@PathVariable Long id) {
 		log.debug("REST request to get all TourSchedules for a tour id");
 		LocalDate localDate = new LocalDate();
-		List<TourSchedule> list = tourScheduleRepository.findAllComingDepartureDate(id, localDate);
-		if (list.size() > 0) {
-			return new ResponseEntity<>(list, HttpStatus.OK);
+		List<TourSchedule> tourSchedule = tourScheduleRepository.findAllComingDepartureDate(id, localDate);
+		if (tourSchedule.size() > 0) {
+			return new ResponseEntity<>(tourSchedule, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}

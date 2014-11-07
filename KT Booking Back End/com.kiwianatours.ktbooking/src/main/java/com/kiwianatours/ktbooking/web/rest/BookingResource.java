@@ -69,6 +69,7 @@ public class BookingResource {
 
     /**
      * GET  /rest/bookings/:id -> get the "id" booking.
+     * get the customer booking by id
      */
     @RequestMapping(value = "/rest/bookings/{id}",
             method = RequestMethod.GET,
@@ -77,14 +78,15 @@ public class BookingResource {
     public ResponseEntity<List<TourBooking>> get(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get booking : {}", id);
         List<TourBooking> tourBooking = bookingService.getCustomerBooking(id);
-        if (tourBooking == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (tourBooking.size() > 0) {
+        	return new ResponseEntity<>(tourBooking, HttpStatus.OK);
         }
-        return new ResponseEntity<>(tourBooking, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
     /**
      * PUT  /rest/bookings/:id -> put the "id" booking.
+     * Update the booking status
      */
     @RequestMapping(value = "/rest/bookings",
             method = RequestMethod.PUT,
@@ -110,6 +112,7 @@ public class BookingResource {
     
     /**
      * GET  /rest/tour/bookings/:id -> get the "id" booking.
+     * get tour schedule booking by id
      */
     @RequestMapping(value = "/rest/tour/bookings/{id}",
             method = RequestMethod.GET,
@@ -118,10 +121,10 @@ public class BookingResource {
     public ResponseEntity<List<TourBooking>> getTourBooking(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get booking : {}", id);
         List<TourBooking> tourBooking = bookingService.getTourBooking(id);
-        if (tourBooking == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (tourBooking.size() > 0) {
+        	return new ResponseEntity<>(tourBooking, HttpStatus.OK);
         }
-        return new ResponseEntity<>(tourBooking, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
 }
