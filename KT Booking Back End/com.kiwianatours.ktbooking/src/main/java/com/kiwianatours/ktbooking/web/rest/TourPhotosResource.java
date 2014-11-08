@@ -81,12 +81,13 @@ public class TourPhotosResource {
 				boolean success = new File(finalPath+ "/upload").mkdir();
 				boolean exist = new File (finalPath +"/upload").exists();
 				if (success || exist){
+					String fileType = file.getContentType().toString().replace("/", ".");
 					BufferedOutputStream stream = new BufferedOutputStream(
-							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename())));
+							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+fileType )));
 					stream.write(bytes);
 					stream.close();
-					responseHeader.set("filename",parseDateNTime+file.getOriginalFilename());
-					log.debug(parseDateNTime+file.getOriginalFilename() + "was uploaded to", finalPath +"/upload/");
+					responseHeader.set("filename",parseDateNTime+fileType);
+					log.debug(parseDateNTime+fileType + " was uploaded to", finalPath +"/upload/");
 				}
 			} catch (Exception e) {
 				log.error("Upload exception", e);

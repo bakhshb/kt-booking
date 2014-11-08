@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-//import javax.activation.MimetypesFileTypeMap;
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,8 +52,9 @@ public class FileUploadServlet extends HttpServlet {
 			for (Part part : request.getParts()) {
 				InputStream is = request.getPart(part.getName()).getInputStream();
 				String fileName = getFileName(part);
-				FileOutputStream os = new FileOutputStream(finalPath +"/upload/" +parseDateNTime+ fileName);
-				response.addHeader("fileName", parseDateNTime+ fileName);
+				String fileType = new MimetypesFileTypeMap().getContentType(fileName).toString().replace("/", ".");
+				FileOutputStream os = new FileOutputStream(finalPath +"/upload/" +parseDateNTime+ fileType);
+				response.addHeader("fileName", parseDateNTime+ fileType);
 				byte[] bytes = new byte[BUFFER_LENGTH];
 				int read = 0;
 				while ((read = is.read(bytes, 0, BUFFER_LENGTH)) != -1) {
@@ -62,7 +63,7 @@ public class FileUploadServlet extends HttpServlet {
 				os.flush();
 				is.close();
 				os.close();
-				log.debug(fileName + " was uploaded to " + finalPath +"/upload/");
+				log.debug(parseDateNTime+ fileType + " was uploaded to " + finalPath +"/upload/");
 			}
     	}
 	}
