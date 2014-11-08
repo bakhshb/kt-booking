@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import javax.activation.MimetypesFileTypeMap;
+//import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -84,7 +84,7 @@ public class FileUploadServlet extends HttpServlet {
 		InputStream input = new FileInputStream(file);
 
 		response.setContentLength((int) file.length());
-		response.setContentType(new MimetypesFileTypeMap().getContentType(file));
+		//response.setContentType(new MimetypesFileTypeMap().getContentType(file));
 
 		OutputStream output = response.getOutputStream();
 		byte[] bytes = new byte[BUFFER_LENGTH];

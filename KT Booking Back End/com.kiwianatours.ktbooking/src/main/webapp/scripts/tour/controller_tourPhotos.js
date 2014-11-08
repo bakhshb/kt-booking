@@ -40,7 +40,7 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 		};
 		modalService.showModal({}, modalOptions).then(function (result) {
 			if (!result) {
-				TourPhoto.update({tourId:tourId, tourPhotoId: tourPhotoId},function () {
+				TourPhoto.put({tourId:tourId, tourPhotoId: tourPhotoId},function () {
 					$scope.tourphotos = TourPhoto.query();
 					processSuccess('Photo Id '+tourPhotoId+' is Primary!');
 				});
