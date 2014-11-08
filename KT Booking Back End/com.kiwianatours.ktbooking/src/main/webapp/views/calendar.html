@@ -46,6 +46,7 @@ $(document).ready(function()
 			event.title = data[i].tour.name; // this should be string
 		    event.start = data[i].departureDate; // this should be date object
 		    event.end = e; // this should be date object
+		    event.url= '#/tour/schedule/booking/'+ data[i].id;
 		    event.allDay = true;
 		    events.push(event);
 		   
@@ -74,7 +75,13 @@ $(document).ready(function()
     		*/
     			selectable: true,
     			selectHelper: true,
-    			});
+    		   	eventClick: function(event) {
+    			        if (event.url) {
+    			            window.open(event.url);
+    			            return false;
+    			        }
+   			    }
+   			});
 
     	}
     	 $('#calendar').fullCalendar('addEventSource',events);

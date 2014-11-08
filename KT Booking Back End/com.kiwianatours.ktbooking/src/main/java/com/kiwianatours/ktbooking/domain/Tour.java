@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.envers.Audited;
 import org.springframework.boot.actuate.audit.listener.AuditListener;
 
@@ -18,6 +20,7 @@ import java.util.Set;
 @Entity
 @EntityListeners(value = AuditListener.class)
 @Table(name = "T_TOUR")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Audited
 public class Tour implements Serializable {
 

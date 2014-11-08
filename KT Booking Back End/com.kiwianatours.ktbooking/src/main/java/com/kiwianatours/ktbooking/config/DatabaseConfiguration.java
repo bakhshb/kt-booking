@@ -72,13 +72,6 @@ public class DatabaseConfiguration implements EnvironmentAware {
         return new HikariDataSource(config);
     }
 
-    @Bean(name = {"org.springframework.boot.autoconfigure.AutoConfigurationUtils.basePackages"})
-    public List<String> getBasePackages() {
-        List<String> basePackages = new ArrayList<>();
-        basePackages.add("com.kiwianatours.ktbooking.domain");
-        return basePackages;
-    }
-
     @Bean
     public SpringLiquibase liquibase(DataSource dataSource) {
         log.debug("Configuring Liquibase");
