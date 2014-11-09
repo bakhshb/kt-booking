@@ -8,6 +8,7 @@ import com.kiwianatours.ktbooking.security.AuthoritiesConstants;
 import com.kiwianatours.ktbooking.service.TourScheduleService;
 import com.kiwianatours.ktbooking.web.rest.dto.TourScheduleDTO;
 
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +101,8 @@ public class TourScheduleResource {
 	@Timed
 	public ResponseEntity<List<TourSchedule>> getAllById(@PathVariable Long id) {
 		log.debug("REST request to get all TourSchedules for a tour id");
-		LocalDate localDate = new LocalDate();
+		DateTimeZone nztimeZone =  DateTimeZone.forID("Pacific/Auckland");
+		LocalDate localDate = new LocalDate(nztimeZone);
 		List<TourSchedule> tourSchedule = tourScheduleRepository.findAllComingDepartureDate(id, localDate);
 		if (tourSchedule.size() > 0) {
 			return new ResponseEntity<>(tourSchedule, HttpStatus.OK);
