@@ -103,7 +103,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             	.antMatchers("/app/rest/customers/**").authenticated()
             	.antMatchers("/app/rest/bookings").permitAll()
-            	.antMatchers("/app/rest/bookings/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            	.antMatchers("/app/rest/bookings/**").authenticated()
             	.antMatchers("/app/rest/tours/**").permitAll()
             	.antMatchers("/app/rest/tourschedules/**").permitAll()
             	.antMatchers("/app/rest/tourphotos").hasAuthority(AuthoritiesConstants.ADMIN)

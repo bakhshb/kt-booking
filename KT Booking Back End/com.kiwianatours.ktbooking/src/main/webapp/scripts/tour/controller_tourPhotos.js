@@ -58,7 +58,7 @@ ktbookingApp.controller('TourPhotoController', function ($scope, $routeParams, $
 		modalService.showModal({}, modalOptions).then(function (result) {
 			if (!result) {
 				TourPhoto.delete({id: id},function () {
-					$scope.tourphotos = TourPhoto.query();
+					$scope.tourphotos = TourPhoto.get({id:tourId});
 					processSuccess('Photo Id: '+id+' was deleted!');
 				});
 			}

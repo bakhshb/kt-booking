@@ -99,7 +99,7 @@ public class TourScheduleResource {
 	 */
 	@RequestMapping(value = "/rest/tourschedules/tour/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
-	public ResponseEntity<List<TourSchedule>> getAllById(@PathVariable Long id) {
+	public ResponseEntity<List<TourSchedule>> getByTourId(@PathVariable Long id) {
 		log.debug("REST request to get all TourSchedules for a tour id");
 		DateTimeZone nztimeZone =  DateTimeZone.forID("Pacific/Auckland");
 		LocalDate localDate = new LocalDate(nztimeZone);

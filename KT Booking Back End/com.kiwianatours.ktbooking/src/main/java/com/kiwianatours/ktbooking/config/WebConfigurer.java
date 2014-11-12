@@ -197,7 +197,7 @@ public class WebConfigurer implements ServletContextInitializer , EmbeddedServle
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourschedules/*");
         corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourphotos/*");
         corsFilter.addMappingForUrlPatterns(disps, true, "/uploads/*");
-        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/bookings/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/bookings");
 
         corsFilter.setAsyncSupported(true);
     }
