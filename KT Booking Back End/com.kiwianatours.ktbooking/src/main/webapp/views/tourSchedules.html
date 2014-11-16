@@ -64,7 +64,7 @@
 						<div class="form-group">
 							<label>Departure Date</label>
 							<p class="input-group">
-								<input type="text" class="form-control" name="departureDate" datepicker-popup="yyyy-MMMM-dd"
+								<input type="text" class="form-control" name="departureDate" datepicker-popup="dd-MMMM-yyyy"
 									data-ng-model="tourSchedule.departureDate" is-open="departureopened" min-date="minDate" max-date="'2015-06-22'"
 									data-datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" readonly placeholder="Pick Date"/> 
 								<span class="input-group-btn">
@@ -78,9 +78,9 @@
 							<div class="{{returnDateError}}">
 								<label>Return Date</label>
 								<p class="input-group">
-									<input type="text" class="form-control" name="returnDate"	datepicker-popup="yyyy-MMMM-dd"
+									<input type="text" class="form-control" name="returnDate"	datepicker-popup="dd-MMMM-yyyy"
 										data-ng-model="tourSchedule.returnDate" is-open="returnopened" min-date="minDate" max-date="'2015-06-22'"
-										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" readonly placeholder="Pick Date"/> 
+										datepicker-options="dateOptions" date-disabled="disabled(date, mode)" data-ng-required="true" close-text="Close" readonly placeholder="Pick Date" /> 
 									<span class="input-group-btn">
 										<button type="button" class="btn btn-default" data-ng-click="openReturn($event)">
 											<i class="glyphicon glyphicon-calendar"></i>
@@ -169,8 +169,8 @@
 							data-dir-paginate="tourSchedule in  tourSchedules | filter: searchText | itemsPerPage: 25 | orderBy:'departureDate':true | orderBy:predicate:reverse">
 							<td>{{tourSchedule.id}}</td>
 							<td>{{tourSchedule.tour.name}}</td>
-							<td>{{tourSchedule.departureDate | date:'dd-MMM-yyyy'}}</td>
-							<td>{{tourSchedule.returnDate | date:'dd-MMM-yyyy'}}</td>
+							<td>{{tourSchedule.departureDate}}</td>
+							<td>{{tourSchedule.returnDate}}</td>
 							<td>$ {{tourSchedule.price}}</td>
 							<td>{{tourSchedule.attending}}</td>
 							<td><a href="#/tour/schedule/booking/{{tourSchedule.id}}"

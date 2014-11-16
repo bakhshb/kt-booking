@@ -106,14 +106,14 @@
 							dir-paginate="customer in customers | filter: searchText | itemsPerPage: 25 | orderBy:'createdDate':true | orderBy:predicate:reverse">
 							<td>{{customer.id}}</td>
 							<td>{{customer.firstName +" "+ customer.lastName}}</td>
-							<td>{{customer.birthday | date:'dd-MMM-yyyy'}}</td>
+							<td>{{customer.birthday}}</td>
 							<td>
 							<span class="{{customer.gender | lowercase}} img-responsive img-rounded " style="height: 40px; width: 40px;  background-size: 40px 40px;"></span>
 							</td>
 							<td>{{customer.nationality}}</td>
 							<td>{{customer.email}}</td>
 							<td>{{customer.contactNo}}</td>
-							<td>{{customer.lastModifiedDate | date:'dd-MMM-yyyy'}}</td>
+							<td>{{customer.lastModifiedDate | date:'yyyy-MM-dd'}}</td>
 							<td>{{customer.lastModifiedBy}}</td>
 							<td><a href="#/customer/booking/{{customer.id}}"
 								class="btn btn-default"><span

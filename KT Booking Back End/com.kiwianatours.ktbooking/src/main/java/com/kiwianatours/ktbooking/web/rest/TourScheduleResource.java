@@ -101,6 +101,7 @@ public class TourScheduleResource {
 	@Timed
 	public ResponseEntity<List<TourSchedule>> getByTourId(@PathVariable Long id) {
 		log.debug("REST request to get all TourSchedules for a tour id");
+		// get todays date new zealand time zone
 		DateTimeZone nztimeZone =  DateTimeZone.forID("Pacific/Auckland");
 		LocalDate localDate = new LocalDate(nztimeZone);
 		List<TourSchedule> tourSchedule = tourScheduleRepository.findAllComingDepartureDate(id, localDate);

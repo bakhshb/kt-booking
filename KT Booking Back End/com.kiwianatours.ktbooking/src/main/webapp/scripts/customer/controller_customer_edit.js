@@ -49,7 +49,7 @@ ktbookingApp
 	$scope.saveCustomer = function() {
 		if ($scope.form.$valid) {
 			if (!$scope.customer.id) {
-				var birthdayParse= Date.parse($scope.customer.birthday);
+				var birthdayParse= $filter('date')($scope.customer.birthday, "yyyy-MM-dd");
 				$scope.customer.birthday = birthdayParse;
 				Booking.save($scope.customer, function success () {
 					onRouteChangeOff(); 
@@ -59,7 +59,7 @@ ktbookingApp
 					processError(data.statusText);
 				});
 			} else {
-				var birthdayParse= Date.parse($scope.customer.birthday);
+				var birthdayParse= $filter('date')($scope.customer.birthday, "yyyy-MM-dd");
 				$scope.customer.birthday = birthdayParse;
 				Customer.save($scope.customer, function success () {
 					onRouteChangeOff();
