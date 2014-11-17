@@ -165,9 +165,9 @@ ktbookingApp.controller('SessionsController', function ($scope, resolvedSessions
         };
     });
 
-ktbookingApp.controller('HealthController', function ($scope, HealthCheckService) {
+ktbookingApp.controller('HealthController', function ($scope, HealthCheckService, $timeout, ngProgress) {
 	$scope.updatingHealth = true;
-
+	$timeout(function (){ngProgress.complete();}, 100);
 	$scope.refresh = function() {
 		$scope.updatingHealth = true;
 		HealthCheckService.check().then(function(promise) {
@@ -190,9 +190,10 @@ ktbookingApp.controller('HealthController', function ($scope, HealthCheckService
 	}
 });
 
-ktbookingApp.controller('MetricsController', function ($scope, MetricsService, HealthCheckService, ThreadDumpService) {
+ktbookingApp.controller('MetricsController', function ($scope, MetricsService, HealthCheckService, ThreadDumpService, $timeout, ngProgress) {
      $scope.metrics = {};
 		$scope.updatingMetrics = true;
+		$timeout(function (){ngProgress.complete();}, 100);
 
      $scope.refresh = function() {
 			$scope.updatingMetrics = true;
