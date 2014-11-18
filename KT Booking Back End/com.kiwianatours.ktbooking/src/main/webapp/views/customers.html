@@ -38,13 +38,6 @@
 			<div class="alert alert-danger" data-ng-show="error">
 				&nbsp;&nbsp;Error:{{ error }}
 			</div>
-			<div data-ng-show="customers.length == 0">
-				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No customers found</h4>
-				</div>
-			</div>
-
-
 		</div>
 	</div>
 
@@ -80,8 +73,7 @@
 				</div>
 			</div>
 			<div class="table-responsive" data-ng-show="listDisplayModeEnabled">
-				<table class="table table-hover"
-					data-ng-hide="customers.length == 0">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -141,6 +133,11 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div data-ng-show="customers.length == 0">
+			<div class="col-md-12 text-center">
+				<h4>No Customers Found</h4>
 			</div>
 		</div>
 	</div>

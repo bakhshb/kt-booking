@@ -12,9 +12,85 @@
 	<br />
 	<div class="row">
 		<div class="col-md-12">
-			<div  ui-calendar ng-model="eventSources" ></div>
-
+			<!--FullCalendar container div-->
+				<div id='calendar' ></div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	
+	/*
+		jQuery document ready
+	*/
+	
+$(document).ready(function()
+{
+	
+	var events=new Array();
+	
+	/*
+		Initialize fullCalendar and store into variable.
+		Why in variable?
+		Because doing so we can use it inside other function.
+		In order to modify its option later.
+	*/
+	$.ajax({
+        url: "app/rest/tourschedules"
+    }).then(function(data) {
+    	for ( var i = 0, l = data.length; i < l; i++ ) {
+    		
+    		var e = new Date(data[i].returnDate);
+			e.setDate(e.getDate()+1);
+			event = new Object(); 
+			event.title = data[i].tour.name; // this should be string
+		    event.start = data[i].departureDate; // this should be date object
+		    event.end = e; // this should be date object
+		    event.url= '#/tour/schedule/booking/'+ data[i].id;
+		    event.allDay = true;
+		    events.push(event);
+		   
+    		$('#calendar').fullCalendar({
+    			
+        		/*
+    			header option will define our calendar header.
+    			left define what will be at left position in calendar
+    			center define what will be at center position in calendar
+    			right define what will be at right position in calendar
+    		*/
+    		header:
+    		{
+    			right: 'prev,next today',
+    			center: 'title',
+    			left: 'month,agendaWeek,agendaDay'
+    		},
+    		/*
+    			defaultView option used to define which view to show by default,
+    			for example we have used agendaWeek.
+    		*/
+    		defaultView: 'month',
+    		/*
+    			selectable:true will enable user to select datetime slot
+    			selectHelper will add helpers for selectable.
+    		*/
+    			selectable: true,
+    			selectHelper: true,
+    		   	eventClick: function(event) {
+    			        if (event.url) {
+    			            window.open(event.url);
+    			            return false;
+    			        }
+   			    }
+   			});
+
+    	}
+    	 $('#calendar').fullCalendar('addEventSource',events);
+
+   	});
+		
+});
+
+</script>
+
+	
 

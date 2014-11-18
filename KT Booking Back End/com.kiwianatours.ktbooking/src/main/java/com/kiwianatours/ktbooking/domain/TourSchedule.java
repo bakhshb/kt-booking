@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 import com.kiwianatours.ktbooking.domain.util.CustomLocalDateSerializer;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.LocalDate;
@@ -23,6 +25,7 @@ import java.util.Set;
 @Entity
 @EntityListeners(value = AuditListener.class)
 @Table(name = "T_TOUR_SCHEDULE")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Audited
 public class TourSchedule implements Serializable {
 

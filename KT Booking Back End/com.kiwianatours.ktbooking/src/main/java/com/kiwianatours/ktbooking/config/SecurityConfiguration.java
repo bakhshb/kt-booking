@@ -1,10 +1,11 @@
 package com.kiwianatours.ktbooking.config;
 
 import com.kiwianatours.ktbooking.security.*;
+import com.kiwianatours.ktbooking.web.filter.StatelessCSRFFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 import javax.inject.Inject;
 
@@ -95,16 +97,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .csrf()
                 .disable()
+                .addFilterBefore(new StatelessCSRFFilter(), CsrfFilter.class)
             .headers()
                 .frameOptions().disable()
             .authorizeRequests()
             	.antMatchers("/app/rest/customers/**").authenticated()
-            	.antMatchers("/app/rest/bookings/**").permitAll()
+            	.antMatchers("/app/rest/bookings").permitAll()
+            	.antMatchers("/app/rest/bookings/**").authenticated()
             	.antMatchers("/app/rest/tours/**").permitAll()
+            	.antMatchers("/app/rest/tourschedules/**").permitAll()
             	.antMatchers("/app/rest/tourphotos").hasAuthority(AuthoritiesConstants.ADMIN)
+            	.antMatchers("/app/rest/tourphotos/**").permitAll()
             	.antMatchers("/uploads").hasAuthority(AuthoritiesConstants.ADMIN)
             	.antMatchers("/uploads/**").permitAll()
-            	.antMatchers("/app/rest/tourschedules/**").permitAll()
                 .antMatchers("/app/rest/register").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/app/rest/activate").permitAll()
                 .antMatchers("/app/rest/authenticate").permitAll()

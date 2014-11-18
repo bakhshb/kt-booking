@@ -1,11 +1,15 @@
 package com.kiwianatours.ktbooking.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +19,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "T_USER")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User extends AbstractAuditingEntity implements Serializable {
 
     /**
@@ -66,10 +71,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
             name = "T_USER_AUTHORITY",
             joinColumns = {@JoinColumn(name = "login", referencedColumnName = "login")},
             inverseJoinColumns = {@JoinColumn(name = "name", referencedColumnName = "name")})
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Authority> authorities = new HashSet<>();
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
     public String getLogin() {

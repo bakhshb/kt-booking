@@ -18,7 +18,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 
 
 	var uploader = $scope.uploader = new FileUploader({
-		url: '/uploads'
+		url: 'app/rest/tourphotos',
 	});
 
 	// FILTERS
@@ -26,8 +26,9 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 	uploader.filters.push({
 		name: 'customFilter',
 		fn: function(item /*{File|FileLikeObject}*/, options) {
-			return this.queue.length < 10;
-		}
+            var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+        }
 	});
 
 	// CALLBACKS
@@ -63,7 +64,7 @@ ktbookingApp.controller('TourPhotoUploadController', function ($scope, $routePar
 				fileName: headers.filename,
 				tourId: tourId,
 		};
-		TourPhoto.update(tourPhoto);
+		TourPhoto.put(tourPhoto);
 	};
 	uploader.onErrorItem = function(fileItem, response, status, headers) {
 		console.info('onErrorItem', fileItem, response, status, headers);

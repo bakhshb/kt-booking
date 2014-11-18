@@ -81,11 +81,13 @@ public class TourPhotosResource {
 				boolean success = new File(finalPath+ "/upload").mkdir();
 				boolean exist = new File (finalPath +"/upload").exists();
 				if (success || exist){
+					String fileType = file.getContentType().toString().replace("/", ".");
 					BufferedOutputStream stream = new BufferedOutputStream(
-							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+file.getOriginalFilename())));
+							new FileOutputStream(new File(finalPath +"/upload/" +parseDateNTime+fileType )));
 					stream.write(bytes);
 					stream.close();
-					responseHeader.set("filename",parseDateNTime+file.getOriginalFilename());
+					responseHeader.set("filename",parseDateNTime+fileType);
+					log.debug(parseDateNTime+fileType + " was uploaded to", finalPath +"/upload/");
 				}
 			} catch (Exception e) {
 				log.error("Upload exception", e);
@@ -96,6 +98,7 @@ public class TourPhotosResource {
 	
 	/**
 	 * PUT /rest/tourphotos -> Create a new tourphoto.
+	 * get the name of image and insert it in the database
 	 */
 	@RequestMapping(value = "/rest/tourphotos", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 	@Timed
@@ -123,10 +126,10 @@ public class TourPhotosResource {
 			HttpServletResponse response) {
 		log.debug("REST request to get TourPhotos : {}", id);
 		List<TourPhoto> tourPhoto = tourPhotoRepository.findTourPhotosByTourId(id);
-		if (tourPhoto == null){
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if (tourPhoto.size() > 0){
+			return new ResponseEntity<>(tourPhoto, HttpStatus.OK);
 		}	
-		return new ResponseEntity<>(tourPhoto, HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**

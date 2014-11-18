@@ -18,9 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableJpaRepositories("com.kiwianatours.ktbooking.repository")
@@ -70,13 +68,6 @@ public class DatabaseConfiguration implements EnvironmentAware {
             config.addDataSourceProperty("useServerPrepStmts", propertyResolver.getProperty("useServerPrepStmts", "true"));
         }
         return new HikariDataSource(config);
-    }
-
-    @Bean(name = {"org.springframework.boot.autoconfigure.AutoConfigurationUtils.basePackages"})
-    public List<String> getBasePackages() {
-        List<String> basePackages = new ArrayList<>();
-        basePackages.add("com.kiwianatours.ktbooking.domain");
-        return basePackages;
     }
 
     @Bean

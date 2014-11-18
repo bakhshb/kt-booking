@@ -26,9 +26,10 @@ spring:
             ddl-auto: none
             naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
         properties:
-            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
 
     mail:
         baseUrl: http://localhost:8080
@@ -45,19 +46,7 @@ metrics:
         host: localhost
         port: 2003
 
-
-
-# You can add as many as folders to watch
-# You just need to add a dash + the directory to watch
-hotReload:
-    enabled: true
-    package:
-      project: com.kiwianatours.ktbooking
-      domain: com.kiwianatours.ktbooking.domain
-      restdto: com.kiwianatours.ktbooking.web.rest.dto
-    liquibase:
-      defaultCatalogName: ktbooking
-      defaultSchema: ktbooking
-      excludeTables: T_AUTHORITY,T_PERSISTENT_AUDIT_EVENT,T_PERSISTENT_AUDIT_EVENT_DATA,T_PERSISTENT_TOKEN,T_USER,T_USER_AUTHORITY
-    watchdir:
-      - target/classes
+cache:
+    timeToLiveSeconds: 3600
+    ehcache:
+        maxBytesLocalHeap: 16M

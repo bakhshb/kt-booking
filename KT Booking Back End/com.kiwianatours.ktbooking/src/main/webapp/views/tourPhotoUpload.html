@@ -6,7 +6,11 @@
 				<li class="active">Upload Photo</li>
 			</ol>
 			<h1>
-				Upload Photo For <small>{{tour.name}}</small>
+				Upload Photo For 
+				<small>
+				{{tour.name}}
+				<a href="#/tour/photo/{{tour.id}}" >View Photos</a>
+				</small>
 			</h1>
 		</div>
 	</div>
@@ -27,21 +31,18 @@
 					Base drop zone</div> -->
 
 				<!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
-				<div nv-file-drop="" uploader="uploader"
-					options="{ url: '/uploads' }">
-					<div nv-file-over="" uploader="uploader"
-						over-class="another-file-over-class"
-						class="well well-lg text-center">
-						<span class="glyphicon glyphicon-cloud-download"></span> drop zone
-						with its own settings
+				<div nv-file-drop="" uploader="uploader" options="{ url: '/uploads' }">
+					<div nv-file-over="" uploader="uploader" over-class="another-file-over-class"	class="well well-lg text-center">
+						<span class="glyphicon glyphicon-cloud-download"></span> drop zone						
 					</div>
 				</div>
 			</div>
-
+			
+			<br/>
+			
 			<!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
-			Multiple <input type="file" nv-file-select="" uploader="uploader" multiple />
-			<br /> 
-			Single <input type="file" nv-file-select=""	uploader="uploader" />
+			<input type="file" nv-file-select="" uploader="uploader" multiple />
+			
 		</div>
 		<div class="col-md-9" style="margin-bottom: 40px">
 			<h3>Upload queue</h3>

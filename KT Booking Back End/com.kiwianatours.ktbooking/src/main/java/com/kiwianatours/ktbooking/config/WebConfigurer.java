@@ -3,13 +3,18 @@ package com.kiwianatours.ktbooking.config;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.MetricsServlet;
+import com.kiwianatours.ktbooking.web.filter.CorsFilter;
 import com.kiwianatours.ktbooking.web.filter.CachingHttpHeadersFilter;
 import com.kiwianatours.ktbooking.web.filter.StaticResourcesProductionFilter;
 import com.kiwianatours.ktbooking.web.filter.gzip.GZipServletFilter;
+import com.kiwianatours.ktbooking.web.rest.upload.FileUploadServlet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.MimeMappings;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -28,7 +33,7 @@ import java.util.Map;
  */
 @Configuration
 @AutoConfigureAfter(CacheConfiguration.class)
-public class WebConfigurer implements ServletContextInitializer {
+public class WebConfigurer implements ServletContextInitializer , EmbeddedServletContainerCustomizer {
 
     private final Logger log = LoggerFactory.getLogger(WebConfigurer.class);
 
@@ -49,9 +54,23 @@ public class WebConfigurer implements ServletContextInitializer {
         }
         initGzipFilter(servletContext, disps);
         initFileUploads(servletContext, disps);
+        initCorsFilter(servletContext, disps);
         log.info("Web application fully configured");
     }
-
+    
+    /**
+     * Set up Mime types.
+     */
+    @Override
+    public void customize(ConfigurableEmbeddedServletContainer container) {
+        MimeMappings mappings = new MimeMappings(MimeMappings.DEFAULT);
+        // IE issue, 
+        mappings.add("html", "text/html;charset=utf-8");
+        // CloudFoundry issue
+        mappings.add("json", "text/html;charset=utf-8");
+        container.setMimeMappings(mappings);
+    }
+    
     /**
      * Initializes the GZip filter.
      */
@@ -158,8 +177,28 @@ public class WebConfigurer implements ServletContextInitializer {
     	// create the file called upload
     	boolean success = new File(finalPath+ "/upload").mkdir();
     	boolean exist = new File (finalPath +"/upload").exists();
+    	log.debug("File Location Web Config" ,finalPath );
     	if (success || exist){
     		uploadsAdminServlet.setMultipartConfig(new MultipartConfigElement(finalPath +"/upload/", 1024*1024*5, 1024*1024*5*5, 1024*1024));
     	}
+    }
+    
+    /**
+     * Initializes HTTP access control (CORS).
+     */
+    private void initCorsFilter (ServletContext servletContext, EnumSet<DispatcherType> disps) {
+    	log.debug("Registering HTTP access control (CORS)");
+        FilterRegistration.Dynamic corsFilter =
+                servletContext.addFilter("corsFilter", new CorsFilter());
+        
+        Map<String, String> parameters = new HashMap<>();
+        corsFilter.setInitParameters(parameters);
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tours/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourschedules/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/tourphotos/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/uploads/*");
+        corsFilter.addMappingForUrlPatterns(disps, true, "/app/rest/bookings");
+
+        corsFilter.setAsyncSupported(true);
     }
 }

@@ -41,7 +41,7 @@ public class TourPhotoService {
 		if (tour != null) {
 			List<TourPhoto> tourPhotos = tourPhotoRepository.findByTour(tour);
 			if (tourPhotoId != null) {
-				if (tourPhotos != null && tourPhotos.size() != 0) {
+				if ( tourPhotos.size() > 0) {
 					for (TourPhoto tourP : tourPhotos) {
 						if (tourP.getId().equals(tourPhotoId)) {
 							tourP.setActivated(true);

@@ -1,6 +1,6 @@
 'use strict';
 
-ktbookingApp.controller('TourScheduleController', function ($scope, $location, $timeout, resolvedTourSchedule, TourSchedule, TourScheduleBooking,  resolvedTour ,Tour, modalService, ngProgress) {
+ktbookingApp.controller('TourScheduleController', function ($scope, $location, $filter, $timeout, resolvedTourSchedule, TourSchedule, TourScheduleBooking,  resolvedTour ,Tour, modalService, ngProgress) {
 
 	var timer;
 	$scope.currentPage = 1;
@@ -34,16 +34,16 @@ ktbookingApp.controller('TourScheduleController', function ($scope, $location, $
 	$scope.create = function () {
 		if ($scope.form.$valid) {
 			$scope.disableCheck = false;
-			var departureDateParse= Date.parse($scope.tourSchedule.departureDate );
+			var departureDateParse= $filter('date')($scope.tourSchedule.departureDate, "yyyy-MM-dd");
 			$scope.tourSchedule.departureDate =departureDateParse ;
-			var returnDateParse = Date.parse($scope.tourSchedule.returnDate );
+			var returnDateParse = $filter('date')($scope.tourSchedule.returnDate, "yyyy-MM-dd");
 			$scope.tourSchedule.returnDate =returnDateParse ;
 			TourSchedule.save($scope.tourSchedule,function () {
 				$scope.tourSchedules = TourSchedule.query();
 				$('#saveTourScheduleModal').modal('hide');
 				$scope.clear();
 				$scope.checked = false;
-				processSuccess('TourSchedule was updated!');
+				processSuccess('Tour Schedule was updated!');
 			});
 		};
 	};

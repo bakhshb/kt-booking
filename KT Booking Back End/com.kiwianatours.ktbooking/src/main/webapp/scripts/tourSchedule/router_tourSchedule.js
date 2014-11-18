@@ -33,11 +33,6 @@ ktbookingApp
 	.when('/tour/schedule/calendar', {
 		templateUrl: 'views/calendar.html',
 		controller: 'CalendarController',
-		resolve:{
-			resolvedTourSchedule: ['TourSchedule', function (TourSchedule) {
-				return TourSchedule.query();
-			}]
-		},
 		access: {
 			authorizedRoles: [USER_ROLES.all]
 		}

@@ -126,21 +126,7 @@ angular.module('ktbookingApp')
         };
     });
 
-angular.module('ktbookingApp').directive('fileModel', ['$parse', function ($parse) {
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs) {
-			var model = $parse(attrs.fileModel);
-			var modelSetter = model.assign;
-
-			element.bind('change', function(){
-				scope.$apply(function(){
-					modelSetter(scope, element[0].files[0]);
-				});
-			});
-		}
-	};
-}]).directive('onlyNum', function() {
+angular.module('ktbookingApp').directive('onlyNum', function() {
     return function(scope, element, attrs) {
 
         var keyCode = [8,9,37,39,48,49,50,51,52,53,54,55,56,57,96,97,98,99,100,101,102,103,104,105,110];
@@ -156,4 +142,18 @@ angular.module('ktbookingApp').directive('fileModel', ['$parse', function ($pars
 
        });
     };
- });
+ }).directive("btnCheckbox", function($filter){
+	    return {
+	        require:"ngModel",
+	        link: function(scope, element, attr, ngModel){
+	                scope.$watch(function(){
+	                    return ngModel.$modelValue;
+	                }, function(modelValue){
+	                    console.log($filter('date')(modelValue, "yyyy-MM-dd"));
+	                    if (modelValue) {
+	                    	return  $filter('date')(modelValue, "yyyy-MM-dd");
+	                    }
+	                });
+	            }
+	    };
+	});

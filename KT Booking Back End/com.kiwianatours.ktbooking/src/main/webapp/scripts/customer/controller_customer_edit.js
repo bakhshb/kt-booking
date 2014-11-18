@@ -1,7 +1,7 @@
 'use strict';
 
 ktbookingApp
-.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, resolvedTourSchedule, modalService,  ngProgress) {
+.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $filter, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, TourScheduleTour, modalService,  ngProgress) {
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId)
 			: 0, timer, onRouteChangeOff;
@@ -9,8 +9,8 @@ ktbookingApp
 	$scope.customer = {};
 	$scope.title = (customerId > 0) ? 'Edit' : 'Add';
 	$scope.buttonText = (customerId > 0) ? 'Update' : 'Add';
+	$scope.customer.birthday= '1990';
 
-	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.tours= resolvedTour;
 	var customers = resolvedCustomer;
 	/*
@@ -34,6 +34,14 @@ ktbookingApp
 
 	});
 
+	$scope.tour={};
+	$scope.tour.id='';
+	$scope.$watch('tour.id', function (newValue, oldValue){
+		if ($scope.tour.id != '') {
+			$scope.tourSchedules = TourScheduleTour.get({id:newValue});
+		}
+
+	});
 
 	/*
 	 * save customer
@@ -41,7 +49,7 @@ ktbookingApp
 	$scope.saveCustomer = function() {
 		if ($scope.form.$valid) {
 			if (!$scope.customer.id) {
-				var birthdayParse= Date.parse($scope.customer.birthday);
+				var birthdayParse= $filter('date')($scope.customer.birthday, "yyyy-MM-dd");
 				$scope.customer.birthday = birthdayParse;
 				Booking.save($scope.customer, function success () {
 					onRouteChangeOff(); 
@@ -51,7 +59,7 @@ ktbookingApp
 					processError(data.statusText);
 				});
 			} else {
-				var birthdayParse= Date.parse($scope.customer.birthday);
+				var birthdayParse= $filter('date')($scope.customer.birthday, "yyyy-MM-dd");
 				$scope.customer.birthday = birthdayParse;
 				Customer.save($scope.customer, function success () {
 					onRouteChangeOff();

@@ -81,9 +81,9 @@
 				<div class="form-group">
 					<label>Birthday:</label>
 					<p class="input-group">
-						<input type="text" name="birthday" class="form-control"	data-ng-model="customer.birthday" datepicker-popup="yyyy-MM-dd"	is-open="opened" 
+						<input type="text" name="birthday" class="form-control"	data-ng-model="customer.birthday" datepicker-popup="dd-MMMM-yyyy"	is-open="opened" 
 							min-date="minDate" max-date="'2015-06-22'"	datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"
-							close-text="Close" placeholder="yyyy-MM-dd" /> 
+							close-text="Close" readonly placeholder="Pick Date"/> 
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" data-ng-click="open($event)">
 								<i class="glyphicon glyphicon-calendar"></i>
@@ -178,8 +178,10 @@
 					<select name="tourScheduleId"	class="form-control" data-ng-model="customer.tourSchedule.id"
 							data-ng-disabled="form.tourId.$invalid" required>
 						<option selected disabled value="">-- Select Departure Date --</option>
-						<option data-ng-repeat="tourSchedule in tourSchedules |filter: tour.id"	value="{{tourSchedule.id}}"
-							data-ng-hide="tourSchedule.departureDate < {{yesterday}}">{{tourSchedule.departureDate}}</option>
+						<option data-ng-repeat="tourSchedule in tourSchedules"	value="{{tourSchedule.id}}"
+							data-ng-hide="tourSchedule.departureDate < {{yesterday}}" data-ng-disabled="tourSchedule.departureDate < {{yesterday}}">
+							{{tourSchedule.departureDate | date:'dd-MMMM-yyyy'}}
+						</option>
 					</select>
 				</div>
 				<div class="form-group" data-ng-if="customer.id == null">

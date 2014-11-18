@@ -12,3 +12,10 @@ ktbookingApp.factory('TourScheduleBooking', function ($resource) {
 		'get': { method: 'GET',  isArray: true},
 	});
 });
+
+ktbookingApp.factory('TourScheduleTour', function ($resource) {
+	return $resource('app/rest/tourschedules/tour/:id', {}, {
+		'get': { method: 'GET',  isArray: true},
+	});
+});
+

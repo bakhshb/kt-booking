@@ -96,7 +96,7 @@ public class TourResource {
         log.debug("REST request to delete Tour : {}", id);
 		if (tourScheduleRepository.findAllTourScheduleByTourId(id).size() == 0){
 			List<TourPhoto> tourPhotos = tourPhotoRepository.findTourPhotosByTourId(id);
-			if (tourPhotos.size() != 0){
+			if (tourPhotos.size() > 0){
 				for (TourPhoto tourPhoto: tourPhotos){
 					tourPhotoService.deletePhoto(tourPhoto.getId());
 				}

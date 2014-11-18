@@ -1,11 +1,10 @@
 'use strict';
 
-ktbookingApp.controller('CustomerBookingController',function($scope, $routeParams,$timeout, $location, Customer, Booking, resolvedBooking, resolvedTour, resolvedTourSchedule,  modalService, ngProgress){
+ktbookingApp.controller('CustomerBookingController',function($scope, $routeParams,$timeout, $location, Customer, Booking, resolvedBooking, resolvedTour, TourScheduleTour,  modalService, ngProgress){
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId): 0, timer;
 	$scope.customers = customerId;
 	$scope.tours = resolvedTour;
-	$scope.tourSchedules = resolvedTourSchedule;
 	$scope.status = null;
 	$scope.error = null;
 	
@@ -67,6 +66,16 @@ ktbookingApp.controller('CustomerBookingController',function($scope, $routeParam
 		$scope.tour ={};
 		$scope.customer.tourSchedule = {};
 	}
+	
+	
+	$scope.tour={};
+	$scope.tour.id='';
+	$scope.$watch('tour.id', function (newValue, oldValue){
+		if ($scope.tour.id != '') {
+			$scope.tourSchedules = TourScheduleTour.get({id:newValue});
+		}
+
+	});
 
 	/*
 	 * Make booking when the url has customer id

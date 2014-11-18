@@ -35,20 +35,13 @@
 				&nbsp;&nbsp;Error:
 				{{ error }}
 			</div>
-			<br />
-			<div data-ng-show="tourphotos.length == 0">
-				<div class="col-md-12 text-center animated bounceIn">
-					<h4>No Photos found</h4>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-sm-12 col-md-12">
 			<div class="table-responsive">
 
-				<table class="table table-hover"
-					data-ng-hide="tourphotos.length == 0">
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -84,6 +77,11 @@
 				</table>
 			</div>
 		</div>
+		<div data-ng-show="tourphotos.length == 0">
+			<div class="col-md-12 text-center">
+				<h4>No Photos Found</h4>
+			</div>
+		</div>		
 	</div>
 </div>
 
