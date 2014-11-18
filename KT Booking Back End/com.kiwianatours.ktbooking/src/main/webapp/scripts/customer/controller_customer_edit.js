@@ -1,7 +1,7 @@
 'use strict';
 
 ktbookingApp
-.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, TourScheduleTour, modalService,  ngProgress) {
+.controller('CustomerEditController',function($rootScope, $scope, $window, $location, $routeParams, $filter, $timeout,resolvedCustomer, Customer, Booking, resolvedTour, TourScheduleTour, modalService,  ngProgress) {
 
 	var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId)
 			: 0, timer, onRouteChangeOff;
